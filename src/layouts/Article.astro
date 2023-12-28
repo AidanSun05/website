@@ -1,0 +1,56 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+import { Image } from "astro:assets";
+import { formatDate, loadImage } from "@common/articles";
+
+interface Frontmatter {
+  title: string;
+  description: string;
+  image?: string;
+  date: Date;
+  tags: string[];
+}
+
+interface Props {
+  frontmatter: Frontmatter;
+}
+
+const { title, description, image, date, tags } = Astro.props.frontmatter;
+const imageSrc = await loadImage(image);
+---
+
+<BaseLayout {title} {description} imageURL={imageSrc?.src}>
+  <h1>{title}</h1>
+  {imageSrc && <Image src={imageSrc} height="350" alt="Article thumbnail" />}
+  <p>Published <time datetime={date.toISOString()}>{formatDate(date)}</time></p>
+  <div class="chip-container">
+    {
+      tags.map((tag) => (
+        <a class="chip" href={"/articles/tag/" + tag}>
+          {tag}
+        </a>
+      ))
+    }
+  </div>
+  <p>{description}</p>
+  <slot />
+</BaseLayout>
+
+<style>
+  .chip-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 4px;
+
+    .chip {
+      padding: 2px;
+      border: 2px solid #777;
+      border-radius: 4px;
+      background-color: #ddd;
+      text-decoration: none;
+      color: black;
+    }
+  }
+</style>

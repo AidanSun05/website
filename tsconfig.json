@@ -1,0 +1,15 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@common/*": ["src/common/*"],
+      "@components/*": ["src/components/*"],
+      "@img/*": ["src/img/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@styles/*": ["src/styles/*"]
+    },
+    "types": ["unplugin-vue-macros/macros-global"]
+  }
+}

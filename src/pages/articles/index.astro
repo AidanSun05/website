@@ -1,0 +1,8 @@
+---
+import ArticleListing from "@components/ArticleListing.astro";
+import { getCollection } from "astro:content";
+
+const articles = await getCollection("articles");
+---
+
+<ArticleListing title="Articles" description="List of all articles" {articles} />

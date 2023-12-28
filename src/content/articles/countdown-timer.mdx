@@ -1,0 +1,35 @@
+---
+title: "Countdown Timer"
+description: "Creating a timer with an Arduino, buzzer, keypad, and seven-segment shield"
+image: "countdown-timer/thumbnail.jpg"
+date: 2020-01-25
+tags:
+  - arduino
+  - projects
+---
+
+import CodeFile from "@components/CodeFile.astro";
+import VideoPlayer from "@components/VideoPlayer.astro";
+
+## Overview
+
+This project is a simple timer created with an Arduino. It uses the following libraries:
+
+- **Keypad** by Mark Stanley and Alexander Brevig; sets up and polls the different keypad pins. To install, go to the Arduino IDE's Library Manager and search for "keypad". Click on the library, then click Install.
+- **SevenSegmentShield**; provides functions for interfacing with the Gravitech seven-segment shield. For a download and more information, follow [this guide](/articles/7-segment-shield).
+
+This project uses the [Gravitech seven-segment shield](https://www.gravitech.us/7segmentshield.html).
+
+## Schematic
+
+![Timer schematic](@img/countdown-timer/schematic.png)
+
+## Code
+
+<CodeFile src="code/CountdownTimer.ino" />
+
+## Using the Timer
+
+Use the keypad to enter a time value, from 1 to 9999 (in seconds). Use the * key to clear the display and the # key to start the timer.
+
+<VideoPlayer src="countdown-timer/timer.mp4" />
