@@ -1,0 +1,16 @@
+---
+import ArticleListing from "@components/ArticleListing.astro";
+import { getCollection } from "astro:content";
+
+export const prerender = false;
+
+const { tag } = Astro.params;
+if (tag === undefined) return Astro.redirect("/404");
+
+const title = `Articles with tag: ${tag}`;
+const description = `List of all articles tagged with ${tag}`;
+
+const articles = await getCollection("articles", (article) => article.data.tags.includes(tag));
+---
+
+<ArticleListing {title} {description} {articles} />

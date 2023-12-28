@@ -1,0 +1,33 @@
+<footer>
+  <p>
+    <a href="/">Home</a> | <a href="/articles">Articles</a>
+  </p>
+  <p>
+    Built with <a href="https://astro.build">{Astro.generator}</a> | &copy; 2018-{new Date().getFullYear()} Aidan Sun
+  </p>
+</footer>
+
+<style>
+  footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 140px;
+    width: 100%;
+    background: #555;
+    color: #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      margin: 0;
+    }
+
+    a {
+      color: #ddd;
+    }
+  }
+</style>

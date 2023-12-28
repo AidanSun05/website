@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  web:
+    image: registry.digitalocean.com/${REGISTRY_NAME}/web:${TAG}
+    build: .
+    command: node dist/server/entry.mjs
+  server:
+    image: registry.digitalocean.com/${REGISTRY_NAME}/server:${TAG}
+    container_name: server
+    restart: unless-stopped
+    build:
+      context: ./nginx
+      args:
+        - CONFIG=nginx.conf
+    volumes:
+      - well_known:/var/www/html
+      - certbot_etc:/etc/letsencrypt
+      - certbot_var:/var/lib/letsencrypt
+      - dhparam:/etc/ssl/certs
+    networks:
+      - internal
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - web
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - well_known:/var/www/html
+      - certbot_etc:/etc/letsencrypt
+      - certbot_var:/var/lib/letsencrypt
+volumes:
+  certbot_etc:
+  certbot_var:
+  well_known:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/${SSH_USERNAME}/website/well-known
+      o: bind
+  dhparam:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/${SSH_USERNAME}/website/dhparam
+      o: bind

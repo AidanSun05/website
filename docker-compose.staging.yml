@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: node dist/server/entry.mjs
+    working_dir: /code
+  server:
+    container_name: server
+    restart: unless-stopped
+    build:
+      context: ./nginx
+      args:
+        - CONFIG=staging.conf
+    networks:
+      - internal
+    ports:
+      - '80:80'
+    depends_on:
+      - web

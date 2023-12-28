@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  web:
+    container_name: web
+    user: node
+    restart: unless-stopped
+    networks:
+      - internal
+    environment:
+      - HOST=0.0.0.0
+      - PORT=4321
+networks:
+  internal:
+    driver: bridge

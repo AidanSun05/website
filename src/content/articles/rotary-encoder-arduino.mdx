@@ -1,0 +1,66 @@
+---
+title: "Rotary Encoder with Arduino"
+description: "Using an incremental rotary encoder with Arduino"
+image: "rotary-encoder-arduino/thumbnail.jpg"
+date: 2020-03-09
+tags:
+  - arduino
+  - sensors
+---
+
+import CodeFile from "@components/CodeFile.astro";
+
+## How the Rotary Encoder Works
+
+The rotary encoder used in this article is an **incremental encoder** which provides information about its knob's rotation. It is up to the controller to turn the measurements into useful values such as distance and speed.
+
+The knob is attached to a disc inside the encoder. There are also two contact points placed next to the spinning disc. These are the A and B outputs of the encoder. When the disc spins, the points remain stationary. This causes them to alternate between touching GND and VCC, producing square waves.
+
+![Rotary encoder working](@img/rotary-encoder-arduino/encoder-inside.png)
+
+The placement of the contacts causes the waves to be 90 degrees out of phase. If the knob rotates clockwise, the B pin will lead. If the knob rotates counter-clockwise, then the A pin will lead. This is how we tell what direction the encoder is turning.
+
+Some rotary encoders also have a switch under the knob that allows it to be pressed. This switch is connected to an additional `SW` pin.
+
+## Pin Connections
+
+A rotary encoder module usually has the following pins. Their connections to the Arduino in the code are also provided in the table.
+
+| RE module pin | Stands for | Description       | Connects to Arduino pin |
+| ------------- | ---------- | ----------------- | ----------------------- |
+| CLK           | Clock      | Encoder output 1  | Digital pin 4           |
+| DT            | Data       | Encoder output 2  | Digital pin 3           |
+| SW            | Switch     | Switch connection | Digital pin 2           |
+| + (V~CC~)     | Power in   | Power connection  | 5V pin                  |
+| - (GND)       | Ground     | Ground connection | GND pin                 |
+
+## Code
+
+<CodeFile src="code/RotaryEncoder.ino" />
+
+We start by defining the pins that the encoder is connected to, as well as open a serial port and configure the pins as inputs. We also read the initial state of the encoder.
+
+In the `loop` function, we start by reading the current state of the encoder. If there is a difference between the old and current states, a pulse has occurred (the user rotated the knob.) We then check if the B output is different from the A output. If it is, then the encoder is rotating clockwise and we increment the counter. Otherwise, we decrement the counter.
+
+Outside the `if` blocks, we also read the button pin and update the last reading. We then use `Serial.print` and `Serial.println` to output the values to the serial monitor.
+
+## Testing
+
+Upload the code to the Arduino and open the serial monitor. Test the code by rotating the encoder and pressing the button. The displayed numbers should change accordingly to the rotation of the knob. Be sure to not rotate it too fast, as the Arduino may not read the pulses fast enough.
+
+This is the output in the serial monitor:
+
+```
+Counter: 26 Button: 1
+Counter: 26 Button: 1
+Counter: 27 Button: 1
+Counter: 28 Button: 1
+Counter: 29 Button: 1
+Counter: 30 Button: 0
+Counter: 32 Button: 0
+Counter: 29 Button: 0
+Counter: 27 Button: 0
+Counter: 25 Button: 1
+```
+
+![Rotary encoder module on a breadboard](@img/rotary-encoder-arduino/breadboard.jpg)

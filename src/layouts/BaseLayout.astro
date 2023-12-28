@@ -1,0 +1,51 @@
+---
+import "@styles/global.pcss";
+import { getCollection } from "astro:content";
+import Manifest from "../generated/manifest.astro";
+import PageFooter from "@components/PageFooter.astro";
+import { pick } from "lodash-es";
+import Placeholder from "@img/placeholder.svg";
+import Sidebar from "@components/SideBar.vue";
+
+interface Props {
+  title: string;
+  description: string;
+  imageURL?: string;
+}
+
+const { title, description, imageURL } = Astro.props;
+
+const imageURLWithSite = Astro.site?.toString().slice(0, -1) + (imageURL ?? Placeholder.src);
+
+// Specific attributes are picked out to avoid unnecessary bloat in generated HTML
+const articles = (await getCollection("articles")).map((i) => pick(i, ["data", "slug"]));
+articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content={title} />
+    <meta name="twitter:title" content={title} />
+    <meta name="description" content={description} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:description" content={description} />
+    <meta property="og:image" content={imageURLWithSite} />
+    <meta name="twitter:image" content={imageURLWithSite} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:site_name" content="Aidan Sun" />
+    <meta name="generator" content={Astro.generator} />
+    <Manifest />
+  </head>
+  <body>
+    <Sidebar {articles} client:load />
+    <main>
+      <slot />
+      <PageFooter />
+    </main>
+  </body>
+</html>

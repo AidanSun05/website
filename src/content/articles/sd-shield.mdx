@@ -1,0 +1,56 @@
+---
+title: "SD Shield"
+description: "Reading and writing from an SD card with Arduino"
+image: "sd-shield/thumbnail.jpg"
+date: 2020-01-25
+tags:
+  - arduino
+  - shields
+---
+
+import Alert from "@components/Alert.astro";
+import CodeFile from "@components/CodeFile.astro";
+
+## Setup
+
+Put the shield on the Arduino, then insert a SD card into the socket (shown in the top image).
+
+<Alert type="important">
+  If your shield has a voltage selection switch, set it to **5V**.
+
+  ![SD shield voltage switch](@img/sd-shield/switch.jpg)
+</Alert>
+
+## Example Code for SD Read/Write
+
+<CodeFile src="code/SDCard.ino" />
+
+### Initialization and Setup
+
+The SD shield uses SPI to communicate with the Arduino, so `SPI.h` is included along with `SD.h`.
+
+The `File` object called `f` represents a file on the SD card, and it is used to perform I/O on the actual file it represents.
+
+`SD.begin` initializes the SD shield. It returns a status code, so we can check for failure and print a message to the serial monitor.
+
+### Writing to a File
+
+To open a file for writing, open it in write mode with `SD.open`. In the code, the opened file is represented by `f`. If the file does not exist, it will be created. To write to the file, use the following methods:
+
+- `print`: Writes a string.
+- `println`: Writes a string followed by a newline.
+
+### Reading from a File
+
+To open a file for reading, do not specify the open mode (it defaults to read mode). To read from the file, use the following methods:
+
+- `available`: Checks if there is still data to read (we haven't yet reached the end of the file)
+- `read`: Reads one byte from the file
+
+### Closing a File
+
+When you are done with a file, close it with `close`.
+
+<Alert type="important">
+  Always remember to close a file after using it with `close()` to save the Arduino's resources.
+</Alert>

@@ -1,0 +1,37 @@
+---
+interface Props {
+  type?: string;
+}
+
+const { type = "note" } = Astro.props;
+---
+
+<div class:list={["alert", type]}>
+  <p class="type">
+    <strong>{type}:</strong>
+  </p>
+  <slot />
+</div>
+
+<style>
+  .alert {
+    padding: 2px 10px;
+    margin: 15px 0 15px;
+
+    .type {
+      text-transform: capitalize;
+    }
+  }
+
+  .important {
+    color: #808000;
+    background-color: #ffffba;
+    border-left: 4px solid #808000;
+  }
+
+  .note {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-left: 4px solid #3c763d;
+  }
+</style>

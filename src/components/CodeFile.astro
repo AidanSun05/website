@@ -1,0 +1,21 @@
+---
+import type { BuiltinLanguage } from "shikiji";
+import { Code } from "astro:components";
+import fs from "fs/promises";
+import path from "path";
+
+interface Props {
+  src: string;
+}
+
+const { src } = Astro.props;
+
+const code = await fs.readFile(path.join(process.cwd(), "public", src), { encoding: "utf-8" });
+const ext = path.extname(src).substring(1);
+
+const lang = ({
+  ino: "cpp"
+}[ext] ?? ext) as BuiltinLanguage;
+---
+
+<Code {code} {lang} theme="github-light" />

@@ -1,0 +1,62 @@
+---
+title: "Using the USBHost Library"
+description: "Reading from a keyboard with USBHost on the Arduino Due"
+image: "usbhost/thumbnail.jpg"
+date: 2019-04-05
+tags:
+  - arduino
+  - software
+---
+
+import CodeFile from "@components/CodeFile.astro";
+
+## Overview
+
+The Arduino Due supports reading from USB devices through the Arduino USBHost library.
+
+This guide it to print the key presses of a USB keyboard to the serial monitor.
+
+In the Arduino IDE, go to **Sketch > Include Library > Manage Libraries** (or **Tools > Manage Libraries...** in the Arduino IDE v2).
+
+In the library manager, type "usbhost" in the search bar and click Install in the box with the USBHost library.
+
+![Arduino IDE library manager](@img/usbhost/library-manager.png)
+![Library installation](@img/usbhost/installation.png)
+
+**In the Arduino IDE v2:**
+
+![Arduino IDE v2 library manager](@img/usbhost/library-manager-v2.png)
+![Library installation in the Arduino IDE v2](@img/usbhost/installation-v2.png)
+
+## Setup
+
+Connect the adapter cable to the native USB port and the cable for programming into the programming port. In this case, the blue cable is for programming and the black cable connects the keyboard. Then, connect the keyboard to the adapter cable.
+
+![Cables plugged into the Arduino Due](@img/usbhost/thumbnail.jpg)
+
+## Code
+
+<CodeFile src="code/USBHost.ino" />
+
+## Code Explanation
+
+First, we include the KeyboardController library and set up the keyboard.
+
+In the `setup` function, we initialize a serial port. In the `loop` function, we call `usb.Task` to process keyboard input.
+
+When a key is pressed, we print the key to the serial monitor with `Serial.write`. If the pressed key is the enter key, we start a new line.
+
+## Running the Code
+
+Make sure the keyboard is plugged into the adapter. Then, open the serial monitor and press some keys on the keyboard.
+
+The serial monitor should behave like a text editor, displaying each pressed key. Press enter to start a new line. This is the output of pressing some keys:
+
+```
+this is a test for usbhost library on arduino due
+
+newline
+newline
+
+abcdefg
+```
