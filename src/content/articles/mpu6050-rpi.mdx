@@ -1,0 +1,121 @@
+---
+title: "MPU6050 with Raspberry Pi"
+description: "Measuring acceleration and rotation with a Raspberry Pi and MPU6050 IMU"
+image: "mpu6050-rpi/thumbnail.jpg"
+date: 2020-02-14
+tags:
+  - raspberry-pi
+  - sensors
+---
+
+import CodeFile from "@components/CodeFile.astro";
+import TabBar from "@components/TabBar.vue";
+import TabPane from "@components/TabPane.vue";
+
+## About MPU6050
+
+The MPU6050 consists of a 3-axis gyroscope and 3-axis accelerometer. It also contains a DMP (digital motion processor) to perform complex calculations, which frees up the controller to do other things.
+
+The MPU6050 has a 16-bit ADC (analog to digital) chip. Because of this, it can receive motion in all three planes.
+
+![MPU6050 axes](@img/mpu6050-rpi/axes.png)
+
+The MPU6050 uses the I2C interface.
+
+## MPU6050 Pinout
+
+| Pin   | Description          |
+| ----- | -------------------- |
+| V~CC~ | 3-5 V supply voltage |
+| GND   | Ground connection    |
+| SCL   | I2C clock connection |
+| SDA   | I2C data connection  |
+| XDA   | See below            |
+| XCL   | ^                    |
+| AD0   | Address pin          |
+| INT   | Interrupt pin        |
+
+XDA and XCL stand for auxiliary data and auxiliary clock, respectively. These pins can be used for interfacing with other I2C devices.
+
+The address pin can be used to change the address of the MPU6050. (default is 0x68)
+
+The interrupt pin is used to indicate that data is available for the microcontroller to read.
+
+## MPU6050 Registers
+
+| Address | Name in code | Purpose                                |
+| ------- | ------------ | -------------------------------------- |
+| 0x6B    | PWR_MGMT_1   | Writing to power management register   |
+| 0x19    | SMPLRT_DIV   | Writing to sample rate register        |
+| 0x1A    | CONFIG       | Writing to configuration register      |
+| 0x1B    | GYRO_CONFIG  | Writing to gyro configuration register |
+| 0x38    | INT_ENABLE   | Writing to interrupt enable register   |
+| 0x3B    | ACCEL_X      | Reading X Accelerometer raw data       |
+| 0x3D    | ACCEL_Y      | Reading Y Accelerometer raw data       |
+| 0x3F    | ACCEL_Z      | Reading Z Accelerometer raw data       |
+| 0x43    | GYRO_X       | Reading X Gyro raw data                |
+| 0x45    | GYRO_Y       | Reading Y Gyro raw data                |
+| 0x47    | GYRO_Z       | Reading Z Gyro raw data                |
+
+## Connections to Raspberry Pi
+
+| MPU6050 pin | Connects to RPi pin |
+| ----------- | ------------------- |
+| V~CC~       | 3.3 V power         |
+| GND         | GND                 |
+| SCL         | GPIO 3 (SCL)        |
+| SDA         | GPIO 2 (SDA)        |
+
+## Code
+
+I2C needs to be enabled on your Raspberry Pi before running this code. See ["ADS1115 with Raspberry Pi"](/articles/ads1115-rpi#enabling-i2c) for details.
+
+This code prints the acceleration and gyro values on each of the three axes.
+
+<TabBar id="basic" titles={["Code", "Output"]} client:load>
+  <TabPane id="basic" index={0} client:load>
+    <CodeFile src="code/mpu6050_basic.py" />
+  </TabPane>
+  <TabPane id="basic" index={1} client:load>
+```
+Accel X: -0.013 Accel Y: 0.012 Accel Z: 0.922 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
+Accel X: -0.012 Accel Y: 0.011 Accel Z: 0.939 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
+Accel X: -0.016 Accel Y: 0.009 Accel Z: 0.931 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
+Accel X: -0.017 Accel Y: 0.012 Accel Z: 0.933 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
+Accel X: -0.017 Accel Y: 0.014 Accel Z: 0.941 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
+Accel X: -0.015 Accel Y: 0.016 Accel Z: 0.922 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
+Accel X: -0.017 Accel Y: 0.004 Accel Z: 0.934 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
+Accel X: -0.018 Accel Y: 0.008 Accel Z: 0.930 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
+Accel X: -0.022 Accel Y: 0.007 Accel Z: 0.932 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
+Stopped
+```
+  </TabPane>
+</TabBar>
+
+## Getting Rotation from Degrees per Second
+
+The gyroscope measures degrees per second (how many degrees it has rotated in a second, or speed of rotation). We can plug in deg/sec for rate and seconds for time, so (degrees per second) * (seconds) equals degrees in rotation.
+
+Below is the code showing this:
+
+<TabBar id="rotation" titles={["Code", "Output"]} client:load>
+  <TabPane id="rotation" index={0} client:load>
+    <CodeFile src="code/mpu6050_rotation.py" />
+  </TabPane>
+  <TabPane id="rotation" index={1} client:load>
+```
+X: 19 Y: 0 Z: -5
+X: 27 Y: -1 Z: -5
+X: 34 Y: -4 Z: -4
+X: 40 Y: -6 Z: -3
+X: 46 Y: -7 Z: -4
+X: 53 Y: -7 Z: -4
+X: 60 Y: -6 Z: -5
+X: 50 Y: -6 Z: -6
+X: 40 Y: -6 Z: -7
+X: 31 Y: -2 Z: -9
+X: 18 Y: -3 Z: -7
+Stopped
+```
+  </TabPane>
+</TabBar>
