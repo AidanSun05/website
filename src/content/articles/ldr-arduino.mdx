@@ -1,0 +1,65 @@
+---
+title: "LDR with Arduino"
+description: "Using a light-dependent resistor (LDR) with Arduino to measure brightness"
+image: "ldr-arduino/thumbnail.jpg"
+date: 2020-01-26
+tags:
+  - arduino
+  - sensors
+---
+
+import Alert from "@components/Alert.astro";
+import CodeFile from "@components/CodeFile.astro";
+import TabBar from "@components/TabBar.vue";
+import TabPane from "@components/TabPane.vue";
+
+## LDR Working Principle
+
+LDR stands for Light-Dependent Resistor. As its name suggests, it is a resistor whose resistance changes depending on the amount of light exposed to it. It also has many other names, such as photoresistor and photocell.
+
+An LDR works off the principles of photoconductivity, an optical phenomenon in which a material's conductivity increases when it absorbs light.
+
+When there is more energy in the light that the LDR is exposed to, more current flows through it, so its resistance decreases.
+
+## Schematic
+
+![LDR schematic](@img/ldr-arduino/schematic.png)
+
+## Code
+
+Since the LDR is an analog device, you can compare it to a predetermined threshold. The code below will turn on an LED if the reading is above 500:
+
+<Alert>
+  This program yields best results in a dark room and with a flashlight to provide a large difference between low and high readings.
+</Alert>
+
+<TabBar titles={["Code", "Serial Monitor Output"]} client:load>
+  <TabPane index={0} client:load>
+    <CodeFile src="code/LDR.ino" />
+  </TabPane>
+  <TabPane index={1} client:load>
+```
+LDR Reading: 805
+LDR Reading: 802
+LDR Reading: 797
+LDR Reading: 799
+LDR Reading: 804
+LDR Reading: 802
+LDR Reading: 797
+LDR Reading: 799
+LDR Reading: 803
+LDR Reading: 802
+LDR Reading: 797
+LDR Reading: 799
+LDR Reading: 803
+LDR Reading: 802
+LDR Reading: 796
+```
+  </TabPane>
+</TabBar>
+
+## Images
+
+![LDR breadboard top view](@img/ldr-arduino/top.jpg)
+![LDR in a dark room](@img/ldr-arduino/dark.jpg)
+![LDR with a flashlight](@img/ldr-arduino/light.jpg)

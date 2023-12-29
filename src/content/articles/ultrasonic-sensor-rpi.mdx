@@ -1,0 +1,63 @@
+---
+title: "Ultrasonic Sensor with Raspberry Pi"
+description: "Measuring distances with a Raspberry Pi and HC-SR04 ultrasonic sensor"
+image: "ultrasonic-sensor-rpi/thumbnail.jpg"
+date: 2020-02-09
+tags:
+  - raspberry-pi
+  - sensors
+---
+
+import CodeFile from "@components/CodeFile.astro";
+import "katex/dist/katex.min.css";
+
+## The Ultrasonic Sensor
+
+An ultrasonic sensor is a device that measures distance using sound waves. It emits a sound wave, which bounces off an object in front of the sensor. The sensor measures how long it takes for the sound wave to get back, then converts the reflected sound into an electric signal. Ultrasonic sound waves travel faster than the speed of sound that humans can hear (audible sound). We will be using the HC-SR04 sensor.
+
+An ultrasonic sensor has two main parts: a transmitter (emits sound) and receiver (receives the sound waves which have bounced off the object).
+
+## How the HC-SR04 Communicates
+
+The controller starts by sending a 10 &mu;S pulse to the Trigger pin. The transmitter on the sensor fires an 8-cycle sonic burst, which travels at the speed of sound, reflects off an object, and into the sensor's receiver. The sensor then sends a pulse on the Echo pin proportional to the distance (time it takes for the sound waves to come back).
+
+![Ultrasonic sensor signal](@img/ultrasonic-sensor-rpi/signal.png)
+
+To calculate the distance $D$ from sensor to object (in centimeters), multiply the duration of the pulse $P$ by the speed of sound (34,300 cm/s). However, since the sound wave needs to go to the object and back, the output from the Echo pin will be double. Therefore, you also need to divide by 2.
+
+$$
+D = \frac{P \times 34300}{2}
+$$
+
+## Voltage Divider
+
+The output of the HC-SR04 is 5V, while the Pi's inputs can only support 3.3V. The output pin cannot be directly connected to the Pi's GPIO pins. To change the voltage from 5V to 3.3V, we need to use a voltage divider with two resistors with appropriate values.
+
+![General voltage divider](@img/ultrasonic-sensor-rpi/divider.png)
+
+The formula for calculating resistor values is:
+
+$$
+V_{out} = V_{in} \left( \frac{R_2}{R_1 + R_2} \right)
+$$
+
+With R1 being 330 &ohm; and R2 being 470 &ohm;, the equation becomes:
+
+$$
+V_{out} = 5 \left( \frac{470}{330 + 470} \right) \approx 3 \mathrm{V}
+$$
+
+## Schematic
+
+In addition to the sensor and voltage divider, this circuit also includes a red and green LED which can be controlled in the code.
+
+![Ultrasonic sensor schematic](@img/ultrasonic-sensor-rpi/schematic.png)
+
+## Python Code
+
+The following code reads the distance from the ultrasonic sensor and switches LEDs depending on if an object is too close to the sensor.
+
+<CodeFile src="code/ultrasonic_sensor_rpi.py" />
+
+![Ultrasonic sensor with an object](@img/ultrasonic-sensor-rpi/object.jpg)
+![Ultrasonic sensor with an object](@img/ultrasonic-sensor-rpi/object2.jpg)
