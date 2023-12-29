@@ -25,12 +25,15 @@ async function main() {
   await fs.mkdir(outPath);
   await fs.mkdir(path.dirname(manifestPath));
 
+  // Write images and data files
   await Promise.all(
     response.images.map(async (image) => await fs.writeFile(path.join(outPath, image.name), image.contents))
   );
   await Promise.all(
     response.files.map(async (file) => await fs.writeFile(path.join(outPath, file.name), file.contents))
   );
+
+  // Write manifest to be included at compile time
   await fs.writeFile(manifestPath, response.html.join("\n"));
 }
 
