@@ -7,5 +7,6 @@
   },
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "eslint.validate": ["astro", "javascript", "typescript"],
-  "prettier.documentSelectors": ["**/*.astro"]
+  "prettier.documentSelectors": ["**/*.astro"],
+  "editor.linkedEditing": true
 }
