@@ -34,6 +34,7 @@ import Fuse from "fuse.js";
 import SearchIcon from "@img/search.svg";
 import { watch } from "vue";
 
+// Manually typing Page interface to avoid importing dependency from Astro
 interface Page {
   slug: string;
   data: {
