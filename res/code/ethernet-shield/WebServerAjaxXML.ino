@@ -80,7 +80,8 @@ void loop() {
     while (client.connected()) {
       if (client.available()) {
         char c = client.read();
-        if (reqIdx < requestLen) request[reqIdx] = c; reqIdx++; // Append c to the request
+        if (reqIdx < requestLen) request[reqIdx] = c; // Append c to the request
+        reqIdx++;
 
         // if you've gotten to the end of the line (received a newline
         // character) and the line is blank, the http request has ended,

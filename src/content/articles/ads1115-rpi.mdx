@@ -97,7 +97,7 @@ Since the ADS1115 communicates over I2C, your Raspberry Pi needs I2C to be enabl
 
 Below is a simple Python 3 library to use the ADS1115. Save it on your Raspberry Pi as `ads1115.py`:
 
-<CodeFile src="code/ads1115.py" />
+<CodeFile src="code/ads1115-rpi/ads1115.py" />
 
 <Alert>
   To learn more about the specific I2C values and how they should be sent to the ADS1115, go to its datasheet.
@@ -109,7 +109,7 @@ The code below reads each analog input and prints their values:
 
 <TabBar id="channels" titles={["Code", "Output"]} client:load>
   <TabPane id="channels" index={0} client:load>
-    <CodeFile src="code/ads1115_read_channels.py" />
+    <CodeFile src="code/ads1115-rpi/read_channels.py" />
   </TabPane>
   <TabPane id="channels" index={1} client:load>
 ```
@@ -184,7 +184,7 @@ The following code reads the differential input between A0 and A1:
 
 <TabBar id="differential" titles={["Code", "Output"]} client:load>
   <TabPane id="differential" index={0} client:load>
-    <CodeFile src="code/ads1115_read_differential.py" />
+    <CodeFile src="code/ads1115-rpi/read_differential.py" />
   </TabPane>
   <TabPane id="differential" index={1} client:load>
 ```
@@ -241,7 +241,7 @@ The ADS1115 has a built-in comparator. This comparator has two modes: traditiona
 
 ### Code
 
-<CodeFile src="code/ads1115_read_comparator.py" />
+<CodeFile src="code/ads1115-rpi/read_comparator.py" />
 
 ### Explanation
 

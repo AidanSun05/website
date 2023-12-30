@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Arduino Web Server</title>
+  <script>
+    function sendLed(state) {
+      const nocache = "&nocache=" + Math.random() * 1000000;
+      const request = new XMLHttpRequest();
+      request.open("GET", "led&state=" + state + nocache, true);
+      request.send(null);
+    }
+  </script>
+</head>
+
+<body>
+  <h1>LED with AJAX</h1>
+  <button onclick="sendLed('on')">LED On</button>
+  <button onclick="sendLed('off')">LED Off</button>
+</body>
+
+</html>
