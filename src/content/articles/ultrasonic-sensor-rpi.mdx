@@ -21,7 +21,7 @@ An ultrasonic sensor has two main parts: a transmitter (emits sound) and receive
 
 The controller starts by sending a 10 &mu;S pulse to the Trigger pin. The transmitter on the sensor fires an 8-cycle sonic burst, which travels at the speed of sound, reflects off an object, and into the sensor's receiver. The sensor then sends a pulse on the Echo pin proportional to the distance (time it takes for the sound waves to come back).
 
-![Ultrasonic sensor signal](@img/ultrasonic-sensor-rpi/signal.png)
+![Ultrasonic sensor signal](@img/ultrasonic-sensor-rpi/signal.svg)
 
 To calculate the distance $D$ from sensor to object (in centimeters), multiply the duration of the pulse $P$ by the speed of sound (34,300 cm/s). However, since the sound wave needs to go to the object and back, the output from the Echo pin will be double. Therefore, you also need to divide by 2.
 
