@@ -48,21 +48,7 @@ Save this HTML file as **index.htm** in your SD card:
   The Arduino SD library only supports 8.3 file names (maximum file name of 8 characters and maximum file extension of 3 characters).
 </Alert>
 
-```html
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Arduino Web Server</title>
-</head>
-
-<body>
-  <h1>Hello World!</h1>
-  <p>Hello from Arduino Ethernet Shield</p>
-</body>
-
-</html>
-```
+<CodeFile src="code/ethernet-shield/index-sd.html" />
 
 Before powering on your Arduino, insert the SD card into the SD slot.
 
@@ -70,7 +56,7 @@ Before powering on your Arduino, insert the SD card into the SD slot.
 
 ## Code
 
-<CodeFile src="code/WebServerSD.ino" />
+<CodeFile src="code/ethernet-shield/WebServerSD.ino" />
 
 ### Explanation
 
@@ -138,45 +124,17 @@ CSS stands for **Cascading Style Sheets**. It is a language commonly used with H
 
 Save this file as style.css in your SD card:
 
-```css
-h1 {
-  color: green;
-  text-align: center;
-  border-bottom: 2px solid green;
-}
-
-p {
-  color: #148F77;
-}
-
-.red {
-  color: red;
-}
-```
+<CodeFile src="code/ethernet-shield/style.css" />
 
 Update `index.htm` with:
 
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <link type="text/css" rel="stylesheet" href="style.css">
-    <title>Arduino Web Server</title>
-  </head>
-  <body>
-    <h1>Web Server Test</h1>
-    <p>Test for Ethernet shield</p>
-    <p class="red">Red text</p>
-    <p>Paragraph that contains <span class="red">some red text</span></p>
-  </body>
-</html>
-```
+<CodeFile src="code/ethernet-shield/index-css.html" />
 
 This HTML file uses a new tag: `<link>`, used to include external files (CSS files here).
 
 Arduino code:
 
-<CodeFile src="code/WebServerCSS.ino" />
+<CodeFile src="code/ethernet-shield/WebServerCSS.ino" />
 
 ### Explanation
 
@@ -198,30 +156,7 @@ Connect an LED to the Arduino's Digital 2 pin with a resistor in series.
 
 Then, update `index.htm` on the SD card with the following:
 
-```html
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Arduino Web Server</title>
-  <script>
-    function sendLed(state) {
-      const nocache = "&nocache=" + Math.random() * 1000000;
-      const request = new XMLHttpRequest();
-      request.open("GET", "led&state=" + state + nocache, true);
-      request.send(null);
-    }
-  </script>
-</head>
-
-<body>
-  <h1>LED with AJAX</h1>
-  <button onclick="sendLed('on')">LED On</button>
-  <button onclick="sendLed('off')">LED Off</button>
-</body>
-
-</html>
-```
+<CodeFile src="code/ethernet-shield/index-ajax-led.html" />
 
 The AJAX code is in the JavaScript `sendLed` function. This will send an HTTP request to the Arduino telling if it should turn the LED on or off (determined by the `state` parameter). The request also contains a `nocache` parameter, which will prevent the browser from caching responses from the Arduino (which could result in out-of-date data).
 
@@ -229,7 +164,7 @@ In the `body` tag, we have two buttons. Each has an `onclick` attribute pointing
 
 The Arduino code is as follows:
 
-<CodeFile src="code/WebServerAjaxLeds.ino" />
+<CodeFile src="code/ethernet-shield/WebServerAjaxLeds.ino" />
 
 ### Explanation
 
@@ -263,53 +198,7 @@ AJAX can also be used to fetch data from the Arduino. In this example, the Ardui
 
 Update `index.htm` with the following:
 
-```html
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Arduino Web Server</title>
-  <script>
-    function getInputs() {
-      const nocache = "&nocache=" + Math.random() * 1000000;
-      const request = new XMLHttpRequest();
-      request.onreadystatechange = function () {
-        if ((this.readyState == 4) && (this.status == 200) && (this.responseXML != null)) {
-          // Get the states of digital and analog pins
-          const digitalStates = this.responseXML.getElementsByTagName('digital');
-          const analogStates  = this.responseXML.getElementsByTagName('analog');
-
-          // Get the number of digital and analog pins
-          const numDigital = digitalStates.length;
-          const numAnalog  = analogStates.length;
-
-          // Update the states with the new data
-          for (let i = 0; i < numDigital; i++) {
-            document.getElementsByClassName('digital')[i].innerHTML = digitalStates[i].childNodes[0].nodeValue;
-          }
-
-          for (let i = 0; i < numAnalog; i++) {
-            document.getElementsByClassName('analog')[i].innerHTML = analogStates[i].childNodes[0].nodeValue;
-          }
-        }
-      }
-      request.open("GET", "inputs" + nocache, true);
-      request.send(null);
-    }
-
-    setInterval(getInputs, 250);
-  </script>
-</head>
-
-<body>
-  <h1>Inputs with AJAX</h1>
-  <p>Digital 2: <span class="digital">Not loaded</span></p>
-  <p>Digital 3: <span class="digital">Not loaded</span></p>
-  <p>Analog A5: <span class="analog">Not loaded</span></p>
-</body>
-
-</html>
-```
+<CodeFile src="code/ethernet-shield/index-ajax-io.html" />
 
 Here, `setInterval` is used in JavaScript to call `getInputs` every 250 ms. The browser sends a request to the Arduino similar to before, but it will now wait for a response. The response contains XML data with the values of the digital and analog inputs, which the JavaScript will use to update the contents of the HTML.
 
@@ -323,7 +212,7 @@ Finally, we update the HTML DOM with the values from the XML.
 
 The Arduino code is as follows:
 
-<CodeFile src="code/WebServerAjaxXML.ino" />
+<CodeFile src="code/ethernet-shield/WebServerAjaxXML.ino" />
 
 ### Explanation
 
