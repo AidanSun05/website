@@ -26,3 +26,4 @@ USER node
 WORKDIR /code
 COPY --from=deps --chown=node /code/node_modules ./node_modules
 COPY --from=builder --chown=node /code/dist ./dist
+COPY --chown=node ./res/downloads ./res/downloads
