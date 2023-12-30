@@ -6,14 +6,9 @@ import Placeholder from "@img/placeholder.svg";
 
 interface Props {
   articles: CollectionEntry<"articles">[];
-  num?: number;
 }
 
-const { articles, num } = Astro.props;
-articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-
-// Take most recent articles
-if (num !== undefined) articles.splice(num);
+const { articles } = Astro.props;
 ---
 
 <div class="page-listing">
