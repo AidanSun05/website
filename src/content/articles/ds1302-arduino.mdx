@@ -38,17 +38,13 @@ The DS1302:
 | 7          | SCLK     | Serial Clock                            |
 | 8          | V~CC1~   | Connection to 3V battery                |
 
-## Typical Operating Circuit
+## Schematic (Typical Operating Circuit)
 
-![DS1302 basic schematic](@img/ds1302-arduino/circuit.png)
+![DS1302 schematic](@img/ds1302-arduino/schematic.png)
 
 Note that the backup supply is a 3V coin cell. This supply will allow the DS1302 to keep track of time when it is turned off.
 
 The DS1302 keeps track of time by reading ticks from an oscillator. This is why a 32.768 kHz oscillator (Y1) is attached to pins 1 and 2.
-
-## Schematic
-
-![DS1302 circuit schematic](@img/ds1302-arduino/schematic.png)
 
 ## Library
 
