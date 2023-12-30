@@ -1,8 +1,13 @@
 ---
 import ArticleListing from "@components/ArticleListing.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const articles = await getCollection("articles");
+const title = "Articles";
 ---
 
-<ArticleListing title="Articles" description="List of all articles" {articles} />
+<BaseLayout {title} description="List of all articles">
+  <h1>{title}</h1>
+  <ArticleListing {articles} />
+</BaseLayout>

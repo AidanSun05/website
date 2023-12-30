@@ -1,36 +1,34 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
 import { formatDate, loadImage } from "@common/articles";
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 import Placeholder from "@img/placeholder.svg";
 
 interface Props {
-  title: string;
-  description: string;
   articles: CollectionEntry<"articles">[];
+  num?: number;
 }
 
-const { title, description, articles } = Astro.props;
+const { articles, num } = Astro.props;
 articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Take most recent articles
+if (num !== undefined) articles.splice(num);
 ---
 
-<BaseLayout {title} {description}>
-  <h1>{title}</h1>
-  <div class="page-listing">
-    {articles.length === 0 && <p>No articles found.</p>}
-    {
-      articles.map(async (page) => (
-        <article>
-          <Image src={(await loadImage(page.data.image)) ?? Placeholder} alt="Article thumbnail" height={200} />
-          <a href={`/${page.collection}/${page.slug}`}>{page.data.title}</a>
-          <div>{page.data.description}</div>
-          <time datetime={page.data.date.toISOString()}>{formatDate(page.data.date)}</time>
-        </article>
-      ))
-    }
-  </div>
-</BaseLayout>
+<div class="page-listing">
+  {articles.length === 0 && <p>No articles found.</p>}
+  {
+    articles.map(async (page) => (
+      <article>
+        <Image src={(await loadImage(page.data.image)) ?? Placeholder} alt="Article thumbnail" height={200} />
+        <a href={`/${page.collection}/${page.slug}`}>{page.data.title}</a>
+        <div>{page.data.description}</div>
+        <time datetime={page.data.date.toISOString()}>{formatDate(page.data.date)}</time>
+      </article>
+    ))
+  }
+</div>
 
 <style>
   .page-listing {
