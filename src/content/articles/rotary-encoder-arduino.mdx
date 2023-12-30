@@ -16,7 +16,7 @@ The rotary encoder used in this article is an **incremental encoder** which prov
 
 The knob is attached to a disc inside the encoder. There are also two contact points placed next to the spinning disc. These are the A and B outputs of the encoder. When the disc spins, the points remain stationary. This causes them to alternate between touching GND and VCC, producing square waves.
 
-![Rotary encoder working](@img/rotary-encoder-arduino/encoder-inside.png)
+![Rotary encoder working](@img/rotary-encoder-arduino/encoder-inside.svg)
 
 The placement of the contacts causes the waves to be 90 degrees out of phase. If the knob rotates clockwise, the B pin will lead. If the knob rotates counter-clockwise, then the A pin will lead. This is how we tell what direction the encoder is turning.
 
