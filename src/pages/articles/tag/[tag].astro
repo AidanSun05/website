@@ -1,5 +1,6 @@
 ---
 import ArticleListing from "@components/ArticleListing.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 export const prerender = false;
@@ -13,4 +14,7 @@ const description = `List of all articles tagged with ${tag}`;
 const articles = await getCollection("articles", (article) => article.data.tags.includes(tag));
 ---
 
-<ArticleListing {title} {description} {articles} />
+<BaseLayout {title} {description}>
+  <h1>{title}</h1>
+  <ArticleListing {articles} />
+</BaseLayout>
