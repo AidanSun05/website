@@ -31,10 +31,7 @@ export async function GET({ params }: APIContext) {
   const chunks = [];
   const target = archiver.create("zip");
 
-  const absPath =
-    process.env.NODE_ENV === "development"
-      ? path.join(process.cwd(), "public", "downloads", id)
-      : path.join(process.cwd(), "dist", "client", "downloads", id);
+  const absPath = path.join(process.cwd(), "res", "downloads", id);
 
   await target.directory(absPath, false).finalize();
   for await (const data of target) chunks.push(data);
