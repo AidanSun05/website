@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Arduino Web Server</title>
+  <script>
+    var outputStates = [0, 0, 0];
+
+    function setOutput(num, state) {
+      outputStates[num] = state;
+      var reqString = "outputs";
+
+      for (var i = 0; i < outputStates.length; i++) {
+        reqString += "&out" + i.toString() + "=" + outputStates[i];
+      }
+
+      var nocache = "&nocache=" + Math.random() * 1000000;
+      var request = new XMLHttpRequest();
+
+      reqString += nocache;
+      request.open("GET", reqString, true);
+      request.send(null);
+    }
+
+    function getInputs() {
+      var nocache = "&nocache=" + Math.random() * 1000000;
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function () {
+        if ((this.readyState == 4) && (this.status == 200) && (this.responseXML != null)) {
+          // Get the states of digital and analog pins
+          var digitalStates = this.responseXML.getElementsByTagName("digital");
+          var analogStates  = this.responseXML.getElementsByTagName("analog");
+
+          // Get the number of digital and analog pins
+          var numDigital = digitalStates.length;
+          var numAnalog  = analogStates.length;
+
+          // Update the states with the new data
+          for (var i = 0; i < numDigital; i++) {
+            document.getElementsByClassName("digital")[i].innerHTML = digitalStates[i].childNodes[0].nodeValue;
+          }
+
+          for (var i = 0; i < numAnalog; i++) {
+            document.getElementsByClassName("analog")[i].innerHTML = analogStates[i].childNodes[0].nodeValue;
+          }
+        }
+      }
+      request.open("GET", "inputs" + nocache, true);
+      request.send(null);
+    }
+
+    setInterval(getInputs, 250);
+  </script>
+
+  <style>
+    .io-container {
+      float: left;
+      margin-left: 25px;
+    }
+
+    .heading {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Inputs and Outputs with AJAX</h1>
+  <div class="io-container">
+    <h2 class="heading">Digital Inputs</h2>
+    <p>Digital 2: <span class="digital">Not loaded</span></p>
+    <p>Digital 3: <span class="digital">Not loaded</span></p>
+    <p>Digital 5: <span class="digital">Not loaded</span></p>
+    <p>Digital 6: <span class="digital">Not loaded</span></p>
+  </div>
+  <div class="io-container">
+    <h2 class="heading">Analog Inputs</h2>
+    <p>Analog A2: <span class="analog">Not loaded</span></p>
+    <p>Analog A3: <span class="analog">Not loaded</span></p>
+    <p>Analog A4: <span class="analog">Not loaded</span></p>
+    <p>Analog A5: <span class="analog">Not loaded</span></p>
+  </div>
+  <div class="io-container">
+    <h2 class="heading">Digital Outputs</h2>
+    <p>Digital 7: <button onclick="setOutput(0, 0)">Off</button> <button onclick="setOutput(0, 1)">On</button></p>
+    <p>Digital 8: <button onclick="setOutput(1, 0)">Off</button> <button onclick="setOutput(1, 1)">On</button></p>
+    <p>Digital 9: <button onclick="setOutput(2, 0)">Off</button> <button onclick="setOutput(2, 1)">On</button></p>
+  </div>
+</body>
+
+</html>
