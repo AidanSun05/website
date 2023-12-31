@@ -1,7 +1,7 @@
 <template>
   <aside id="sidebar" :class="{ toggled: sidebarOpened }">
     <div id="searchbar">
-      <input id="search-box" v-model="searchQuery" type="text" placeholder="Search" />
+      <input id="search-box" v-model.trim="searchQuery" type="text" placeholder="Search" />
       <button id="search-button" type="button" @click="doSearch"></button>
     </div>
     <nav id="sidebar-content">
@@ -29,7 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { debounce } from "lodash-es";
 import Fuse from "fuse.js";
 import SearchIcon from "@img/search.svg";
 import { watch } from "vue";
@@ -71,7 +70,7 @@ function doSearch() {
   searchMatches = fuse.search(searchQuery).map((i) => i.item);
 }
 
-watch($$(searchQuery), debounce(doSearch, 500));
+watch($$(searchQuery), () => setTimeout(doSearch, 500));
 </script>
 
 <style lang="postcss">
