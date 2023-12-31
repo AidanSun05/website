@@ -4,6 +4,7 @@ This repository contains the source code for aidansun.com. The website is built 
 
 - Astro (backend)
 - Vue.js (frontend)
+- Nginx (server)
 - Docker (deployment)
 - DigitalOcean (hosting)
 
@@ -16,6 +17,18 @@ This website is deployed using Docker and Docker Compose. Docker Compose files:
 - `docker-compose.prod.yml`: Production, includes nginx and TLS configured.
 - `docker-compose.staging.yml`: For testing use, like the production file but without TLS.
 
+Run development container locally:
+
+```shell
+docker compose -f docker-compose.yml -f docker-compose.override.yml up --build
+```
+
+Run staging container locally:
+
+```shell
+docker compose -f docker-compose.yml -f docker-compose.staging.yml up --build
+```
+
 ## Setup
 
 ```shell
@@ -24,6 +37,12 @@ npm run favicons # Generate favicon files
 
 npm run dev      # Start development server
 ```
+
+## Software
+
+- **Code**: VSCode
+- **SVGs** (`/src/img/**.svg`): Inkscape
+- **Schematics** (`/kicad/`): KiCad
 
 ## Editor Configuration
 
@@ -40,3 +59,9 @@ EditorConfig, ESLint, Prettier, and VSCode configuration files are included in t
 - [Npm Dependency](https://marketplace.visualstudio.com/items?itemName=howardzuo.vscode-npm-dependency)
 - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+
+## License
+
+This website's code and assets are licensed under the [MIT License](/LICENSE.txt).
+
+This repository also contains the Arduino libraries that are featured on the site in `res/downloads/`; each has its own MIT license document.
