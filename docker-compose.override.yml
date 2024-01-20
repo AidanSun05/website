@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   web:
-    image: node:20.10-alpine
+    image: node:20.11-alpine
     tty: true
     ports:
       - '4321:4321'
