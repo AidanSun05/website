@@ -1,4 +1,4 @@
-FROM node:20.10-alpine AS base
+FROM node:20.12-alpine AS base
 USER node
 WORKDIR /code
 
@@ -16,7 +16,7 @@ FROM base AS deps
 RUN npm ci --omit=dev
 
 FROM alpine:3.19 AS runner
-RUN apk add --update nodejs=20.11.0-r0 && \
+RUN apk add --update nodejs=20.12.0-r0 && \
   addgroup -g 65535 node && \
   adduser --shell /sbin/nologin --disabled-password \
   --no-create-home --uid 65535 --ingroup node node
