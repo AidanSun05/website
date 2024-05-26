@@ -17,7 +17,7 @@
         <a
           v-for="page of articles as Page[]"
           :key="page.slug"
-          :href="`/articles/${page.slug}`"
+          :href="`/articles/${page.slug}/`"
           :class="{ highlight: searchActive && searchMatches.includes(page) }"
           >{{ page.data.title }}</a
         >
