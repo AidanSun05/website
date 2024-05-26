@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-
+import ChipContainer from "@components/ChipContainer.astro";
 import { Image } from "astro:assets";
 import { formatDate, loadImage } from "@common/articles";
 
@@ -24,33 +24,7 @@ const imageSrc = image ? await loadImage(image) : null;
   <h1>{title}</h1>
   {imageSrc && <Image src={imageSrc} height="350" alt="Article thumbnail" />}
   <p>Published <time datetime={date.toISOString()}>{formatDate(date)}</time></p>
-  <div class="chip-container">
-    {
-      tags.map((tag) => (
-        <a class="chip" href={`/articles/tag/${tag}/`}>
-          {tag}
-        </a>
-      ))
-    }
-  </div>
+  <ChipContainer tags={tags} />
   <p>{description}</p>
   <slot />
 </BaseLayout>
-
-<style>
-  .chip-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 4px;
-
-    .chip {
-      padding: 2px;
-      border: 2px solid #777;
-      border-radius: 4px;
-      background-color: #ddd;
-      text-decoration: none;
-      color: black;
-    }
-  }
-</style>
