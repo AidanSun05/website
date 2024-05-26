@@ -17,7 +17,7 @@ interface Props {
 }
 
 const { title, description, image, date, tags } = Astro.props.frontmatter;
-const imageSrc = await loadImage(image);
+const imageSrc = image ? await loadImage(image) : null;
 ---
 
 <BaseLayout {title} {description} imageURL={imageSrc?.src}>
@@ -27,7 +27,7 @@ const imageSrc = await loadImage(image);
   <div class="chip-container">
     {
       tags.map((tag) => (
-        <a class="chip" href={"/articles/tag/" + tag}>
+        <a class="chip" href={`/articles/tag/${tag}`}>
           {tag}
         </a>
       ))

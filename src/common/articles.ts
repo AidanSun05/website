@@ -21,8 +21,8 @@ export function formatDate(date: Date) {
   return `${monthNames[date.getUTCMonth()]} ${date.getUTCDate()}, ${date.getUTCFullYear()}`;
 }
 
-export async function loadImage(image?: string) {
-  return image ? (await images[`/src/img/${image}`]()).default : null;
+export async function loadImage(image: string) {
+  return (await images[`/src/img/${image}`]()).default;
 }
 
 export async function getArticlesSorted() {
