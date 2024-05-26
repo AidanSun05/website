@@ -10,6 +10,6 @@ const articles = (await getArticlesSorted()).slice(0, 5);
 <BaseLayout title="Home" description="Home page for aidansun.com">
   <h1>Home</h1>
   <h2>Recent Articles</h2>
-  <p><a href="/articles">View all</a></p>
+  <p><a href="/articles/">View all</a></p>
   <ArticleListing {articles} />
 </BaseLayout>

@@ -15,6 +15,7 @@ interface Props {
 const { title, description, imageURL } = Astro.props;
 
 const imageURLWithSite = Astro.site?.toString().slice(0, -1) + (imageURL ?? Placeholder.src);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Specific attributes are picked out to avoid unnecessary bloat in generated HTML
 const articles = (await getCollection("articles")).map((i) => ({ data: i.data, slug: i.slug }));
@@ -38,6 +39,7 @@ articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:site_name" content="Aidan Sun" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
     <Manifest />
   </head>
   <body>
