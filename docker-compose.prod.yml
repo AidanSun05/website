@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   web:
     image: registry.digitalocean.com/${REGISTRY_NAME}/web:${TAG}
