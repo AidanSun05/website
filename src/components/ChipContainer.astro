@@ -1,0 +1,36 @@
+---
+interface Props {
+  tags: string[];
+}
+
+const { tags } = Astro.props;
+---
+
+<div class="chip-container">
+  {
+    tags.map((tag) => (
+      <a class="chip" href={`/articles/tag/${tag}/`}>
+        {tag}
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .chip-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 4px;
+
+    .chip {
+      padding: 2px;
+      border: 2px solid #777;
+      border-radius: 4px;
+      background-color: #ddd;
+      text-decoration: none;
+      color: black;
+    }
+  }
+</style>

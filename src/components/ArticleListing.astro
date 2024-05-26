@@ -1,5 +1,6 @@
 ---
 import { formatDate, loadImage } from "@common/articles";
+import ChipContainer from "@components/ChipContainer.astro";
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 
@@ -22,6 +23,7 @@ const { articles } = Astro.props;
         <p>
           <time datetime={page.data.date.toISOString()}>{formatDate(page.data.date)}</time> - {page.data.description}
         </p>
+        <ChipContainer tags={page.data.tags} />
       </div>
     </article>
   ))
@@ -33,10 +35,31 @@ const { articles } = Astro.props;
     padding: 15px;
     display: grid;
     gap: 10px;
-    grid-template-columns: 210px 1fr;
+
+    @media screen and (min-width: 451px) {
+      & {
+        grid-template-columns: 210px 1fr;
+      }
+    }
+
+    @media screen and (max-width: 450px) {
+      & {
+        grid-template-rows: auto 1fr;
+      }
+    }
 
     .article-desc {
-      grid-column: 2;
+      @media screen and (min-width: 451px) {
+        & {
+          grid-column: 2;
+        }
+      }
+
+      @media screen and (max-width: 450px) {
+        & {
+          grid-row: 2;
+        }
+      }
 
       a {
         color: #555;
