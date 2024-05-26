@@ -10,9 +10,9 @@
         <strong v-else>Found {{ searchMatches.length }} search results.</strong>
       </template>
       <a href="/">Home</a>
-      <a href="/about">About</a>
+      <a href="/about/">About</a>
       <button type="button" @click="articlesOpened = !articlesOpened">{{ articlesOpened ? "-" : "+" }}</button>
-      <a href="/articles">Articles</a>
+      <a href="/articles/">Articles</a>
       <template v-if="articlesOpened">
         <a
           v-for="page of articles as Page[]"

@@ -17,7 +17,7 @@ const { articles } = Astro.props;
       {page.data.image && <Image src={await loadImage(page.data.image)} alt="Article thumbnail" height={150} />}
       <div class="article-desc">
         <h3>
-          <a href={`/${page.collection}/${page.slug}`}>{page.data.title}</a>
+          <a href={`/${page.collection}/${page.slug}/`}>{page.data.title}</a>
         </h3>
         <p>
           <time datetime={page.data.date.toISOString()}>{formatDate(page.data.date)}</time> - {page.data.description}

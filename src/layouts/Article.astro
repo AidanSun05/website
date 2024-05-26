@@ -27,7 +27,7 @@ const imageSrc = image ? await loadImage(image) : null;
   <div class="chip-container">
     {
       tags.map((tag) => (
-        <a class="chip" href={`/articles/tag/${tag}`}>
+        <a class="chip" href={`/articles/tag/${tag}/`}>
           {tag}
         </a>
       ))
