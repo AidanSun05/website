@@ -72,7 +72,9 @@ pre {
   code .line {
     min-height: 1rem;
 
-    &::before {
+    /* Lines that are not empty or are not the last line have numbers */
+    &:not(:last-child)::before,
+    &:has(:not(:empty))::before {
       counter-increment: lines;
       content: counter(lines);
       width: 1rem;

@@ -10,7 +10,7 @@ interface Props {
 
 const { src } = Astro.props;
 
-const code = await fs.readFile(path.join(process.cwd(), "res", src), { encoding: "utf-8" });
+const code = (await fs.readFile(path.join(process.cwd(), "res", src), { encoding: "utf-8" })).trimEnd();
 const ext = path.extname(src).substring(1);
 
 const lang = ({
