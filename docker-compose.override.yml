@@ -1,6 +1,6 @@
 services:
   web:
-    image: node:20.13-alpine
+    image: node:20.15-alpine
     tty: true
     ports:
       - '4321:4321'
