@@ -11,5 +11,6 @@
       "@styles/*": ["src/styles/*"]
     },
     "types": ["unplugin-vue-macros/macros-global"]
-  }
+  },
+  "exclude": ["dist"]
 }
