@@ -8,22 +8,20 @@ tags:
   - shields
 ---
 
-import Alert from "@components/Alert.astro";
-import CodeFile from "@components/CodeFile.astro";
-
 ## Setup
 
 Put the shield on the Arduino, then insert a SD card into the socket (shown in the top image).
 
-<Alert type="important">
-  If your shield has a voltage selection switch, set it to **5V**.
+{% alert type="important" %}
+If your shield has a voltage selection switch, set it to **5V**.
 
-  ![SD shield voltage switch](@img/sd-shield/switch.jpg)
-</Alert>
+![SD shield voltage switch](@img/sd-shield/switch.jpg)
+{% /alert %}
 
 ## Example Code for SD Read/Write
 
-<CodeFile src="code/SDCard.ino" />
+```@code/SDCard.ino
+```
 
 ### Initialization and Setup
 
@@ -51,6 +49,6 @@ To open a file for reading, do not specify the open mode (it defaults to read mo
 
 When you are done with a file, close it with `close`.
 
-<Alert type="important">
-  Always remember to close a file after using it with `close()` to save the Arduino's resources.
-</Alert>
+{% alert type="important" %}
+Always remember to close a file after using it with `close()` to save the Arduino's resources.
+{% /alert %}

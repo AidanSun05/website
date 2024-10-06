@@ -8,12 +8,6 @@ tags:
   - software
 ---
 
-import Alert from "@components/Alert.astro";
-import CodeFile from "@components/CodeFile.astro";
-import CollapsiblePane from "@components/CollapsiblePane.vue";
-import TabBar from "@components/TabBar.vue";
-import TabPane from "@components/TabPane.vue";
-
 ## Overview
 
 This page contains information relevant to both the DS1302 and DS1307 real-time clock (RTC) chips. All information specific to one chip will be pointed out.
@@ -28,14 +22,19 @@ All example code is under **File > Examples > DS130X > (your RTC)**.
 
 After installing the library, go to the **DateAndTime > PrintDateTime** example.
 
-<TabBar titles={["DS1302 Example Code", "DS1307 Example Code", "Serial Monitor Output"]} client:load>
-  <TabPane index={0} client:load>
-    <CodeFile src="downloads/DS130X/examples/DS1302/DateAndTime/PrintDateTime/PrintDateTime.ino" />
-  </TabPane>
-  <TabPane index={1} client:load>
-    <CodeFile src="downloads/DS130X/examples/DS1307/DateAndTime/PrintDateTime/PrintDateTime.ino" />
-  </TabPane>
-  <TabPane index={2} client:load>
+{% tabbar titles=["DS1302 Example Code", "DS1307 Example Code", "Serial Monitor Output"] %}
+
+{% tabpane index=0 %}
+```@downloads/DS130X/examples/DS1302/DateAndTime/PrintDateTime/PrintDateTime.ino
+```
+{% /tabpane %}
+
+{% tabpane index=1 %}
+```@downloads/DS130X/examples/DS1307/DateAndTime/PrintDateTime/PrintDateTime.ino
+```
+{% /tabpane %}
+
+{% tabpane index=2 %}
 ```
 Fri, 28/08/20 10:05:50
 Fri, 28/08/20 10:05:51
@@ -48,8 +47,9 @@ Fri, 28/08/20 10:05:57
 Fri, 28/08/20 10:05:58
 Fri, 28/08/20 10:05:59
 ```
-  </TabPane>
-</TabBar>
+{% /tabpane %}
+
+{% /tabbar %}
 
 ### Creating the RTC Object
 
@@ -92,14 +92,19 @@ At the end of each loop iteration, the program pauses for one second so it doesn
 
 An example of reading registers is at **DateAndTime > ReadData**.
 
-<TabBar titles={["DS1302 Example Code", "DS1307 Example Code", "Serial Monitor Output"]} client:load>
-  <TabPane index={0} client:load>
-    <CodeFile src="downloads/DS130X/examples/DS1302/DateAndTime/ReadData/ReadData.ino" />
-  </TabPane>
-  <TabPane index={1} client:load>
-    <CodeFile src="downloads/DS130X/examples/DS1307/DateAndTime/ReadData/ReadData.ino" />
-  </TabPane>
-  <TabPane index={2} client:load>
+{% tabbar titles=["DS1302 Example Code", "DS1307 Example Code", "Serial Monitor Output"] %}
+
+{% tabpane index=0 %}
+```@downloads/DS130X/examples/DS1302/DateAndTime/ReadData/ReadData.ino
+```
+{% /tabpane %}
+
+{% tabpane index=1 %}
+```@downloads/DS130X/examples/DS1307/DateAndTime/ReadData/ReadData.ino
+```
+{% /tabpane %}
+
+{% tabpane index=2 %}
 ```
 Hour: 10
 Minute: 5
@@ -129,8 +134,9 @@ Month: 8
 Year: 20
 --------------------
 ```
-  </TabPane>
-</TabBar>
+{% /tabpane %}
+
+{% /tabbar %}
 
 ### Available Registers
 
@@ -156,17 +162,17 @@ All four methods will require you to specify a register to perform operations on
 
 You can also specify a register address. For example, with a DS1302, `write(0x80)` writes to the register 0x80 (the seconds register). (On the DS1307, this register is 0x00.)
 
-<Alert>
-  **DS1302 only:**
+{% alert %}
+**DS1302 only:**
 
-  The read registers are always one higher than the write registers. For example, to write to the minutes register, use `write(0x82, x);` to write and `read(0x83);` to read.
+The read registers are always one higher than the write registers. For example, to write to the minutes register, use `write(0x82, x);` to write and `read(0x83);` to read.
 
-  If you are using a register constant (like `MINUTES`), this difference is already handled, and you can use `write(MINUTES, x);` and `read(MINUTES);`
-</Alert>
+If you are using a register constant (like `MINUTES`), this difference is already handled, and you can use `write(MINUTES, x);` and `read(MINUTES);`
+{% /alert %}
 
-<Alert type="important">
-  Writing to the seconds register will overwrite the halt bit to 0. Keep this in mind when using this method - call `setHalt` *after* setting the seconds register (See "Additional Functions").
-</Alert>
+{% alert type="important" %}
+Writing to the seconds register will overwrite the halt bit to 0. Keep this in mind when using this method - call `setHalt` *after* setting the seconds register (See "Additional Functions").
+{% /alert %}
 
 ### Register Operations
 
@@ -181,23 +187,29 @@ You can also specify a register address. For example, with a DS1302, `write(0x80
 
 `write` expects the value to be in base-10, then converts it to BCD to write. `writeRaw` expects the value to be in BCD, and directly writes to the register without converting.
 
-<Alert>
-  When writing to the seconds register with `writeRaw`, you can explicitly set the halt bit (bit #7, the MSB, in the seconds register).
-</Alert>
+{% alert %}
+When writing to the seconds register with `writeRaw`, you can explicitly set the halt bit (bit #7, the MSB, in the seconds register).
+{% /alert %}
 
 ## Reading and Writing RAM
 
 Register operations can be used for operating on the RTC's RAM. An example is at **Other > RAMReadWrite**.
 
-<TabBar titles={["DS1302 Example Code", "DS1307 Example Code", "Serial Monitor Output"]} client:load>
-  <TabPane index={0} client:load>
-    <CodeFile src="downloads/DS130X/examples/DS1302/Other/RAMReadWrite/RAMReadWrite.ino" />
-  </TabPane>
-  <TabPane index={1} client:load>
-    <CodeFile src="downloads/DS130X/examples/DS1307/Other/RAMReadWrite/RAMReadWrite.ino" />
-  </TabPane>
-  <TabPane index={2} client:load>
-    <CollapsiblePane title="DS1302" client:load>
+{% tabbar titles=["DS1302 Example Code", "DS1307 Example Code", "Serial Monitor Output"] %}
+
+{% tabpane index=0 %}
+```@downloads/DS130X/examples/DS1302/Other/RAMReadWrite/RAMReadWrite.ino
+```
+{% /tabpane %}
+
+{% tabpane index=1 %}
+```@downloads/DS130X/examples/DS1307/Other/RAMReadWrite/RAMReadWrite.ino
+```
+{% /tabpane %}
+
+{% tabpane index=2 %}
+
+{% collapsiblepane title="DS1302" %}
 ```
 Writing to RAM
 Reading from RAM
@@ -233,8 +245,9 @@ Address 0xf9 has value 28
 Address 0xfb has value 29
 Address 0xfd has value 30
 ```
-    </CollapsiblePane>
-    <CollapsiblePane title="DS1307" client:load>
+{% /collapsiblepane %}
+
+{% collapsiblepane title="DS1307" %}
 ```
 Writing to RAM
 Reading from RAM
@@ -295,9 +308,11 @@ Address 0x3d has value 53
 Address 0x3e has value 54
 Address 0x3f has value 55
 ```
-    </CollapsiblePane>
-  </TabPane>
-</TabBar>
+{% /collapsiblepane %}
+
+{% /tabpane %}
+
+{% /tabbar %}
 
 ### Addresses and Bounds
 
@@ -314,15 +329,34 @@ The DS1302 class has four methods to get the lowest and highest RAM addresses, s
 
 In each loop, the increment statement is `i += 2`. Since the addresses alternate between read and write, we have to skip every other one.
 
-| RAM byte | Address | Function                                      |
-| -------- | ------- | --------------------------------------------- |
-| 0        | 0xC0    | Write                                         |
-| ^        | 0xC1    | Read                                          |
-| 1        | 0xC2    | Write                                         |
-| ^        | 0xC3    | Read                                          |
-| 2        | 0xC4    | Write                                         |
-| ^        | 0xC5    | Read                                          |
-| >        | >       | <div style="text-align:center">&vellip;</div> |
+{% table %}
+* RAM byte
+* Address
+* Function
+---
+* 0 {% rowspan=2 %}
+* 0xC0
+* Write
+---
+* 0xC1
+* Read
+---
+* 1 {% rowspan=2 %}
+* 0xC2
+* Write
+---
+* 0xC3
+* Read
+---
+* 2 {% rowspan=2 %}
+* 0xC4
+* Write
+---
+* 0xC5
+* Read
+---
+* &vellip; {% colspan=3 align="center" %}
+{% /table %}
 
 #### DS1307 Specifics
 
@@ -341,6 +375,6 @@ When the RTC is halted (determined by the halt bit), its oscillator is disabled 
 
 The RTC's `setHalt` method writes to this halt bit. It takes a Boolean parameter: `true` to enable the halt bit, `false` to disable.
 
-<Alert type="important">
-  **DS1307 only:** The SQW output won't work when the RTC is halted.
-</Alert>
+{% alert type="important" %}
+**DS1307 only:** The SQW output won't work when the RTC is halted.
+{% /alert %}

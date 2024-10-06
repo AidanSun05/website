@@ -8,10 +8,6 @@ tags:
   - sensors
 ---
 
-import CodeFile from "@components/CodeFile.astro";
-import TabBar from "@components/TabBar.vue";
-import TabPane from "@components/TabPane.vue";
-
 ## About MPU6050
 
 The MPU6050 consists of a 3-axis gyroscope and 3-axis accelerometer. It also contains a DMP (digital motion processor) to perform complex calculations, which frees up the controller to do other things.
@@ -24,16 +20,33 @@ The MPU6050 uses the I2C interface.
 
 ## MPU6050 Pinout
 
-| Pin   | Description          |
-| ----- | -------------------- |
-| V~CC~ | 3-5 V supply voltage |
-| GND   | Ground connection    |
-| SCL   | I2C clock connection |
-| SDA   | I2C data connection  |
-| XDA   | See below            |
-| XCL   | ^                    |
-| AD0   | Address pin          |
-| INT   | Interrupt pin        |
+{% table %}
+* Pin
+* Description
+---
+* `$V_{CC}$`
+* 3-5 V supply voltage
+---
+* GND
+* Ground connection
+---
+* SCL
+* I2C clock connection
+---
+* SDA
+* I2C data connection
+---
+* XDA
+* See below {% rowspan=2 %}
+---
+* XCL
+---
+* AD0
+* Address pin
+---
+* INT
+* Interrupt pin
+{% /table %}
 
 XDA and XCL stand for auxiliary data and auxiliary clock, respectively. These pins can be used for interfacing with other I2C devices.
 
@@ -61,7 +74,7 @@ The interrupt pin is used to indicate that data is available for the microcontro
 
 | MPU6050 pin | Connects to RPi pin |
 | ----------- | ------------------- |
-| V~CC~       | 3.3 V power         |
+| `$V_{CC}$`  | 3.3 V power         |
 | GND         | GND                 |
 | SCL         | GPIO 3 (SCL)        |
 | SDA         | GPIO 2 (SDA)        |
@@ -72,11 +85,14 @@ I2C needs to be enabled on your Raspberry Pi before running this code. See ["ADS
 
 This code prints the acceleration and gyro values on each of the three axes.
 
-<TabBar id="basic" titles={["Code", "Output"]} client:load>
-  <TabPane id="basic" index={0} client:load>
-    <CodeFile src="code/mpu6050_basic.py" />
-  </TabPane>
-  <TabPane id="basic" index={1} client:load>
+{% tabbar id="basic" titles=["Code", "Output"] %}
+
+{% tabpane id="basic" index=0 %}
+```@code/mpu6050_basic.py
+```
+{% /tabpane %}
+
+{% tabpane id="basic" index=1 %}
 ```
 Accel X: -0.013 Accel Y: 0.012 Accel Z: 0.922 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
 Accel X: -0.012 Accel Y: 0.011 Accel Z: 0.939 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
@@ -89,8 +105,9 @@ Accel X: -0.018 Accel Y: 0.008 Accel Z: 0.930 Gyro X: 0.000 Gyro Y: -0.000 Gyro 
 Accel X: -0.022 Accel Y: 0.007 Accel Z: 0.932 Gyro X: 0.000 Gyro Y: -0.000 Gyro Z: -0.000
 Stopped
 ```
-  </TabPane>
-</TabBar>
+{% /tabpane %}
+
+{% /tabbar %}
 
 ## Getting Rotation from Degrees per Second
 
@@ -98,11 +115,14 @@ The gyroscope measures degrees per second (how many degrees it has rotated in a 
 
 Below is the code showing this:
 
-<TabBar id="rotation" titles={["Code", "Output"]} client:load>
-  <TabPane id="rotation" index={0} client:load>
-    <CodeFile src="code/mpu6050_rotation.py" />
-  </TabPane>
-  <TabPane id="rotation" index={1} client:load>
+{% tabbar id="rotation" titles=["Code", "Output"] %}
+
+{% tabpane id="rotation" index=0 %}
+```@code/mpu6050_rotation.py
+```
+{% /tabpane %}
+
+{% tabpane id="rotation" index=1 %}
 ```
 X: 19 Y: 0 Z: -5
 X: 27 Y: -1 Z: -5
@@ -117,5 +137,6 @@ X: 31 Y: -2 Z: -9
 X: 18 Y: -3 Z: -7
 Stopped
 ```
-  </TabPane>
-</TabBar>
+{% /tabpane %}
+
+{% /tabbar %}

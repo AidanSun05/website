@@ -8,21 +8,15 @@ tags:
   - outputs
 ---
 
-import Alert from "@components/Alert.astro";
-import CodeFile from "@components/CodeFile.astro";
-import TabBar from "@components/TabBar.vue";
-import TabPane from "@components/TabPane.vue";
-import VideoPlayer from "@components/VideoPlayer.astro";
-
 ## What is the SSD1306?
 
 The SSD1306 is a driver chip for 128&times;64 OLED (Organic Light Emitting Diode) displays. It can support many communication interfaces, but we will be using I2C.
 
 ![SSD1306 module](@img/ssd1306-arduino/module.jpg)
 
-<Alert>
-  Even though the chip is rated at 3.3V communication, many display modules have on-board circuitry that can help it tolerate 5V. This means it can be used with both 5V and 3.3V logic.
-</Alert>
+{% alert %}
+Even though the chip is rated at 3.3V communication, many display modules have on-board circuitry that can help it tolerate 5V. This means it can be used with both 5V and 3.3V logic.
+{% /alert %}
 
 ## SSD1306 Pixel Numbering
 
@@ -58,14 +52,18 @@ This project uses my **SSD1306_I2C library.** [Download the library in Zip forma
 
 Example code for drawing graphics is located at **File > Examples > SSD1306_I2C > DrawGraphics**, also available below.
 
-<TabBar id="graphics" titles={["Example Code", "Video"]} client:load>
-  <TabPane id="graphics" index={0} client:load>
-    <CodeFile src="downloads/SSD1306_I2C/examples/DrawGraphics/DrawGraphics.ino" />
-  </TabPane>
-  <TabPane id="graphics" index={1} client:load>
-    <VideoPlayer src="ssd1306-arduino/example1.mp4" />
-  </TabPane>
-</TabBar>
+{% tabbar id="graphics" titles=["Example Code", "Video"] %}
+
+{% tabpane id="graphics" index=0 %}
+```@downloads/SSD1306_I2C/examples/DrawGraphics/DrawGraphics.ino
+```
+{% /tabpane %}
+
+{% tabpane id="graphics" index=1 %}
+{% video src="ssd1306-arduino/example1.mp4" / %}
+{% /tabpane %}
+
+{% /tabbar %}
 
 ### Initialization
 
@@ -81,9 +79,9 @@ Initialization of the SSD1306 is done with:
 
 `updateDisplay` sends what is in the display buffer to the SSD1306 over I2C.
 
-<Alert type="important">
-  This should be called after using the below graphics methods to display the results on screen. Graphics methods do not change the screen by themselves.
-</Alert>
+{% alert type="important" %}
+This should be called after using the below graphics methods to display the results on screen. Graphics methods do not change the screen by themselves.
+{% /alert %}
 
 `clear`: Sets the contents of the display buffer to 0. Takes no parameters.
 
@@ -148,9 +146,9 @@ The methods below draw various graphics; parameters are listed under each. The f
 
 These methods accept printable characters, i.e., ASCII codes 32-126 (plus the newline and tab). TabBar are printed as 4 spaces.
 
-<Alert>
-  `println` can also be called with no parameters to move the cursor only.
-</Alert>
+{% alert %}
+`println` can also be called with no parameters to move the cursor only.
+{% /alert %}
 
 ## Drawing Text
 
@@ -158,14 +156,18 @@ Example code: **File > Examples > SSD1306_I2C > DrawText**
 
 This code demonstrates how data and text can be printed to the screen.
 
-<TabBar id="text" titles={["Example Code", "Image (last part of program)"]} client:load>
-  <TabPane id="text" index={0} client:load>
-    <CodeFile src="downloads/SSD1306_I2C/examples/DrawText/DrawText.ino" />
-  </TabPane>
-  <TabPane id="text" index={1} client:load>
-    ![Displaying all printable characters](@img/ssd1306-arduino/characters.jpg)
-  </TabPane>
-</TabBar>
+{% tabbar id="text" titles=["Example Code", "Image (last part of program)"] %}
+
+{% tabpane id="text" index=0 %}
+```@downloads/SSD1306_I2C/examples/DrawText/DrawText.ino
+```
+{% /tabpane %}
+
+{% tabpane id="text" index=1 %}
+![Displaying all printable characters](@img/ssd1306-arduino/characters.jpg)
+{% /tabpane %}
+
+{% /tabbar %}
 
 ### Size and Positioning
 
@@ -184,14 +186,18 @@ Example code: **File > Examples > SSD1306_I2C > ControlCommands**
 
 This code shows various controls supported by the library, such as inverting the display and turning it on/off.
 
-<TabBar id="control" titles={["Example Code", "Video"]} client:load>
-  <TabPane id="control" index={0} client:load>
-    <CodeFile src="downloads/SSD1306_I2C/examples/ControlCommands/ControlCommands.ino" />
-  </TabPane>
-  <TabPane id="control" index={1} client:load>
-    <VideoPlayer src="ssd1306-arduino/example2.mp4" />
-  </TabPane>
-</TabBar>
+{% tabbar id="control" titles=["Example Code", "Video"] %}
+
+{% tabpane id="control" index=0 %}
+```@downloads/SSD1306_I2C/examples/ControlCommands/ControlCommands.ino
+```
+{% /tabpane %}
+
+{% tabpane id="control" index=1 %}
+{% video src="ssd1306-arduino/example2.mp4" / %}
+{% /tabpane %}
+
+{% /tabbar %}
 
 ### Control Methods
 
@@ -215,14 +221,18 @@ The SSD1306 has the built-in ability to scroll. It can either scroll horizontall
 
 Example code: **File > Examples > SSD1306_I2C > ScrollDisplay**
 
-<TabBar id="scrolling" titles={["Example Code", "Video"]} client:load>
-  <TabPane id="scrolling" index={0} client:load>
-    <CodeFile src="downloads/SSD1306_I2C/examples/ScrollDisplay/ScrollDisplay.ino" />
-  </TabPane>
-  <TabPane id="scrolling" index={1} client:load>
-    <VideoPlayer src="ssd1306-arduino/example3.mp4" />
-  </TabPane>
-</TabBar>
+{% tabbar id="scrolling" titles=["Example Code", "Video"] %}
+
+{% tabpane id="scrolling" index=0 %}
+```@downloads/SSD1306_I2C/examples/ScrollDisplay/ScrollDisplay.ino
+```
+{% /tabpane %}
+
+{% tabpane id="scrolling" index=1 %}
+{% video src="ssd1306-arduino/example3.mp4" / %}
+{% /tabpane %}
+
+{% /tabbar %}
 
 ### Scrolling Setup
 
@@ -245,17 +255,17 @@ You may use any of the following constants for the last parameter:
 - `FRAMES_128`
 - `FRAMES_256`
 
-<Alert>
-  The smaller the interval, the smoother the scrolling. For example, `FRAMES_2` is smoother than `FRAMES_25`.
-</Alert>
+{% alert %}
+The smaller the interval, the smoother the scrolling. For example, `FRAMES_2` is smoother than `FRAMES_25`.
+{% /alert %}
 
 `startScroll`: Tells the display to start scrolling. Takes no parameters.
 
 `stopScroll`: Tells the display to stop scrolling. Takes no parameters.
 
-<Alert>
-  Scrolling affects the data in the display's RAM, so to revert it to its pre-scroll state, you will have to also use this with `updateDisplay`.
-</Alert>
+{% alert %}
+Scrolling affects the data in the display's RAM, so to revert it to its pre-scroll state, you will have to also use this with `updateDisplay`.
+{% /alert %}
 
 ## Displaying Bitmaps
 
@@ -263,18 +273,22 @@ The SSD1306 can display bitmap images with a size up to 128&times;64. Bitmaps ar
 
 Example code: **File > Examples > SSD1306_I2C > DisplayBitmap**
 
-<TabBar id="bitmaps" titles={["Example Code", "Result"]} client:load>
-  <TabPane id="bitmaps" index={0} client:load>
-    <CodeFile src="downloads/SSD1306_I2C/examples/DisplayBitmap/DisplayBitmap.ino" />
-  </TabPane>
-  <TabPane id="bitmaps" index={1} client:load>
-    ![SSD1306 bitmap display](@img/ssd1306-arduino/bitmap.jpg)
-  </TabPane>
-</TabBar>
+{% tabbar id="bitmaps" titles=["Example Code", "Result"] %}
 
-<Alert>
-  The fish image was taken from [Shutterstock](https://www.shutterstock.com/image-vector/fish-outline-icon-749702563). The bitmap array was generated using [image2cpp](https://javl.github.io/image2cpp).
-</Alert>
+{% tabpane id="bitmaps" index=0 %}
+```@downloads/SSD1306_I2C/examples/DisplayBitmap/DisplayBitmap.ino
+```
+{% /tabpane %}
+
+{% tabpane id="bitmaps" index=1 %}
+![SSD1306 bitmap display](@img/ssd1306-arduino/bitmap.jpg)
+{% /tabpane %}
+
+{% /tabbar %}
+
+{% alert %}
+The fish image was taken from [Shutterstock](https://www.shutterstock.com/image-vector/fish-outline-icon-749702563). The bitmap array was generated using [image2cpp](https://javl.github.io/image2cpp).
+{% /alert %}
 
 ### Loading Bitmaps
 

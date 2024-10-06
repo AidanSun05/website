@@ -8,9 +8,6 @@ tags:
   - software
 ---
 
-import Alert from "@components/Alert.astro";
-import CodeFile from "@components/CodeFile.astro";
-
 ## Purpose
 
 An I2C scanner iterates through all possible I2C addresses. An I2C scanner can let the user know how many I2C devices are currently connected, as well as the addresses of them.
@@ -39,7 +36,8 @@ if (Wire.endTransmission() == 0) {
 
 ## Code
 
-<CodeFile src="code/I2CScanner.ino" />
+```@code/I2CScanner.ino
+```
 
 ## Iterating Addresses
 
@@ -56,9 +54,9 @@ Within the loops, the Arduino tries to initialize communication with each possib
 
 Connect various I2C devices to the Arduino. If you have more than one, you can use a breadboard to break out the Arduino I2C pins.
 
-<Alert>
-  On many boards, Arduino pin A4 is I2C SDA and A5 is I2C SCL.
-</Alert>
+{% alert %}
+On many boards, Arduino pin A4 is I2C SDA and A5 is I2C SCL.
+{% /alert %}
 
 After connecting the I2C devices, run the sketch and open the serial monitor. For example, this is the output from an Arduino connected to a DS1307 (0x68) and I2C LCD (0x3F):
 

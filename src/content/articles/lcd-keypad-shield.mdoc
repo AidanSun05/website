@@ -8,11 +8,6 @@ tags:
   - shields
 ---
 
-import CodeFile from "@components/CodeFile.astro";
-import TabBar from "@components/TabBar.vue";
-import TabPane from "@components/TabPane.vue";
-import VideoPlayer from "@components/VideoPlayer.astro";
-
 ## The LCD Keypad Shield
 
 [DFRobot LCD Keypad Shield](https://www.dfrobot.com/product-51.html)
@@ -35,14 +30,18 @@ The LCD Keypad shield contains a 1602 LCD connected to pins 4-9 and backlight co
 
 ## Printing Text
 
-<TabBar id="printing" titles={["Code", "Result"]} client:load>
-  <TabPane id="printing" index={0} client:load>
-    <CodeFile src="code/LCDShieldText.ino" />
-  </TabPane>
-  <TabPane id="printing" index={1} client:load>
-    ![LCD text example](@img/lcd-keypad-shield/text-example.jpg)
-  </TabPane>
-</TabBar>
+{% tabbar id="printing" titles=["Code", "Result"] %}
+
+{% tabpane id="printing" index=0 %}
+```@code/LCDShieldText.ino
+```
+{% /tabpane %}
+
+{% tabpane id="printing" index=1 %}
+![LCD text example](@img/lcd-keypad-shield/text-example.jpg)
+{% /tabpane %}
+
+{% /tabbar %}
 
 After running the code, it may seem like nothing is displayed. This is because of the contrast adjustment trimpot, which is blue with a gold screw and located in the top left corner of the shield.
 
@@ -54,14 +53,18 @@ Once properly adjusted, you should see the words "Hello, world!" displayed on th
 
 The LCD's backlight is connected to digital pin 10. It can be controlled like a normal LED with `pinMode` and `digitalWrite`.
 
-<TabBar id="backlight" titles={["Code", "Result"]} client:load>
-  <TabPane id="backlight" index={0} client:load>
-    <CodeFile src="code/LCDShieldBacklight.ino" />
-  </TabPane>
-  <TabPane id="backlight" index={1} client:load>
-    <VideoPlayer src="lcd-keypad-shield/backlight.mp4" />
-  </TabPane>
-</TabBar>
+{% tabbar id="backlight" titles=["Code", "Result"] %}
+
+{% tabpane id="backlight" index=0 %}
+```@code/LCDShieldBacklight.ino
+```
+{% /tabpane %}
+
+{% tabpane id="backlight" index=1 %}
+{% video src="lcd-keypad-shield/backlight.mp4" / %}
+{% /tabpane %}
+
+{% /tabbar %}
 
 Controlling the backlight has many useful applications. For example, the backlight could turn off if there is no user interaction for a long time to implement a power-save mode, similar to a cell phone.
 
@@ -84,11 +87,15 @@ Notice how each button has a range, not a specific value. This is because resist
 
 We can compare these ranges with the analog input value to interpret each button press.
 
-<TabBar id="buttons" titles={["Code", "Result"]} client:load>
-  <TabPane id="buttons" index={0} client:load>
-    <CodeFile src="code/LCDShieldButtons.ino" />
-  </TabPane>
-  <TabPane id="buttons" index={1} client:load>
-    <VideoPlayer src="lcd-keypad-shield/buttons.mp4" />
-  </TabPane>
-</TabBar>
+{% tabbar id="buttons" titles=["Code", "Result"] %}
+
+{% tabpane id="buttons" index=0 %}
+```@code/LCDShieldButtons.ino
+```
+{% /tabpane %}
+
+{% tabpane id="buttons" index=1 %}
+{% video src="lcd-keypad-shield/buttons.mp4" / %}
+{% /tabpane %}
+
+{% /tabbar %}

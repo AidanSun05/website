@@ -10,9 +10,6 @@ tags:
   - ethernet
 ---
 
-import Alert from "@components/Alert.astro";
-import CodeFile from "@components/CodeFile.astro";
-
 ## The Ethernet Shield
 
 The Ethernet shield provides a standard RJ45 Ethernet jack and micro SD card slot. It has a connection speed of 10/100MB and provides a network stack capable of TCP and UDP.
@@ -45,11 +42,12 @@ digitalWrite(4, HIGH);
 
 Save this HTML file as **index.htm** in your SD card:
 
-<Alert>
-  The Arduino SD library only supports 8.3 file names (maximum file name of 8 characters and maximum file extension of 3 characters).
-</Alert>
+{% alert %}
+The Arduino SD library only supports 8.3 file names (maximum file name of 8 characters and maximum file extension of 3 characters).
+{% /alert %}
 
-<CodeFile src="code/ethernet-shield/index-sd.html" />
+```@code/ethernet-shield/index-sd.html
+```
 
 Before powering on your Arduino, insert the SD card into the SD slot.
 
@@ -57,7 +55,8 @@ Before powering on your Arduino, insert the SD card into the SD slot.
 
 ## Code
 
-<CodeFile src="code/ethernet-shield/WebServerSD.ino" />
+```@code/ethernet-shield/WebServerSD.ino
+```
 
 ### Explanation
 
@@ -125,17 +124,20 @@ CSS stands for **Cascading Style Sheets**. It is a language commonly used with H
 
 Save this file as style.css in your SD card:
 
-<CodeFile src="code/ethernet-shield/style.css" />
+```@code/ethernet-shield/style.css
+```
 
 Update `index.htm` with:
 
-<CodeFile src="code/ethernet-shield/index-css.html" />
+```@code/ethernet-shield/index-css.html
+```
 
 This HTML file uses a new tag: `<link>`, used to include external files (CSS files here).
 
 Arduino code:
 
-<CodeFile src="code/ethernet-shield/WebServerCSS.ino" />
+```@code/ethernet-shield/WebServerCSS.ino
+```
 
 ### Explanation
 
@@ -157,7 +159,8 @@ Connect an LED to the Arduino's Digital 2 pin with a resistor in series.
 
 Then, update `index.htm` on the SD card with the following:
 
-<CodeFile src="code/ethernet-shield/index-ajax-led.html" />
+```@code/ethernet-shield/index-ajax-led.html
+```
 
 The AJAX code is in the JavaScript `sendLed` function. This will send an HTTP request to the Arduino telling if it should turn the LED on or off (determined by the `state` parameter). The request also contains a `nocache` parameter, which will prevent the browser from caching responses from the Arduino (which could result in out-of-date data).
 
@@ -165,7 +168,8 @@ In the `body` tag, we have two buttons. Each has an `onclick` attribute pointing
 
 The Arduino code is as follows:
 
-<CodeFile src="code/ethernet-shield/WebServerAjaxLeds.ino" />
+```@code/ethernet-shield/WebServerAjaxLeds.ino
+```
 
 ### Explanation
 
@@ -193,13 +197,14 @@ When you click the button labeled LED On, the LED should turn on. When you click
 
 AJAX can also be used to fetch data from the Arduino. In this example, the Arduino will periodically send the values of some of its inputs to the browser.
 
-<Alert>
-  The Arduino code below uses digital pins 2 and 3 as digital inputs with pullups enabled and A5 as an analog input. You can connect anything to these pins, such as buttons or potentiometers.
-</Alert>
+{% alert %}
+The Arduino code below uses digital pins 2 and 3 as digital inputs with pullups enabled and A5 as an analog input. You can connect anything to these pins, such as buttons or potentiometers.
+{% /alert %}
 
 Update `index.htm` with the following:
 
-<CodeFile src="code/ethernet-shield/index-ajax-io.html" />
+```@code/ethernet-shield/index-ajax-io.html
+```
 
 Here, `setInterval` is used in JavaScript to call `getInputs` every 250 ms. The browser sends a request to the Arduino similar to before, but it will now wait for a response. The response contains XML data with the values of the digital and analog inputs, which the JavaScript will use to update the contents of the HTML.
 
@@ -213,7 +218,8 @@ Finally, we update the HTML DOM with the values from the XML.
 
 The Arduino code is as follows:
 
-<CodeFile src="code/ethernet-shield/WebServerAjaxXML.ino" />
+```@code/ethernet-shield/WebServerAjaxXML.ino
+```
 
 ### Explanation
 
