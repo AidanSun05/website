@@ -1,5 +1,5 @@
 {
-  "[mdx]": {
+  "[markdoc]": {
     "editor.wordWrap": "on"
   },
   "[typescript][javascript][vue][astro][postcss][json][jsonc]": {

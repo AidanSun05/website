@@ -10,16 +10,13 @@ tags:
   - projects
 ---
 
-import Alert from "@components/Alert.astro";
-import CodeFile from "@components/CodeFile.astro";
-
 ## Overview
 
 This project uses a web server page to control the Arduino's I/O ports remotely. See [Ethernet Shield](/articles/ethernet-shield/) for more details on using the Ethernet shield and its SD card slot with Arduino.
 
-<Alert>
-  An Arduino Uno may not have enough memory for this program. You can use any board with sufficient memory, such as a Mega.
-</Alert>
+{% alert %}
+An Arduino Uno may not have enough memory for this program. You can use any board with sufficient memory, such as a Mega.
+{% /alert %}
 
 ## Schematic
 
@@ -29,7 +26,8 @@ This project uses a web server page to control the Arduino's I/O ports remotely.
 
 Save this HTML file as **index.htm** in your SD card:
 
-<CodeFile src="code/ethernet-io-arduino/index.html" />
+```@code/ethernet-io-arduino/index.html
+```
 
 This HTML page is similar to the last example in the "Ethernet Shield" article. There are not many changes to the HTML/JS code. This is because we used many loops to iterate through the pins, so the request handling code can be left alone. However, there are more tags that show the input states, since we have more inputs. We have also used `<div>` tags, which are used to style a group of elements.
 
@@ -37,7 +35,8 @@ We have also used internal CSS in the `<style>` tag. The `float: left;` means th
 
 ## Arduino Code
 
-<CodeFile src="code/ethernet-io-arduino/WebServerAjaxIO.ino" />
+```@code/ethernet-io-arduino/WebServerAjaxIO.ino
+```
 
 ## Running the Code
 

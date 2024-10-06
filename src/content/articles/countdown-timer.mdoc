@@ -9,9 +9,6 @@ tags:
   - 7-segment-shield
 ---
 
-import CodeFile from "@components/CodeFile.astro";
-import VideoPlayer from "@components/VideoPlayer.astro";
-
 ## Overview
 
 This project is a simple timer created with an Arduino. It uses the following libraries:
@@ -27,10 +24,11 @@ This project uses the [Gravitech seven-segment shield](https://www.gravitech.us/
 
 ## Code
 
-<CodeFile src="code/CountdownTimer.ino" />
+```@code/CountdownTimer.ino
+```
 
 ## Using the Timer
 
 Use the keypad to enter a time value, from 1 to 9999 (in seconds). Use the * key to clear the display and the # key to start the timer.
 
-<VideoPlayer src="countdown-timer/timer.mp4" />
+{% video src="countdown-timer/timer.mp4" / %}

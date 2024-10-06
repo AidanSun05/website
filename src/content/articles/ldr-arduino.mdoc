@@ -8,11 +8,6 @@ tags:
   - sensors
 ---
 
-import Alert from "@components/Alert.astro";
-import CodeFile from "@components/CodeFile.astro";
-import TabBar from "@components/TabBar.vue";
-import TabPane from "@components/TabPane.vue";
-
 ## LDR Working Principle
 
 LDR stands for Light-Dependent Resistor. As its name suggests, it is a resistor whose resistance changes depending on the amount of light exposed to it. It also has many other names, such as photoresistor and photocell.
@@ -29,15 +24,18 @@ When there is more energy in the light that the LDR is exposed to, more current 
 
 Since the LDR is an analog device, you can compare it to a predetermined threshold. The code below will turn on an LED if the reading is above 500:
 
-<Alert>
-  This program yields best results in a dark room and with a flashlight to provide a large difference between low and high readings.
-</Alert>
+{% alert %}
+This program yields best results in a dark room and with a flashlight to provide a large difference between low and high readings.
+{% /alert %}
 
-<TabBar titles={["Code", "Serial Monitor Output"]} client:load>
-  <TabPane index={0} client:load>
-    <CodeFile src="code/LDR.ino" />
-  </TabPane>
-  <TabPane index={1} client:load>
+{% tabbar titles=["Code", "Serial Monitor Output"] %}
+
+{% tabpane index=0 %}
+```@code/LDR.ino
+```
+{% /tabpane %}
+
+{% tabpane index=1 %}
 ```
 LDR Reading: 805
 LDR Reading: 802
@@ -55,8 +53,9 @@ LDR Reading: 803
 LDR Reading: 802
 LDR Reading: 796
 ```
-  </TabPane>
-</TabBar>
+{% /tabpane %}
+
+{% /tabbar %}
 
 ## Images
 

@@ -8,9 +8,6 @@ tags:
   - sensors
 ---
 
-import CodeFile from "@components/CodeFile.astro";
-import "katex/dist/katex.min.css";
-
 ## The Ultrasonic Sensor
 
 An ultrasonic sensor is a device that measures distance using sound waves. It emits a sound wave, which bounces off an object in front of the sensor. The sensor measures how long it takes for the sound wave to get back, then converts the reflected sound into an electric signal. Ultrasonic sound waves travel faster than the speed of sound that humans can hear (audible sound). We will be using the HC-SR04 sensor.
@@ -23,11 +20,9 @@ The controller starts by sending a 10 &mu;S pulse to the Trigger pin. The transm
 
 ![Ultrasonic sensor signal](@img/ultrasonic-sensor-rpi/signal.svg)
 
-To calculate the distance $D$ from sensor to object (in centimeters), multiply the duration of the pulse $P$ by the speed of sound (34,300 cm/s). However, since the sound wave needs to go to the object and back, the output from the Echo pin will be double. Therefore, you also need to divide by 2.
+To calculate the distance `$D$` from sensor to object (in centimeters), multiply the duration of the pulse `$P$` by the speed of sound (34,300 cm/s). However, since the sound wave needs to go to the object and back, the output from the Echo pin will be double. Therefore, you also need to divide by 2.
 
-$$
-D = \frac{P \times 34300}{2}
-$$
+`$$D = \frac{P \times 34300}{2}$$`
 
 ## Voltage Divider
 
@@ -37,15 +32,11 @@ The output of the HC-SR04 is 5V, while the Pi's inputs can only support 3.3V. Th
 
 The formula for calculating resistor values is:
 
-$$
-V_{out} = V_{in} \left( \frac{R_2}{R_1 + R_2} \right)
-$$
+`$$V_{out} = V_{in} \left( \frac{R_2}{R_1 + R_2} \right)$$`
 
 With R1 being 330 &ohm; and R2 being 470 &ohm;, the equation becomes:
 
-$$
-V_{out} = 5 \left( \frac{470}{330 + 470} \right) \approx 3 \mathrm{V}
-$$
+`$$V_{out} = 5 \left( \frac{470}{330 + 470} \right) \approx 3 \mathrm{V}$$`
 
 ## Schematic
 
@@ -57,7 +48,8 @@ In addition to the sensor and voltage divider, this circuit also includes a red 
 
 The following code reads the distance from the ultrasonic sensor and switches LEDs depending on if an object is too close to the sensor.
 
-<CodeFile src="code/ultrasonic_sensor_rpi.py" />
+```@code/ultrasonic_sensor_rpi.py
+```
 
 ![Ultrasonic sensor with an object](@img/ultrasonic-sensor-rpi/object.jpg)
 ![Ultrasonic sensor with an object](@img/ultrasonic-sensor-rpi/object2.jpg)

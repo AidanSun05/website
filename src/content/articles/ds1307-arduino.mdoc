@@ -8,11 +8,6 @@ tags:
   - rtc
 ---
 
-import Alert from "@components/Alert.astro";
-import CodeFile from "@components/CodeFile.astro";
-import TabBar from "@components/TabBar.vue";
-import TabPane from "@components/TabPane.vue";
-
 Date/time and RAM examples are listed in the [DS130X Common Reference](/articles/ds130x-reference/). This page covers DS1307-specific features.
 
 ## DS1307 Features
@@ -28,16 +23,42 @@ The DS1307:
 - Can be run in 12 hour (1:00-12:00 with AM/PM flag) or 24 hour mode (0:00-23:00).
 - Can have a backup power supply. If the main supply is failing, the chip can detect it and switch over to the backup. It can also keep track of time when the main supply is shut off because of the backup.
 
-| Pin Number | Pin Name | Function                                |
-| ---------- | -------- | --------------------------------------- |
-| 1          | X1       | Connection to 32.768 kHz quartz crystal |
-| 2          | X2       | Connection to 32.768 kHz quartz crystal |
-| 3          | V~BAT~   | Connection to 3V battery                |
-| 4          | GND      | Ground                                  |
-| 5          | SDA      | I2C Data connection                     |
-| 6          | SCL      | I2C Clock connection                    |
-| 7          | SQW/OUT  | Square wave output (open drain)         |
-| 8          | V~CC~    | 5V power supply                         |
+{% table %}
+* Pin number
+* Pin name
+* Function
+---
+* 1
+* X1
+* Connection to 32.768 kHz quartz crystal {% rowspan=2 %}
+---
+* 2
+* X2
+---
+* 3
+* `$V_{BAT}$`
+* Connection to 3V battery
+---
+* 4
+* GND
+* Ground
+---
+* 5
+* SDA
+* I2C Data connection
+---
+* 6
+* SCL
+* I2C Clock connection
+---
+* 7
+* SQW/OUT
+* Square wave output (open drain)
+---
+* 8
+* `$V_{CC}$`
+* 5V power supply
+{% /table %}
 
 ## Schematic (Typical Operating Circuit)
 
@@ -65,11 +86,14 @@ The SQW pin is used as a current sink - the LED's anode is connected to 5V and t
 
 The example code is at **File > Examples > DS130X > DS1307 > Other > SquareWave**.
 
-<TabBar titles={["Example Code", "Serial Monitor Output"]} client:load>
-  <TabPane index={0} client:load>
-    <CodeFile src="downloads/DS130X/examples/DS1307/Other/SquareWave/SquareWave.ino" />
-  </TabPane>
-  <TabPane index={1} client:load>
+{% tabbar titles=["Example Code", "Serial Monitor Output"] %}
+
+{% tabpane index=0 %}
+```@downloads/DS130X/examples/DS1307/Other/SquareWave/SquareWave.ino
+```
+{% /tabpane %}
+
+{% tabpane index=1 %}
 ```
 SQW High
 SQW 1 Hz
@@ -78,8 +102,9 @@ SQW 8.192 kHz
 SQW 32.768 kHz
 SQW Low
 ```
-  </TabPane>
-</TabBar>
+{% /tabpane %}
+
+{% /tabbar %}
 
 ### Setting the Frequency
 
@@ -94,9 +119,9 @@ To set the square wave frequency, use `writeRaw` to write to the register `SQW_O
 - `SQW_32KHZ`: 32.768 kHz square wave
 - `SQW_LOW`: Output off
 
-<Alert>
-  Be sure to use `writeRaw` **(not `write`)** to set the frequency. The constant values are in the raw BCD format.
-</Alert>
+{% alert %}
+Be sure to use `writeRaw` **(not `write`)** to set the frequency. The constant values are in the raw BCD format.
+{% /alert %}
 
 ### Output Waveforms
 

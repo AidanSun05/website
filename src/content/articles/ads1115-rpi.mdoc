@@ -8,12 +8,6 @@ tags:
   - sensors
 ---
 
-import Alert from "@components/Alert.astro";
-import CodeFile from "@components/CodeFile.astro";
-import TabBar from "@components/TabBar.vue";
-import TabPane from "@components/TabPane.vue";
-import VideoPlayer from "@components/VideoPlayer.astro";
-
 ## The ADS1115
 
 The ADS1115 is an ADC (Analog-to-Digital Converter). ADCs convert analog signals (like sine waves) into digital signals through communication protocol like SPI or I2C. They are used to give analog inputs to a device incapable of measuring analog signals by itself, such as Raspberry Pis.
@@ -60,29 +54,29 @@ There are four addresses available. They are set by connecting the ADDR pin to e
 | SDA             | 0x4A (0b1001010) |
 | SCL             | 0x4B (0b1001011) |
 
-<Alert>
-  The default address, when ADDR is not connected, is 0x48.
-</Alert>
+{% alert %}
+The default address, when ADDR is not connected, is 0x48.
+{% /alert %}
 
 ## ADS1115 Resolution
 
-The output of the ADS1115 is a signed integer (positive or negative). This means that although the precision of the ADC is 16 bits, only 15 bits are used for the value of voltage measurements. One of the bits determines the sign of the value. So, there are 32,768 possible output values (0 to 32,767, or 000000000000000~2~ to 111111111111111~2~ binary).
+The output of the ADS1115 is a signed integer (positive or negative). This means that although the precision of the ADC is 16 bits, only 15 bits are used for the value of voltage measurements. One of the bits determines the sign of the value. So, there are 32,768 possible output values (0 to 32,767, or `$000000000000000_2$` to `$111111111111111_2$` binary).
 
 ## ADS1115 Full Scale and Value of a Bit
 
 The value of a bit is determined by the Programmable Gain Amplifier (PGA) setting. This setting establishes the full scale. In the default mode, the setting is &plusmn;6.144 V where 32,767 represents an input value of 6.144 V. Dividing 6.144 V by 32,767 yields a scale factor of 0.1875 mV per bit. You can also change the PGA setting to have a smaller full scale of &plusmn;2.048 V. That provides a more precise resolution of 0.0635 mV per bit.
 
-<Alert type="important">
-  The maximum analog input voltage cannot exceed the voltage at VDD + 0.3 V. For example, if VDD is 3.3 V, the analog inputs cannot exceed 3.6 V. If the input does exceed 3.6 V, the chip on the ADS1115 could be damaged.
-</Alert>
+{% alert type="important" %}
+The maximum analog input voltage cannot exceed the voltage at VDD + 0.3 V. For example, if VDD is 3.3 V, the analog inputs cannot exceed 3.6 V. If the input does exceed 3.6 V, the chip on the ADS1115 could be damaged.
+{% /alert %}
 
 ## Schematic
 
 ![ADS1115 schematic](@img/ads1115-rpi/schematic.png)
 
-<Alert>
-  It is a good idea to tie any unused inputs to ground to avoid "floating" inputs, where an input pin gives erratic readings, due to the fact that it is not connected to anything.
-</Alert>
+{% alert %}
+It is a good idea to tie any unused inputs to ground to avoid "floating" inputs, where an input pin gives erratic readings, due to the fact that it is not connected to anything.
+{% /alert %}
 
 ## Enabling I2C
 
@@ -97,21 +91,25 @@ Since the ADS1115 communicates over I2C, your Raspberry Pi needs I2C to be enabl
 
 Below is a simple Python 3 library to use the ADS1115. Save it on your Raspberry Pi as `ads1115.py`:
 
-<CodeFile src="code/ads1115-rpi/ads1115.py" />
+```@code/ads1115-rpi/ads1115.py
+```
 
-<Alert>
-  To learn more about the specific I2C values and how they should be sent to the ADS1115, go to its datasheet.
-</Alert>
+{% alert %}
+To learn more about the specific I2C values and how they should be sent to the ADS1115, go to its datasheet.
+{% /alert %}
 
 ## Reading Channels
 
 The code below reads each analog input and prints their values:
 
-<TabBar id="channels" titles={["Code", "Output"]} client:load>
-  <TabPane id="channels" index={0} client:load>
-    <CodeFile src="code/ads1115-rpi/read_channels.py" />
-  </TabPane>
-  <TabPane id="channels" index={1} client:load>
+{% tabbar id="channels" titles=["Code", "Output"] %}
+
+{% tabpane id="channels" index=0 %}
+```@code/ads1115-rpi/read_channels.py
+```
+{% /tabpane %}
+
+{% tabpane id="channels" index=1 %}
 ```
 18      18      18      18
 18      18      18      18
@@ -139,8 +137,9 @@ The code below reads each analog input and prints their values:
 20887   18      18      18
 Program Stopped
 ```
-  </TabPane>
-</TabBar>
+{% /tabpane %}
+
+{% /tabbar %}
 
 There should be an output with four columns, A0 reading on the left to A3 reading on the right. Rotate the trimpot connected to A0 to make the first value change.
 
@@ -182,11 +181,14 @@ If a `KeyboardInterrupt` is caught, the program prints a message and exits.
 
 The following code reads the differential input between A0 and A1:
 
-<TabBar id="differential" titles={["Code", "Output"]} client:load>
-  <TabPane id="differential" index={0} client:load>
-    <CodeFile src="code/ads1115-rpi/read_differential.py" />
-  </TabPane>
-  <TabPane id="differential" index={1} client:load>
+{% tabbar id="differential" titles=["Code", "Output"] %}
+
+{% tabpane id="differential" index=0 %}
+```@code/ads1115-rpi/read_differential.py
+```
+{% /tabpane %}
+
+{% tabpane id="differential" index=1 %}
 ```
 2725
 2749
@@ -210,8 +212,9 @@ The following code reads the differential input between A0 and A1:
 12
 Program Stopped
 ```
-  </TabPane>
-</TabBar>
+{% /tabpane %}
+
+{% /tabbar %}
 
 The output should have one column. Rotate both trimpots to see how the value changes.
 
@@ -241,7 +244,8 @@ The ADS1115 has a built-in comparator. This comparator has two modes: traditiona
 
 ### Code
 
-<CodeFile src="code/ads1115-rpi/read_comparator.py" />
+```@code/ads1115-rpi/read_comparator.py
+```
 
 ### Explanation
 
@@ -259,11 +263,11 @@ In the example code, `low_thresh` is set to 2000 and `high_thresh` is set to 100
 
 This example code by default uses the comparator in traditional mode. Play the video below to see how the LED should change in traditional mode.
 
-<VideoPlayer src="ads1115-rpi/comparator-traditional.mp4" />
+{% video src="ads1115-rpi/comparator-traditional.mp4" / %}
 
 To use window mode, uncomment line 8 and comment line 7. Run the code again, and you should see the LED turn on when it is inside the 2000-10000 range:
 
-<VideoPlayer src="ads1115-rpi/comparator-window.mp4" />
+{% video src="ads1115-rpi/comparator-window.mp4" / %}
 
 To set the ALRT pin to active high, uncomment the third `read_adc_comparator` line (line 9) and comment the other two.
 
@@ -271,4 +275,4 @@ Active high can be used with both comparator modes. Combine `traditional=False` 
 
 If you run the code again, you should see that the LED's state is inverted:
 
-<VideoPlayer src="ads1115-rpi/comparator-active-high.mp4" />
+{% video src="ads1115-rpi/comparator-active-high.mp4" / %}

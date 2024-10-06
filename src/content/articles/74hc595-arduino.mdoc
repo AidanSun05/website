@@ -8,14 +8,6 @@ tags:
   - outputs
 ---
 
-import Blockquote from "@components/Blockquote.astro";
-import CodeFile from "@components/CodeFile.astro";
-import TabBar from "@components/TabBar.vue";
-import TabPane from "@components/TabPane.vue";
-import VideoPlayer from "@components/VideoPlayer.astro";
-
-export const components = { blockquote: Blockquote };
-
 ## What is a Shift Register?
 
 A shift register loads the data on its inputs and then shifts it to its output once every clock cycle.
@@ -44,24 +36,24 @@ From [the Arduino website](https://docs.arduino.cc/tutorials/communication/guide
 
 ## 74HC595 Pinout
 
-| Pin Number | Pin Name | Function                   |
-| ---------- | -------- | -------------------------- |
-| 1          | Q1       | Parallel data output 1     |
-| 2          | Q2       | Parallel data output 2     |
-| 3          | Q3       | Parallel data output 3     |
-| 4          | Q4       | Parallel data output 4     |
-| 5          | Q5       | Parallel data output 5     |
-| 6          | Q6       | Parallel data output 6     |
-| 7          | Q7       | Parallel data output 7     |
-| 8          | GND      | Ground                     |
-| 9          | Q7'      | Serial data output         |
-| 10         | MR       | Master reset (active low)  |
-| 11         | SH_CP    | Shift register clock       |
-| 12         | ST_CP    | Storage register clock     |
-| 13         | OE       | Output enable (active low) |
-| 14         | DS       | Serial data input          |
-| 15         | Q0       | Parallel data output 0     |
-| 16         | V~CC~    | Supply voltage             |
+| Pin Number | Pin Name   | Function                   |
+| ---------- | ---------- | -------------------------- |
+| 1          | Q1         | Parallel data output 1     |
+| 2          | Q2         | Parallel data output 2     |
+| 3          | Q3         | Parallel data output 3     |
+| 4          | Q4         | Parallel data output 4     |
+| 5          | Q5         | Parallel data output 5     |
+| 6          | Q6         | Parallel data output 6     |
+| 7          | Q7         | Parallel data output 7     |
+| 8          | GND        | Ground                     |
+| 9          | Q7'        | Serial data output         |
+| 10         | MR         | Master reset (active low)  |
+| 11         | SH_CP      | Shift register clock       |
+| 12         | ST_CP      | Storage register clock     |
+| 13         | OE         | Output enable (active low) |
+| 14         | DS         | Serial data input          |
+| 15         | Q0         | Parallel data output 0     |
+| 16         | `$V_{CC}$` | Supply voltage             |
 
 ## Hardware Overview
 
@@ -110,14 +102,18 @@ All resistors are 220&ohm;.
 
 ## Example
 
-<TabBar titles={["Code", "Video"]} client:load>
-  <TabPane index={0} client:load>
-    <CodeFile src="code/74HC595.ino" />
-  </TabPane>
-  <TabPane index={1} client:load>
-    <VideoPlayer src="74hc595-arduino/scanner.mp4" />
-  </TabPane>
-</TabBar>
+{% tabbar titles=["Code", "Video"] %}
+
+{% tabpane index=0 %}
+```@code/74HC595.ino
+```
+{% /tabpane %}
+
+{% tabpane index=1 %}
+{% video src="74hc595-arduino/scanner.mp4" / %}
+{% /tabpane %}
+
+{% /tabbar %}
 
 ### Program Flow
 

@@ -8,8 +8,6 @@ tags:
   - sensors
 ---
 
-import CodeFile from "@components/CodeFile.astro";
-
 ## How the Rotary Encoder Works
 
 The rotary encoder used in this article is an **incremental encoder** which provides information about its knob's rotation. It is up to the controller to turn the measurements into useful values such as distance and speed.
@@ -26,17 +24,18 @@ Some rotary encoders also have a switch under the knob that allows it to be pres
 
 A rotary encoder module usually has the following pins. Their connections to the Arduino in the code are also provided in the table.
 
-| RE module pin | Stands for | Description       | Connects to Arduino pin |
-| ------------- | ---------- | ----------------- | ----------------------- |
-| CLK           | Clock      | Encoder output 1  | Digital pin 4           |
-| DT            | Data       | Encoder output 2  | Digital pin 3           |
-| SW            | Switch     | Switch connection | Digital pin 2           |
-| + (V~CC~)     | Power in   | Power connection  | 5V pin                  |
-| - (GND)       | Ground     | Ground connection | GND pin                 |
+| RE module pin  | Stands for | Description       | Connects to Arduino pin |
+| -------------- | ---------- | ----------------- | ----------------------- |
+| CLK            | Clock      | Encoder output 1  | Digital pin 4           |
+| DT             | Data       | Encoder output 2  | Digital pin 3           |
+| SW             | Switch     | Switch connection | Digital pin 2           |
+| + (`$V_{CC}$`) | Power in   | Power connection  | 5V pin                  |
+| - (GND)        | Ground     | Ground connection | GND pin                 |
 
 ## Code
 
-<CodeFile src="code/RotaryEncoder.ino" />
+```@code/RotaryEncoder.ino
+```
 
 We start by defining the pins that the encoder is connected to, as well as open a serial port and configure the pins as inputs. We also read the initial state of the encoder.
 

@@ -1,0 +1,12 @@
+---
+import TabBar from "@components/TabBar.vue";
+
+interface Props {
+  id?: string;
+  titles: string[];
+}
+---
+
+<TabBar {...Astro.props} client:load>
+  <slot />
+</TabBar>
