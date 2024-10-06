@@ -44,22 +44,6 @@ npm run dev      # Start development server
 - **SVGs** (`/src/img/**.svg`): Inkscape
 - **Schematics** (`/kicad/`): KiCad
 
-## Editor Configuration
-
-EditorConfig, ESLint, Prettier, and VSCode configuration files are included in the repository.
-
-### VSCode Extensions
-
-- [Astro](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode)
-- [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
-- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- [language-postcss](https://marketplace.visualstudio.com/items?itemName=cpylua.language-postcss)
-- [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx)
-- [nginx.conf hint](https://marketplace.visualstudio.com/items?itemName=hangxingliu.vscode-nginx-conf-hint)
-- [Npm Dependency](https://marketplace.visualstudio.com/items?itemName=howardzuo.vscode-npm-dependency)
-- [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [Vue Language Features (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
-
 ## License
 
 This website's code and assets are licensed under the [MIT License](/LICENSE.txt).
