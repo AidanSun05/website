@@ -1,0 +1,23 @@
+---
+import type { ImageMetadata } from "astro";
+import ImageSlides from "@components/ImageSlides.vue";
+import { getImage } from "astro:assets";
+
+interface Props {
+  width: number;
+  images: string[][];
+}
+
+const { width } = Astro.props;
+
+const imports = import.meta.glob<{ default: ImageMetadata }>("@img/**");
+const images = await Promise.all(
+  Astro.props.images.map(async ([file, caption]) => {
+    const src = (await imports[`/src/${file}`]()).default;
+    const imageResult = await getImage({ src, format: "webp", width });
+    return [imageResult.src, caption];
+  })
+);
+---
+
+<ImageSlides width={Astro.props.width} {images} client:load />

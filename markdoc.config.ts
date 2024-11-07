@@ -36,6 +36,13 @@ export default defineMarkdocConfig({
         title: { type: String }
       }
     },
+    imageslides: {
+      render: component("@components/tags/ImageSlidesClient.astro"),
+      attributes: {
+        width: { type: Number },
+        images: { type: Array }
+      }
+    },
     tabbar: {
       render: component("@components/tags/TabBarClient.astro"),
       attributes: {
