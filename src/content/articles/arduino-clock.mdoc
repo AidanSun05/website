@@ -1,0 +1,100 @@
+---
+title: "Arduino Clock"
+description: "A simple alarm clock with an Arduino Nano"
+image: "arduino-clock/thumbnail.jpg"
+date: 2019-07-01
+tags:
+  - arduino
+  - rtc
+  - projects
+---
+
+## Overview
+
+The Arduino Clock v2 is an open-source, easy-to-use alarm clock running on an Arduino Nano. It features a bright 4-digit seven-segment display with decimal points, large snooze button, and two ways to be powered - USB or battery.
+
+## Specifications
+
+| Attribute                      | Value                                          |
+| ------------------------------ | ---------------------------------------------- |
+| Microcontroller                | ATmega328P (on Arduino Nano)                   |
+| Input Voltage                  | 5V DC via USB or 7-12V DC via input pins       |
+| Clock Speed (crystal)          | 16MHz microcontroller, 32.768kHz DS1302        |
+| PCB Size                       | 13.3 cm &times; 8.3 cm (5.2 in &times; 3.2 in) |
+| Clock Chip                     | DS1302                                         |
+| Clock Chip Backup Power Supply | 3V DC via coin cell battery                    |
+| Num. of Digits                 | 4                                              |
+| Mounting Holes                 | 4                                              |
+
+## Schematic
+
+![Arduino Clock schematic](@img/arduino-clock/schematic.png)
+
+## List of Parts
+
+All IC sockets have 300 mil pin spacing.
+
+[Download the .fzz file](/files/clock-pcb.fzz)
+
+| Part                          | Symbol       | Quantity |
+| ----------------------------- | ------------ | -------- |
+| Arduino Nano v3               | Arduino Nano | 1        |
+| 4-Digit 7-Segment Display     |              | 1        |
+| MAX7219                       | IC1          | 1        |
+| DS1302                        | IC2          | 1        |
+| 32.768kHz crystal             | Y1           | 1        |
+| Pushbutton (normally open)    | S1-8         | 8        |
+| Buzzer                        | BUZZER       | 1        |
+| DIP24 IC socket               |              | 1        |
+| DIP8 IC socket                |              | 1        |
+| Green LED                     | D1           | 1        |
+| Female header, 15 pins        |              | 1        |
+| Rounded female header, 7 pins |              | 2        |
+| 47k resistor                  | R1           | 1        |
+| 220R resistor                 | R2-3         | 2        |
+| 3V coin cell holder           |              | 1        |
+| 9V battery snap (optional)    |              | 1        |
+| SPST slide switch (optional)  |              | 1        |
+| 9V battery (optional)         |              | 1        |
+| 3V coin cell (CR2032)         |              | 1        |
+| Fabricated PCB                |              | 1        |
+
+## Installation
+
+{% imageslides width=600 images=[
+  ["img/arduino-clock/soldering-1.jpg", "Solder on both IC sockets. Pay attention to the orientation and direction of the notch."],
+  ["img/arduino-clock/soldering-2.jpg", "Solder on both rounded female headers (7 pins)."],
+  ["img/arduino-clock/soldering-3.jpg", "Solder on the battery holder, R2, and R3 (both 220R)."],
+  ["img/arduino-clock/soldering-4.jpg", "Solder on both female headers (15 pins)."],
+  ["img/arduino-clock/soldering-5.jpg", "R1 is mounted vertically to save space. Bend one of the leads 180 degrees to make it fit. Then, put it on the PCB with the actual resistor in the circle. Next, be sure to leave at least 2mm of lead space on Y1 at the top of the PCB. Solder on R1 and Y1."],
+  ["img/arduino-clock/soldering-6.jpg", "Solder on D1. Make sure that the anode goes into the square pad."],
+  ["img/arduino-clock/soldering-7.jpg", "Solder on S1-8 and the buzzer. Make sure that the \"+\" on the buzzer is on the left."],
+  ["img/arduino-clock/soldering-8.jpg", "If using 9V battery: Solder the 9V battery snap to the back of the PCB. The black wire should be in the square pad. Then, attach the wires to the board with tape."],
+  ["img/arduino-clock/soldering-9.jpg", "If using 9V battery: Solder the SPST slide switch to the two holes labelled \"SWITCH\"."],
+  ["img/arduino-clock/soldering-10.jpg", "Bend Y1 downward. Then, insert the Arduino Nano into the two long female headers. The USB port should be over the word \"USB\" on the PCB."],
+  ["img/arduino-clock/soldering-11.jpg", "Insert the two ICs into their corresponding sockets. Pay attention to their orientation."],
+  ["img/arduino-clock/soldering-12.jpg", "Note the small \"1\" on the PCB. This indicates where pin 1 of the display should be connected. Insert the display into the rounded female headers. Then, insert a 3V coin cell into the coin cell holder. The side marked with a \"+\" should be on top."],
+  ["img/arduino-clock/soldering-13.jpg", "Use super glue to stick a 7.5 mm x 31 mm (0.3 in x 1.2 in) piece of black, rigid plastic to S6 and S7, forming the snooze bar."],
+  ["img/arduino-clock/soldering-14.jpg", "If using 9V battery: Insert the 9V battery into the snap and use double-sided tape to stick it on the PCB."]
+] / %}
+
+## Code
+
+{% alert %}
+You will need the [DS130X](/articles/ds1302-arduino/) and [LedControl](https://github.com/wayoda/LedControl) libraries for the code to compile and run properly.
+{% /alert %}
+
+```@code/clock.ino
+```
+
+## Usage
+
+**Power-On:** Turn the clock on. If you are using a 9V battery, slide the switch to the "ON" position. If you are using USB power, connect the USB port to a 5V USB supply (ex. a computer's USB port) via a mini-USB cable.
+
+**Time Adjustments:** To adjust the displayed time, use the TIME+/- buttons (S1 and S2). TIME+ will add 1 to the minutes, and TIME- will subtract 1 from the minutes. The clock uses 12-hour time. Even when you turn it off, the clock will still be recording the time because the DS1302 has the coin cell as a backup power supply.
+
+**Setting an Alarm:** To set an alarm, press the ALARM ON/OFF button (S8). D1 will turn on. The default alarm time is 12:00. Adjusting the alarm time is similar to adjusting the normal time. Use the ALARM+/- buttons (S3 and S4).
+
+**Turning the Alarm Off:** When the set alarm time is reached, the buzzer will beep continuously. Use the SLEEP button (S5) to turn the alarm off, or use the snooze bar (S6 and S7) to make the clock wait 5 minutes before beeping again. The snooze bar will work if either button is pressed. It will also work if both buttons are pressed.
+
+**Replacing the Coin Cell:** To replace the 3V coin cell, first turn the clock off. Then, use pliers to bend the small metal tab on the left of the holder to release the coin cell. After removing the coin cell, put a new one in by putting the right edge in first and then pushing the left end down to secure it.
