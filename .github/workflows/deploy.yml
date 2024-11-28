@@ -62,8 +62,9 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          envs: REGISTRY_NAME,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},{{ secrets.SSH_USERNAME }},TAG,EMAIL,SSH_USERNAME
+          envs: REGISTRY_NAME,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},{{ secrets.SSH_USERNAME }},${{ secrets.DOCKER_HUB_USER }},${{ secrets.DOCKER_HUB_PASSWORD }},TAG,SSH_USERNAME
           script: |
             docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
+            docker login -i ${{ secrets.DOCKER_HUB_USER }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
             cd /home/${{ secrets.SSH_USERNAME }}/website
             docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
