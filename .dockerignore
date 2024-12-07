@@ -14,4 +14,3 @@ pnpm-debug.log*
 .*
 Dockerfile
 docker-*.yml
-kicad/
