@@ -16,10 +16,10 @@
       <template v-if="articlesOpened">
         <a
           v-for="page of articles as Page[]"
-          :key="page.slug"
-          :href="`/articles/${page.slug}/`"
+          :key="page.id"
+          :href="`/articles/${page.id}/`"
           :class="{ highlight: searchActive && searchMatches.includes(page) }"
-          >{{ page.data.title }}</a
+          >{{ page.data.doctitle }}</a
         >
       </template>
     </nav>
@@ -35,7 +35,7 @@ import { ref, watch } from "vue";
 
 // Manually typing Page interface to avoid importing dependency from Astro
 interface Page {
-  slug: string;
+  id: string;
   data: {
     title: string;
   };
