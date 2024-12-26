@@ -59,15 +59,14 @@ function doSearch() {
     return;
   }
 
-  const fuse = new Fuse(props.articles, {
-    keys: ["data.title", "data.description", "data.tags"],
-    includeMatches: true,
-    minMatchCharLength: 2,
-    threshold: 0.5
-  });
-
-  searchActive = true;
-  searchMatches = fuse.search(searchQuery).map((i) => i.item);
+  searchActive.value = true;
+  const q = searchQuery.value.toLowerCase();
+  searchMatches.value = (<Page[]>props.articles).filter(
+    ({ data }) =>
+      data.doctitle.toLowerCase().includes(q) ||
+      data.description.toLowerCase().includes(q) ||
+      data.tags.split(" ").some((tag) => tag.toLowerCase().includes(q))
+  );
 }
 
 watch(searchQuery, () => setTimeout(doSearch, 500));
