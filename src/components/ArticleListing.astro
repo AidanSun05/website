@@ -1,5 +1,5 @@
 ---
-import { formatDate, loadImage } from "@common/articles";
+import { formatDate } from "@common/articles";
 import ChipContainer from "@components/ChipContainer.astro";
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
@@ -15,13 +15,13 @@ const { articles } = Astro.props;
 {
   articles.map(async (page) => (
     <article>
-      {page.data.image && <Image src={await loadImage(page.data.image)} alt="Article thumbnail" height={150} />}
+      {page.data.image && <Image src={page.data.image} alt="Article thumbnail" height={150} />}
       <div class="article-desc">
         <h3>
-          <a href={`/${page.collection}/${page.slug}/`}>{page.data.title}</a>
+          <a href={`/${page.collection}/${page.id}/`}>{page.data.doctitle}</a>
         </h3>
         <p>
-          <time datetime={page.data.date.toISOString()}>{formatDate(page.data.date)}</time> - {page.data.description}
+          <time datetime={page.data.revdate.toISOString()}>{formatDate(page.data.revdate)}</time> - {page.data.description}
         </p>
         <ChipContainer tags={page.data.tags} />
       </div>
