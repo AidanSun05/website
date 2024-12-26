@@ -30,9 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import Fuse from "fuse.js";
 import SearchIcon from "@img/search.svg";
-import { watch } from "vue";
+import { ref, watch } from "vue";
 
 // Manually typing Page interface to avoid importing dependency from Astro
 interface Page {
@@ -46,17 +45,17 @@ const props = defineProps<{
   articles: unknown[];
 }>();
 
-let searchActive = $ref(false);
-let searchMatches = $ref<unknown[]>([]);
-const searchQuery = $ref("");
+let searchActive = ref(false);
+let searchMatches = ref<unknown[]>([]);
+const searchQuery = ref("");
 
-let sidebarOpened = $ref(false);
-let articlesOpened = $ref(true);
+let sidebarOpened = ref(false);
+let articlesOpened = ref(true);
 const searchIcon = `url(${SearchIcon.src})`;
 
 function doSearch() {
-  if (searchQuery.length === 0) {
-    searchActive = false;
+  if (searchQuery.value.length === 0) {
+    searchActive.value = false;
     return;
   }
 
@@ -71,7 +70,7 @@ function doSearch() {
   searchMatches = fuse.search(searchQuery).map((i) => i.item);
 }
 
-watch($$(searchQuery), () => setTimeout(doSearch, 500));
+watch(searchQuery, () => setTimeout(doSearch, 500));
 </script>
 
 <style lang="postcss">
