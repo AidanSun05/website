@@ -24,15 +24,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, useTemplateRef } from "vue";
+import { onMounted, ref, useTemplateRef } from "vue";
 
 const props = defineProps<{
   width: number;
   images: string[][];
 }>();
 
-let slidesWidth = $ref(0);
-let slideNumber = $ref(0);
+let slidesWidth = ref(0);
+let slideNumber = ref(0);
 const width = `${props.width}px`;
 
 const slides = useTemplateRef("slides");
@@ -40,7 +40,7 @@ onMounted(() => {
   const el = slides.value;
   if (el === null) return;
 
-  const resizeObserver = new ResizeObserver(() => (slidesWidth = el.getBoundingClientRect().width));
+  const resizeObserver = new ResizeObserver(() => (slidesWidth.value = el.getBoundingClientRect().width));
   resizeObserver.observe(el);
 });
 </script>
