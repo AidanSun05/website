@@ -1,5 +1,3 @@
-const postcssPresetEnv = require("postcss-preset-env");
-
 module.exports = {
-  plugins: [require("autoprefixer"), postcssPresetEnv({ stage: 1 })]
+  plugins: [require("autoprefixer"), require("postcss-preset-env")({ stage: 1 })]
 };
