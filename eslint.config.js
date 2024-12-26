@@ -18,17 +18,16 @@ export default tseslint.config(
       parserOptions: {
         sourceType: "module",
         parser: tseslint.parser
-      },
-      // For Vue Macros:
-      globals: {
-        $$: "readonly",
-        $: "readonly",
-        $computed: "readonly",
-        $customRef: "readonly",
-        $ref: "readonly",
-        $shallowRef: "readonly",
-        $toRef: "readonly"
       }
+    }
+  },
+  {
+    files: ["*.config.cjs"],
+    languageOptions: {
+      sourceType: "commonjs"
+    },
+    rules: {
+      "@typescript-eslint/no-require-imports": "off"
     }
   },
   {
