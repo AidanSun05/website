@@ -1,7 +1,4 @@
-import type { ImageMetadata } from "astro";
 import { getCollection } from "astro:content";
-
-const images = import.meta.glob<{ default: ImageMetadata }>("/src/img/*/*.{jpg,png,gif}");
 
 export function formatDate(date: Date) {
   const monthNames = [
@@ -21,12 +18,8 @@ export function formatDate(date: Date) {
   return `${monthNames[date.getUTCMonth()]} ${date.getUTCDate()}, ${date.getUTCFullYear()}`;
 }
 
-export async function loadImage(image: string) {
-  return (await images[`/src/img/${image}`]()).default;
-}
-
 export async function getArticlesSorted() {
   const articles = await getCollection("articles");
-  articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  articles.sort((a, b) => b.data.revdate.getTime() - a.data.revdate.getTime());
   return articles;
 }
