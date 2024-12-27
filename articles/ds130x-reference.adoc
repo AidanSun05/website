@@ -11,7 +11,7 @@ This page contains information relevant to both the DS1302 and DS1307 real-time 
 
 View additional chip-specific guides: xref:ds1302-arduino.adoc[DS1302], xref:ds1307-arduino.adoc[DS1307]
 
-This guide uses my *DS130X* library. link:/zipped/DS130X.zip[Download the library in Zip format]
+This guide uses my *DS130X* library. link:/dl/DS130X.zip[Download the library in Zip format]
 
 All example code is under menu:File[Examples > DS130X > (your RTC)].
 
