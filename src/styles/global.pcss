@@ -41,22 +41,6 @@ main {
   }
 }
 
-table,
-td,
-th {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-th {
-  padding: 4px;
-  text-align: left;
-}
-
-td {
-  padding: 4px;
-}
-
 :not(pre) > code {
   padding: 0 2px;
   margin: auto 2px;
@@ -66,8 +50,8 @@ td {
 
 pre {
   overflow-x: auto;
-  padding: 1rem;
   counter-reset: lines;
+  padding: 0.5rem 0;
 
   code .line {
     min-height: 1rem;
@@ -83,5 +67,9 @@ pre {
       text-align: right;
       color: rgba(115, 138, 148, 0.4);
     }
+  }
+
+  code .highlight-line {
+    background-color: #f8eec9;
   }
 }
