@@ -1,6 +1,6 @@
 ---
 interface Props {
-  tags: string[];
+  tags: string;
 }
 
 const { tags } = Astro.props;
@@ -8,7 +8,7 @@ const { tags } = Astro.props;
 
 <div class="chip-container">
   {
-    tags.map((tag) => (
+    tags.split(" ").map((tag) => (
       <a class="chip" href={`/articles/tag/${tag}/`}>
         {tag}
       </a>

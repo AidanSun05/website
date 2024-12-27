@@ -37,7 +37,9 @@ import { ref, watch } from "vue";
 interface Page {
   id: string;
   data: {
-    title: string;
+    doctitle: string;
+    description: string;
+    tags: string;
   };
 }
 
