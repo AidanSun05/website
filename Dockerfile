@@ -10,7 +10,7 @@ USER node
 RUN npm ci --include=dev
 
 COPY --chown=node . .
-RUN npm run favicons && npm run build && npm run svgs
+RUN node scripts/generate-favicons.js && npm run build && npx svgo -f dist/client/_astro
 
 FROM base AS deps
 RUN npm ci --omit=dev
