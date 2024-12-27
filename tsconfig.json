@@ -4,6 +4,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
+      "@asciidoc/*": ["src/asciidoc/*"],
       "@common/*": ["src/common/*"],
       "@components/*": ["src/components/*"],
       "@img/*": ["src/img/*"],

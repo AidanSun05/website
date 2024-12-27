@@ -1,4 +1,4 @@
-import markdoc from "@astrojs/markdoc";
+import asciidoc from "./src/asciidoc";
 import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
 import vue from "@astrojs/vue";
