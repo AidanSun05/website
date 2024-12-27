@@ -33,7 +33,7 @@ const tabs = useStore($tabs);
 setTab(props.id, 0);
 </script>
 
-<style>
+<style lang="postcss">
 .tab-container {
   margin: 10px 0;
 }
