@@ -33,7 +33,7 @@ image::arduino-clock/schematic.png[Arduino Clock schematic]
 
 All IC sockets have 300 mil pin spacing.
 
-link:/files/clock-pcb.fzz[Download the .fzz file]
+link:/dl/clock-pcb.fzz[Download the .fzz file]
 
 |===
 |Part |Symbol |Quantity

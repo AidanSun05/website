@@ -45,7 +45,7 @@ The DS1302 keeps track of time by reading ticks from an oscillator. This is why 
 
 == Library
 
-This project uses my *DS130X* library. link:/zipped/DS130X.zip[Download the library in Zip format]
+This project uses my *DS130X* library. link:/dl/DS130X.zip[Download the library in Zip format]
 
 == Using the TCR (Trickle Charge Register)
 

@@ -20,7 +20,7 @@ NOTE: The shield uses Arduino pins D3, D5, D6 (for the LED), A4, and A5 (for I2C
 
 == Library
 
-This project uses my *SevenSegmentShield* library. link:/zipped/SevenSegmentShield.zip[Download the library in Zip format]
+This project uses my *SevenSegmentShield* library. link:/dl/SevenSegmentShield.zip[Download the library in Zip format]
 
 All example code is under menu:File[Examples > SevenSegmentShield].
 

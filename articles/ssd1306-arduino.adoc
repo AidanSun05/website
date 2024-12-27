@@ -42,7 +42,7 @@ In the example code, the address is set to `0x3C`. If your address is different,
 
 == Library
 
-This project uses my *SSD1306_I2C library.* link:/zipped/SSD1306_I2C.zip[Download the library in Zip format]
+This project uses my *SSD1306_I2C library.* link:/dl/SSD1306_I2C.zip[Download the library in Zip format]
 
 == Drawing Graphics
 
