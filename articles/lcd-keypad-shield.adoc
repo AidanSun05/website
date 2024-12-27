@@ -1,0 +1,80 @@
+= LCD Keypad Shield
+Aidan Sun
+2020-04-06
+:description: Using the LCD Keypad Shield's display, backlight, and buttons with Arduino
+:image: @img/lcd-keypad-shield/thumbnail.jpg
+:tags: arduino shields
+
+== The LCD Keypad Shield
+
+https://www.dfrobot.com/product-51.html[DFRobot LCD Keypad Shield]
+
+image::lcd-keypad-shield/shield1.jpg[LCD keypad shield]
+image::lcd-keypad-shield/shield2.jpg[LCD keypad shield]
+
+The LCD Keypad shield contains a 1602 LCD connected to pins 4-9 and backlight connected to digital 10. It also has 6 buttons, 5 of which are connected to A0. The sixth is a reset button.
+
+== Arduino Pin Connections
+
+* *LCD RS pin* is connected to D8
+* *LCD EN pin* is connected to D9
+* *LCD D4 pin* is connected to D4
+* *LCD D5 pin* is connected to D5
+* *LCD D6 pin* is connected to D6
+* *LCD D7 pin* is connected to D7
+* *LCD backlight* is connected to D10
+* *Buttons* are connected to A0
+
+== Printing Text
+
+[source,cpp]
+----
+include::../res/code/LCDShieldText.ino[]
+----
+
+image::lcd-keypad-shield/text-example.jpg[LCD text example]
+
+After running the code, it may seem like nothing is displayed. This is because of the contrast adjustment trimpot, which is blue with a gold screw and located in the top left corner of the shield.
+
+To adjust this trimpot, get a flat screwdriver and rotate the screw. Note that this is a precision trimpot, so it can take a few turns to reach the proper value.
+
+Once properly adjusted, you should see the words "Hello, world!" displayed on the screen.
+
+== Controlling the Backlight
+
+The LCD's backlight is connected to digital pin 10. It can be controlled like a normal LED with `pinMode` and `digitalWrite`.
+
+[source,cpp]
+----
+include::../res/code/LCDShieldBacklight.ino[]
+----
+
+video::{videosdir}/lcd-keypad-shield/backlight.mp4[]
+
+Controlling the backlight has many useful applications. For example, the backlight could turn off if there is no user interaction for a long time to implement a power-save mode, similar to a cell phone.
+
+== Using the Buttons
+
+The shield contains six buttons, five of which are connected to A0. Each switch is connected to a resistor with a unique value. This is a resistor ladder, and it saves pins by connecting multiple buttons to one analog input.
+
+When pressed, each button generates a different value on the A0 pin. This is how we can know when a button is pressed, as well as which button it is.
+
+The analog input values for each button are:
+
+* *< 100:* Right
+* *> 100, < 200:* Up
+* *> 200, < 400:* Down
+* *> 400, < 600:* Left
+* *> 600, < 800:* Select
+* *> 800:* No button pressed
+
+Notice how each button has a range, not a specific value. This is because resistors have a tolerance, so the actual value of a resistor can vary between parts.
+
+We can compare these ranges with the analog input value to interpret each button press.
+
+[source,cpp]
+----
+include::../res/code/LCDShieldButtons.ino[]
+----
+
+video::{videosdir}/lcd-keypad-shield/buttons.mp4[]

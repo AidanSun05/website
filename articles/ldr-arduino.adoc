@@ -1,14 +1,11 @@
----
-title: "LDR with Arduino"
-description: "Using a light-dependent resistor (LDR) with Arduino to measure brightness"
-image: "ldr-arduino/thumbnail.jpg"
-date: 2020-01-26
-tags:
-  - arduino
-  - sensors
----
+= LDR with Arduino
+Aidan Sun
+2020-01-26
+:description: Using a light-dependent resistor (LDR) with Arduino to measure brightness
+:image: @img/ldr-arduino/thumbnail.jpg
+:tags: arduino sensors
 
-## LDR Working Principle
+== LDR Working Principle
 
 LDR stands for Light-Dependent Resistor. As its name suggests, it is a resistor whose resistance changes depending on the amount of light exposed to it. It also has many other names, such as photoresistor and photocell.
 
@@ -16,27 +13,23 @@ An LDR works off the principles of photoconductivity, an optical phenomenon in w
 
 When there is more energy in the light that the LDR is exposed to, more current flows through it, so its resistance decreases.
 
-## Schematic
+== Schematic
 
-![LDR schematic](@img/ldr-arduino/schematic.png)
+image::ldr-arduino/schematic.png[LDR schematic]
 
-## Code
+== Code
 
 Since the LDR is an analog device, you can compare it to a predetermined threshold. The code below will turn on an LED if the reading is above 500:
 
-{% alert %}
-This program yields best results in a dark room and with a flashlight to provide a large difference between low and high readings.
-{% /alert %}
+NOTE: This program yields best results in a dark room and with a flashlight to provide a large difference between low and high readings.
 
-{% tabbar titles=["Code", "Serial Monitor Output"] %}
+[source,cpp]
+----
+include::../res/code/LDR.ino[]
+----
 
-{% tabpane index=0 %}
-```@code/LDR.ino
-```
-{% /tabpane %}
-
-{% tabpane index=1 %}
-```
+.Serial monitor output
+[listing]
 LDR Reading: 805
 LDR Reading: 802
 LDR Reading: 797
@@ -52,13 +45,13 @@ LDR Reading: 799
 LDR Reading: 803
 LDR Reading: 802
 LDR Reading: 796
-```
-{% /tabpane %}
 
-{% /tabbar %}
+== Images
 
-## Images
+|===
+|Breadboard top view |Dark room |With a flashlight
 
-![LDR breadboard top view](@img/ldr-arduino/top.jpg)
-![LDR in a dark room](@img/ldr-arduino/dark.jpg)
-![LDR with a flashlight](@img/ldr-arduino/light.jpg)
+a|image::ldr-arduino/top.jpg[LDR breadboard top view]
+a|image::ldr-arduino/dark.jpg[LDR in a dark room]
+a|image::ldr-arduino/light.jpg[LDR with a flashlight]
+|===

@@ -1,41 +1,38 @@
----
-title: "DS130X Library Common Reference"
-description: "Code samples and documentation for the DS130X library common to the DS1302 and DS1307 RTCs"
-date: 2023-07-01
-tags:
-  - arduino
-  - rtc
-  - software
----
+= DS130X Library Common Reference
+Aidan Sun
+2023-07-01
+:description: Code samples and documentation for the DS130X library common to the DS1302 and DS1307 RTCs
+:tags: arduino rtc software
+:experimental:
 
-## Overview
+== Overview
 
 This page contains information relevant to both the DS1302 and DS1307 real-time clock (RTC) chips. All information specific to one chip will be pointed out.
 
-View additional chip-specific guides: [DS1302](/articles/ds1302-arduino/), [DS1307](/articles/ds1307-arduino/)
+View additional chip-specific guides: xref:ds1302-arduino.adoc[DS1302], xref:ds1307-arduino.adoc[DS1307]
 
-This guide uses my **DS130X** library. [Download the library in Zip format](/zipped/DS130X.zip)
+This guide uses my *DS130X* library. link:/zipped/DS130X.zip[Download the library in Zip format]
 
-All example code is under **File > Examples > DS130X > (your RTC)**.
+All example code is under menu:File[Examples > DS130X > (your RTC)].
 
-## Printing Date and Time
+== Printing Date and Time
 
-After installing the library, go to the **DateAndTime > PrintDateTime** example.
+After installing the library, go to the menu:DateAndTime[PrintDateTime] example.
 
-{% tabbar titles=["DS1302 Example Code", "DS1307 Example Code", "Serial Monitor Output"] %}
+.DS1302 example code
+[source,cpp]
+----
+include::../res/downloads/DS130X/examples/DS1302/DateAndTime/PrintDateTime/PrintDateTime.ino[]
+----
 
-{% tabpane index=0 %}
-```@downloads/DS130X/examples/DS1302/DateAndTime/PrintDateTime/PrintDateTime.ino
-```
-{% /tabpane %}
+.DS1307 example code
+[source,cpp]
+----
+include::../res/downloads/DS130X/examples/DS1307/DateAndTime/PrintDateTime/PrintDateTime.ino[]
+----
 
-{% tabpane index=1 %}
-```@downloads/DS130X/examples/DS1307/DateAndTime/PrintDateTime/PrintDateTime.ino
-```
-{% /tabpane %}
-
-{% tabpane index=2 %}
-```
+.Serial monitor output
+[listing]
 Fri, 28/08/20 10:05:50
 Fri, 28/08/20 10:05:51
 Fri, 28/08/20 10:05:52
@@ -46,66 +43,62 @@ Fri, 28/08/20 10:05:56
 Fri, 28/08/20 10:05:57
 Fri, 28/08/20 10:05:58
 Fri, 28/08/20 10:05:59
-```
-{% /tabpane %}
 
-{% /tabbar %}
-
-### Creating the RTC Object
+=== Creating the RTC Object
 
 The DS1302 constructor takes parameters in the order:
 
-1. `dataPin`: Arduino pin that the RTC's DAT pin is connected to
-2. `clockPin`: Arduino pin that the RTC's CLK pin is connected to
-3. `cePin`: Arduino pin that the RTC's CE pin is connected to
+. `dataPin`: Arduino pin that the RTC's DAT pin is connected to
+. `clockPin`: Arduino pin that the RTC's CLK pin is connected to
+. `cePin`: Arduino pin that the RTC's CE pin is connected to
 
-The DS1307 constructor takes no parameters. **`Wire.begin` must be called to intialize the I2C bus before using the RTC.**
+The DS1307 constructor takes no parameters. *`Wire.begin` must be called to initialize the I2C bus before using the RTC.*
 
-### Writing Date and Time
+=== Writing Date and Time
 
-**DS1302 only:** Before writing to the RTC's registers, we need call `setWriteProtect(false);` which sets the write protect bit. When write protect is enabled, the `write` and `writeRaw` methods won't do anything, but it is disabled, these methods will write data to the chip.
+*DS1302 only:* Before writing to the RTC's registers, we need call `setWriteProtect(false);` which sets the write protect bit. When write protect is enabled, the `write` and `writeRaw` methods won't do anything, but it is disabled, these methods will write data to the chip.
 
 `setTime` takes parameters in the order:
 
-1. `hour`: Hour to set (0-23)
-2. `minute`: Minute to set (0-59)
-3. `second`: Second to set (0-59)
+. `hour`: Hour to set (0-23)
+. `minute`: Minute to set (0-59)
+. `second`: Second to set (0-59)
 
 `setDate` takes parameters in the order:
 
-1. `day`: Day of month to set (1-31)
-2. `month`: Month to set (1-12)
-3. `year`: Year to set (0-99)
-4. `dayOfWk`: Day of week to set (use the weekday constants: `SUNDAY`, `MONDAY`, etc.)
+. `day`: Day of month to set (1-31)
+. `month`: Month to set (1-12)
+. `year`: Year to set (0-99)
+. `dayOfWk`: Day of week to set (use the weekday constants: `SUNDAY`, `MONDAY`, etc.)
 
-### Reading Date and Time
+=== Reading Date and Time
 
 These functions return parts of the current date/time in predetermined formats:
 
-- `dowAbbr`: Day of week abbreviation
-- `dateStr`: Date as a string (dd/mm/yy format)
-- `timeStr`: Time as a string (hh:mm:ss)
+* `dowAbbr`: Day of week abbreviation
+* `dateStr`: Date as a string (dd/mm/yy format)
+* `timeStr`: Time as a string (hh:mm:ss)
 
 At the end of each loop iteration, the program pauses for one second so it doesn't read too quickly.
 
-## Reading and Writing Registers
+== Reading and Writing Registers
 
-An example of reading registers is at **DateAndTime > ReadData**.
+An example of reading registers is at menu:DateAndTime[ReadData].
 
-{% tabbar titles=["DS1302 Example Code", "DS1307 Example Code", "Serial Monitor Output"] %}
+.DS1302 example code
+[source,cpp]
+----
+include::../res/downloads/DS130X/examples/DS1302/DateAndTime/ReadData/ReadData.ino[]
+----
 
-{% tabpane index=0 %}
-```@downloads/DS130X/examples/DS1302/DateAndTime/ReadData/ReadData.ino
-```
-{% /tabpane %}
+.DS1307 example code
+[source,cpp]
+----
+include::../res/downloads/DS130X/examples/DS1307/DateAndTime/ReadData/ReadData.ino[]
+----
 
-{% tabpane index=1 %}
-```@downloads/DS130X/examples/DS1307/DateAndTime/ReadData/ReadData.ino
-```
-{% /tabpane %}
-
-{% tabpane index=2 %}
-```
+.Serial monitor output
+----
 Hour: 10
 Minute: 5
 Second: 50
@@ -133,48 +126,42 @@ Day: 28
 Month: 8
 Year: 20
 --------------------
-```
-{% /tabpane %}
+----
 
-{% /tabbar %}
-
-### Available Registers
+=== Available Registers
 
 The RTC classes have four methods to read and write to registers:
 
-- `read`
-- `readRaw`
-- `write`
-- `writeRaw`
+* `read`
+* `readRaw`
+* `write`
+* `writeRaw`
 
 All four methods will require you to specify a register to perform operations on. There are two ways to do this. The first way is to specify a register constant:
 
-- `SECONDS` (range 0-59)
-- `MINUTES` (0-59)
-- `HOURS` (0-23)
-- `DAY_OF_WEEK` (1-7)
-- `DAY_OF_MONTH` (1-31)
-- `MONTHS` (1-12)
-- `YEARS` (0-99)
-- `TCR_GET` (**DS1302 only**, read-only)
-- `TCR_SET` (**DS1302 only**, write-only)
-- `SQW_OUT` (**DS1307 only**)
+* `SECONDS` (range 0-59)
+* `MINUTES` (0-59)
+* `HOURS` (0-23)
+* `DAY_OF_WEEK` (1-7)
+* `DAY_OF_MONTH` (1-31)
+* `MONTHS` (1-12)
+* `YEARS` (0-99)
+* `TCR_GET` (*DS1302 only*, read-only)
+* `TCR_SET` (*DS1302 only*, write-only)
+* `SQW_OUT` (*DS1307 only*)
 
 You can also specify a register address. For example, with a DS1302, `write(0x80)` writes to the register 0x80 (the seconds register). (On the DS1307, this register is 0x00.)
 
-{% alert %}
-**DS1302 only:**
+[NOTE]
+====
+*DS1302 only:*
 
 The read registers are always one higher than the write registers. For example, to write to the minutes register, use `write(0x82, x);` to write and `read(0x83);` to read.
 
 If you are using a register constant (like `MINUTES`), this difference is already handled, and you can use `write(MINUTES, x);` and `read(MINUTES);`
-{% /alert %}
+====
 
-{% alert type="important" %}
-Writing to the seconds register will overwrite the halt bit to 0. Keep this in mind when using this method - call `setHalt` *after* setting the seconds register (See "Additional Functions").
-{% /alert %}
-
-### Register Operations
+=== Register Operations
 
 `read` and `readRaw` both take a single parameter: the register to read from.
 
@@ -182,35 +169,31 @@ Writing to the seconds register will overwrite the halt bit to 0. Keep this in m
 
 `write` and `writeRaw` both take two parameters in the order:
 
-1. `reg`: Register address to write to
-2. `value`: Data to write to the register
+. `reg`: Register address to write to
+. `value`: Data to write to the register
 
 `write` expects the value to be in base-10, then converts it to BCD to write. `writeRaw` expects the value to be in BCD, and directly writes to the register without converting.
 
-{% alert %}
-When writing to the seconds register with `writeRaw`, you can explicitly set the halt bit (bit #7, the MSB, in the seconds register).
-{% /alert %}
+TIP: When writing to the seconds register with `writeRaw`, you can explicitly set the halt bit, which is the MSB, in the seconds register).
 
-## Reading and Writing RAM
+== Reading and Writing RAM
 
-Register operations can be used for operating on the RTC's RAM. An example is at **Other > RAMReadWrite**.
+Register operations can be used for operating on the RTC's RAM. An example is at menu:Other[RAMReadWrite].
 
-{% tabbar titles=["DS1302 Example Code", "DS1307 Example Code", "Serial Monitor Output"] %}
+.DS1302 example code
+[source,cpp]
+----
+include::../res/downloads/DS130X/examples/DS1302/Other/RAMReadWrite/RAMReadWrite.ino[]
+----
 
-{% tabpane index=0 %}
-```@downloads/DS130X/examples/DS1302/Other/RAMReadWrite/RAMReadWrite.ino
-```
-{% /tabpane %}
+.DS1307 example code
+[source,cpp]
+----
+include::../res/downloads/DS130X/examples/DS1307/Other/RAMReadWrite/RAMReadWrite.ino[]
+----
 
-{% tabpane index=1 %}
-```@downloads/DS130X/examples/DS1307/Other/RAMReadWrite/RAMReadWrite.ino
-```
-{% /tabpane %}
-
-{% tabpane index=2 %}
-
-{% collapsiblepane title="DS1302" %}
-```
+.DS1302 serial monitor output
+[listing]
 Writing to RAM
 Reading from RAM
 Address 0xc1 has value 0
@@ -244,11 +227,9 @@ Address 0xf7 has value 27
 Address 0xf9 has value 28
 Address 0xfb has value 29
 Address 0xfd has value 30
-```
-{% /collapsiblepane %}
 
-{% collapsiblepane title="DS1307" %}
-```
+.DS1307 serial monitor output
+[listing]
 Writing to RAM
 Reading from RAM
 Address 0x8 has value 0
@@ -307,74 +288,50 @@ Address 0x3c has value 52
 Address 0x3d has value 53
 Address 0x3e has value 54
 Address 0x3f has value 55
-```
-{% /collapsiblepane %}
 
-{% /tabpane %}
-
-{% /tabbar %}
-
-### Addresses and Bounds
+=== Addresses and Bounds
 
 Using the below functions as the lower and upper bounds of a for loop, we can iterate through each address.
 
 To operate on a single byte, use `read` or `write` and set the register value to the desired address.
 
-#### DS1302 Specifics
+=== DS1302 Specifics
 
 The DS1302 class has four methods to get the lowest and highest RAM addresses, split into read and write:
 
-- `ramWStart, ramWEnd` for write start and write end, respectively
-- `ramRStart, ramREnd` for read start and read end, respectively
+* `ramWStart, ramWEnd` for write start and write end, respectively
+* `ramRStart, ramREnd` for read start and read end, respectively
 
 In each loop, the increment statement is `i += 2`. Since the addresses alternate between read and write, we have to skip every other one.
 
-{% table %}
-* RAM byte
-* Address
-* Function
----
-* 0 {% rowspan=2 %}
-* 0xC0
-* Write
----
-* 0xC1
-* Read
----
-* 1 {% rowspan=2 %}
-* 0xC2
-* Write
----
-* 0xC3
-* Read
----
-* 2 {% rowspan=2 %}
-* 0xC4
-* Write
----
-* 0xC5
-* Read
----
-* &vellip; {% colspan=3 align="center" %}
-{% /table %}
+[cols=".^,d,d"]
+|===
+|RAM byte |Address |Function
 
-#### DS1307 Specifics
+.2+|0 |0xC0 |Write
+|0xC1 |Read
+.2+|1 |0xC2 |Write
+|0xC3 |Read
+.2+|2 |0xC4 |Write
+|0xC5 |Read
+3+^|&#8942;
+|===
+
+==== DS1307 Specifics
 
 The DS1307 class has two methods to get the lowest and highest RAM addresses:
 
-- `ramStart` for the start
-- `ramEnd` for the end
+* `ramStart` for the start
+* `ramEnd` for the end
 
 All addresses can be written to and read from.
 
-## Additional Functions
+== Additional Functions
 
-### Halt Bit
+=== Halt Bit
 
 When the RTC is halted (determined by the halt bit), its oscillator is disabled and goes into low-power mode. This means that it won't keep track of time until you set it back to normal mode.
 
 The RTC's `setHalt` method writes to this halt bit. It takes a Boolean parameter: `true` to enable the halt bit, `false` to disable.
 
-{% alert type="important" %}
-**DS1307 only:** The SQW output won't work when the RTC is halted.
-{% /alert %}
+IMPORTANT: *DS1307 only:* The SQW output won't work when the RTC is halted.

@@ -1,0 +1,278 @@
+= SSD1306 OLED Display with Arduino
+Aidan Sun
+2020-07-07
+:description: Displaying graphics and text on the SSD1306 display with Arduino
+:image: @img/ssd1306-arduino/thumbnail.jpg
+:tags: arduino outputs
+:experimental:
+
+== What is the SSD1306?
+
+The SSD1306 is a driver chip for 128&#215;64 OLED (Organic Light Emitting Diode) displays. It can support many communication interfaces, but we will be using I2C.
+
+image::ssd1306-arduino/module.jpg[SSD1306 module]
+
+NOTE: Even though the chip is rated at 3.3V communication, many display modules have on-board circuitry that can help it tolerate 5V. This means it can be used with both 5V and 3.3V logic.
+
+== SSD1306 Pixel Numbering
+
+The pixels on the SSD1306 are numbered starting from the top-left corner at (0, 0), then increasing until (127, 63) in the bottom-right corner.
+
+image::ssd1306-arduino/pixels.svg[SSD1306 pixels]
+
+== SSD1306 Column Numbering
+
+Each column is one pixel wide.
+
+image::ssd1306-arduino/columns.svg[SSD1306 pixels]
+
+== SSD1306 Page Numbering
+
+The SSD1306 has eight pages, each one being a group of pixels 8 tall and 128 wide:
+
+image::ssd1306-arduino/pages.svg[SSD1306 pixels]
+
+== I2C Connections to Arduino
+
+The SSD1306 display module connects to the Arduino's 5V, GND, SDA, and SDL pins.
+
+You will need to know your display's I2C address before running any code. See xref:i2c-scanner-arduino.adoc[this page] for an I2C scanner program.
+
+In the example code, the address is set to `0x3C`. If your address is different, substitute it in for each instance of `display.begin(0x3C);` across the examples.
+
+== Library
+
+This project uses my *SSD1306_I2C library.* link:/zipped/SSD1306_I2C.zip[Download the library in Zip format]
+
+== Drawing Graphics
+
+Example code for drawing graphics is located at menu:File[Examples > SSD1306_I2C > DrawGraphics], also available below.
+
+[source,cpp]
+----
+include::../res/downloads/SSD1306_I2C/examples/DrawGraphics/DrawGraphics.ino[]
+----
+
+video::{videosdir}/ssd1306-arduino/example1.mp4[]
+
+=== Initialization
+
+The `SSD1306` constructor takes no parameters.
+
+Before using the SSD1306, `Wire.begin` must be called to initialize the I2C bus.
+
+Initialization of the SSD1306 is done with:
+
+`begin`: Starts I2C communication and sends initialization commands to the SSD1306. Takes a single parameter: the I2C address of the display.
+
+=== Graphics Methods
+
+`updateDisplay` sends what is in the display buffer to the SSD1306 over I2C.
+
+IMPORTANT: This should be called after using the below graphics methods to display the results on screen. Graphics methods do not change the screen by themselves.
+
+`clear`: Sets the contents of the display buffer to 0. Takes no parameters.
+
+The methods below draw various graphics; parameters are listed under each. The following parameters are shared by multiple functions:
+
+. `color`: How the drawn pixels appear. Use `HIGH` to turn them on, or `LOW` to turn them off.
+. `fill`: If the drawn shape is filled. Use `OUTLINE` to draw an outline only, or `FILL` to fill in the shape.
+
+`drawPixel`: Draws a single pixel.
+
+. `x`: X-coordinate of the pixel
+. `y`: Y-coordinate of the pixel
+. `color`
+
+`drawLine`: Draws a line.
+
+. `x0`: X-coordinate of the first endpoint
+. `y0`: Y-coordinate of the first endpoint
+. `x1`: X-coordinate of the second endpoint
+. `y1`: Y-coordinate of the second endpoint
+. `color`
+
+`drawAngledLine`: Draws a line given an angle and length.
+
+. `x`: X-coordinate of the first endpoint
+. `y`: Y-coordinate of the first endpoint
+. `length`: Length of the line in pixels
+. `angle`: Angle of the line in degrees (0: to the right, increasing values rotate clockwise)
+. `color`
+
+`drawRect`: Draws a rectangle.
+
+. `x0`: X-coordinate of the top-left corner
+. `y0`: Y-coordinate of the top-left corner
+. `w`: Width of the rectangle in pixels
+. `h`: Height of the rectangle in pixels
+. `color`
+. `fill`
+
+`drawRectByCoords`: Draws a rectangle given the coordinates of the top-left and bottom-right corners.
+
+. `x0`: X-coordinate of the top-left corner
+. `y0`: Y-coordinate of the top-left corner
+. `x1`: X-coordinate of the bottom-right corner
+. `y1`: Y-coordinate of the bottom-right corner
+. `color`
+. `fill`
+
+`drawCircle`: Draws a circle.
+
+. `x`: X-coordinate of the center
+. `y`: Y-coordinate of the center
+. `r`: Radius of the circle in pixels
+. `color`
+. `fill`
+
+`print`, `println`: Prints text; the latter moves the cursor to the next line.
+
+. `s`: Data to print (can be string, char, float/double, or number in the range &#177;2,147,483,647)
+. `color`
+. `nplaces`: Number of decimal places to print (optional, *only with `s` as float or double*)
+
+These methods accept printable characters, i.e., ASCII codes 32-126 (plus the newline and tab). Tabs are printed as 4 spaces.
+
+TIP: `println` can also be called with no parameters to move the cursor only.
+
+== Drawing Text
+
+Example code: menu:File[Examples > SSD1306_I2C > DrawText]
+
+This code demonstrates how data and text can be printed to the screen.
+
+[source,cpp]
+----
+include::../res/downloads/SSD1306_I2C/examples/DrawText/DrawText.ino[]
+----
+
+image::ssd1306-arduino/characters.jpg[Displaying all printable characters]
+
+=== Size and Positioning
+
+`setTextSize`: Determines the size of the text to be printed. The height of a character will be 7 times the text size, and the width will be 5 times the text size (both in pixels). The default text size is 1.
+
+. `size`: The size of the characters to print
+
+`setCursor`: Determines the location of an invisible cursor. Any text created with `print` or `println` will start at the location provided. The default cursor position is (0, 0).
+
+. `x`: X-coordinate of the cursor's top-left corner
+. `y`: Y-coordinate of the cursor's top-left corner
+
+== Other Control Commands
+
+Example code: menu:File[Examples > SSD1306_I2C > ControlCommands]
+
+This code shows various controls supported by the library, such as inverting the display and turning it on/off.
+
+[source,cpp]
+----
+include::../res/downloads/SSD1306_I2C/examples/ControlCommands/ControlCommands.ino[]
+----
+
+video::{videosdir}/ssd1306-arduino/example2.mp4[]
+
+=== Control Methods
+
+The control methods below do not affect the display's RAM or the display buffer stored in the Arduino. This means `updateDisplay` is not needed for these to take effect.
+
+`setInvert`: Sets the inverted state of the display. When the display is not inverted, the RAM contents are displayed normally. When it is inverted, pixels that are supposed to be on turn off (and the other way around).
+
+. `invert`: If the display is inverted: inverted if true, normal if false
+
+`setState`: Turns the display on/off. When the display is on, the RAM contents are displayed. If the display is off, all pixels are turned off.
+
+. `on`: If the display is on (display on if true, off if false)
+
+`displayAllOn`: Turns all pixels of the display on, regardless of the RAM contents. Takes no parameters.
+
+`resumeDisplay`: Displays what is in the RAM; normally used after the above methods. Takes no parameters.
+
+== Scrolling
+
+The SSD1306 has the built-in ability to scroll. It can either scroll horizontally or horizontally and vertically (there is no vertical-only scrolling).
+
+Example code: menu:File[Examples > SSD1306_I2C > ScrollDisplay]
+
+[source,cpp]
+----
+include::../res/downloads/SSD1306_I2C/examples/ScrollDisplay/ScrollDisplay.ino[]
+----
+
+video::{videosdir}/ssd1306-arduino/example3.mp4[]
+
+=== Scrolling Setup
+
+`setupScrollH`, `setupScrollHV`: Configures scrolling in the horizontal and 45-degree directions, respectively.
+
+. `dirX`: Horizontal scrolling direction (use the constants `LEFT` or `RIGHT`)
+. `dirY`: Vertical scrolling direction (use the constants `UP` or `DOWN`) (*setupScrollHV only*)
+. `start`: Which page to start scrolling (0-7, inclusive)
+. `end`: Which page to stop scrolling (0-7, inclusive) (*must be greater than or equal to start*)
+. `interval`: The time interval between each scroll step, in terms of frame frequency
+
+You may use any of the following constants for the last parameter:
+
+* `FRAMES_2`
+* `FRAMES_3`
+* `FRAMES_4`
+* `FRAMES_5`
+* `FRAMES_25`
+* `FRAMES_64`
+* `FRAMES_128`
+* `FRAMES_256`
+
+NOTE: The smaller the interval, the smoother the scrolling. For example, `FRAMES_2` is smoother than `FRAMES_25`.
+
+`startScroll`: Tells the display to start scrolling. Takes no parameters.
+
+`stopScroll`: Tells the display to stop scrolling. Takes no parameters.
+
+NOTE: Scrolling affects the data in the display's RAM, so to revert it to its pre-scroll state, you will have to also use this with `updateDisplay`.
+
+== Displaying Bitmaps
+
+The SSD1306 can display bitmap images with a size up to 128&#215;64. Bitmaps are read from arrays of `unsigned char` stored in `PROGMEM`.
+
+Example code: menu:File[Examples > SSD1306_I2C > DisplayBitmap]
+
+[source,cpp]
+----
+include::../res/downloads/SSD1306_I2C/examples/DisplayBitmap/DisplayBitmap.ino[]
+----
+
+image::ssd1306-arduino/bitmap.jpg[SSD1306 bitmap display]
+
+NOTE: The fish image was taken from https://www.shutterstock.com/image-vector/fish-outline-icon-749702563[Shutterstock]. The bitmap array was generated using https://javl.github.io/image2cpp[image2cpp].
+
+=== Loading Bitmaps
+
+`displayBitmapImage`: Draws a bitmap image.
+
+. `img`: Bitmap image to draw (array of unsigned chars in PROGMEM)
+. `x`: X-coordinate of the top-left corner
+. `y`: Y-coordinate of the top-left corner
+. `w`: Width of the bitmap in pixels
+. `h`: Height of the bitmap in pixels
+
+`displayBitmap` requires your bitmap to be in PROGMEM (program memory). To do this, use the syntax below:
+
+[source,cpp]
+----
+const PROGMEM unsigned char yourImg[] = {
+  // Your image data here...
+};
+----
+
+In the example, the bitmap is 128 pixels wide and 64 pixels high, and it is displayed at (0, 0).
+
+== Other Functions
+
+=== Raw Commands
+
+`sendCommand`: Sends a byte to the control register (0x00) of the SSD1306.
+
+. `x`: Byte to send
+
+A list of available commands can be found in the SSD1306 datasheet, for example, https://www.digikey.com/htmldatasheets/production/2047793/0/0/1/ssd1306.html[here].

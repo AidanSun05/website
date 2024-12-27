@@ -1,0 +1,21 @@
+= Stopwatch
+Aidan Sun
+2018-07-10
+:description: Creating a stopwatch with an Arduino and a seven-segment shield
+:image: @img/stopwatch/thumbnail.jpg
+:tags: arduino software 7-segment-shield
+
+== Overview
+
+This page was updated in 2020 to use the SevenSegmentShield library. For a download and more information, follow xref:7-segment-shield.adoc[this guide].
+
+This code uses the https://www.gravitech.us/7segmentshield.html[Gravitech seven-segment shield]
+
+== Code
+
+This is a simple program that counts up every second and displays the counter on the segments, similar to a stopwatch.
+
+[source,cpp]
+----
+include::../res/code/Stopwatch.ino[]
+----

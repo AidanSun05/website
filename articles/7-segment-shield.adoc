@@ -1,0 +1,237 @@
+= Seven-Segment Shield
+Aidan Sun
+2020-04-12
+:description: Using the Seven-Segment Shield's display, EEPROM, temperature sensor, and RGB LED with Arduino
+:image: @img/7-segment-shield/thumbnail.jpg
+:tags: arduino shields 7-segment-shield
+:experimental:
+
+== The Seven-Segment Shield
+
+The shield is available https://www.gravitech.us/7segmentshield.html[here]. It has the following onboard devices:
+
+* Four bright green 7-segment digits
+* I2C 7-segment driver (NXP SAA1064)
+* 128K I2C EEPROM (24LC128)
+* I2C Digital thermometer (TMP75)
+* 10mm RGB LED (with PWM)
+
+NOTE: The shield uses Arduino pins D3, D5, D6 (for the LED), A4, and A5 (for I2C), so they cannot be used for anything else.
+
+== Library
+
+This project uses my *SevenSegmentShield* library. link:/zipped/SevenSegmentShield.zip[Download the library in Zip format]
+
+All example code is under menu:File[Examples > SevenSegmentShield].
+
+== Displaying Digits and Letters
+
+The menu:Display[CycleDigits] example displays the digits 0-9 on each segment.
+
+[source,cpp]
+----
+include::../res/downloads/SevenSegmentShield/examples/Display/CycleDigits/CycleDigits.ino[]
+----
+
+video::{videosdir}/7-segment-shield/cycle.mp4[]
+
+The menu:Display[DisplayChars] example directly writes to the segments, displaying "-AbC".
+
+[source,cpp]
+----
+include::../res/downloads/SevenSegmentShield/examples/Display/DisplayChars/DisplayChars.ino[]
+----
+
+=== Initializing the Display
+
+`Wire.begin` must be called before using any of the shield's I2C devices to initialize the communication bus.
+
+The `begin` method of the `Display` class sets the default brightness for the LEDs. (See "Cycling Brightness")
+
+=== Displaying on a Single Digit
+
+Both methods below take the following parameter:
+
+`digit`: The digit to write to, from 1 (rightmost on the shield) to 4 (leftmost)
+
+`writeDigit`: Displays a digit. Takes the following parameters:
+
+. `digit`
+. `value`: The numeric value to show on the digit (0-9)
+. `decimalPoint`: If the digit's decimal point is shown (`true` to show, `false` to hide)
+
+`writeDigitData`: Controls the individual segments on a digit.
+
+. `digit`
+. `value`: 1-byte integer containing the segments to display
+
+.Segment Values
+[%collapsible]
+====
+Segment values may be added together to display them together:
+
+image::7-segment-shield/segments.svg[]
+====
+
+=== Clearing the Display
+
+`clear`: Turns off all segments on the display. Takes no parameters.
+
+== Displaying Integers
+
+Integers can also be displayed on the shield. An example is at menu:Display[DisplayNum].
+
+[source,cpp]
+----
+include::../res/downloads/SevenSegmentShield/examples/Display/DisplayNum/DisplayNum.ino[]
+----
+
+The code above randomly generates integers and displays them with the function below:
+
+`displayInt`: Shows an integer on the entire display.
+
+. `number`: Number to show (-999 to 9999)
+
+== Cycling Brightness
+
+The brightness of the display can be adjusted by changing the amount of current the LEDs receive. An example is at menu:Display[CycleBrightness].
+
+[source,cpp]
+----
+include::../res/downloads/SevenSegmentShield/examples/Display/CycleBrightness/CycleBrightness.ino[]
+----
+
+The code loops through each possible current value, passing each to the function:
+
+`writeBrightness`: Sets the brightness of the seven-segment display. The default current is 12 mA.
+
+. `brightness`: Current value to determine brightness. Possible values are:
+* BRIGHTNESS_3MA (3 mA current)
+* BRIGHTNESS_6MA (6 mA current)
+* BRIGHTNESS_9MA (9 mA current)
+* BRIGHTNESS_12MA (12 mA current)
+* BRIGHTNESS_18MA (18 mA current)
+* BRIGHTNESS_21MA (21 mA current)
+
+== Using the EEPROM Chip
+
+The 24LC128 chip on the shield can hold 128 kB of data. The menu:EEPROM[ReadWrite] example demonstrates performing I/O on the addresses of the EEPROM.
+
+[source,cpp]
+----
+include::../res/downloads/SevenSegmentShield/examples/EEPROM/ReadWrite/ReadWrite.ino[]
+----
+
+.Serial monitor output
+[listing]
+EEPROM address 0 holds 0
+EEPROM address 1 holds 1
+EEPROM address 2 holds 2
+EEPROM address 3 holds 3
+EEPROM address 4 holds 4
+EEPROM address 5 holds 5
+EEPROM address 6 holds 6
+EEPROM address 7 holds 7
+EEPROM address 8 holds 8
+EEPROM address 9 holds 9
+EEPROM address 10 holds 10
+EEPROM address 11 holds 11
+EEPROM address 12 holds 12
+EEPROM address 13 holds 13
+EEPROM address 14 holds 14
+EEPROM address 15 holds 15
+EEPROM address 16 holds 16
+EEPROM address 17 holds 17
+EEPROM address 18 holds 18
+EEPROM address 19 holds 19
+
+=== Reading and Writing Memory
+
+The methods below are part of the `MemoryChip` class, which represents the onboard 24LC128. They share the following parameter:
+
+`address`: The address to read or write from
+
+`readByte`: Returns the byte at the specified memory address.
+
+. `address`
+
+`writeByte`: Writes the given byte to the specified memory address.
+
+. `address`
+. `data`: Byte to write
+
+IMPORTANT: After writing to the EEPROM, insert a short delay (such as 5 ms in the example) to prevent the loss of communication data.
+
+== Controlling the LED
+
+The shield's RGB LED is connected to three PWM pins on the Arduino. The menu:LED[CycleColors] example uses PWM to display different colors.
+
+[source,cpp]
+----
+include::../res/downloads/SevenSegmentShield/examples/LED/CycleColors/CycleColors.ino[]
+----
+
+=== Hex and RGB Colors
+
+The example above defines 48 hex colors. Each color is an integer with 8 bits of red (leftmost bits), green, and blue (rightmost bits) values.
+
+`displayHexColor`: Displays a color on the LED given in hexadecimal format.
+
+. `hh`: Color
+
+`displayRGBColor`: Displays a color on the LED given with individual red, green, and blue components.
+
+. `r`: 8-bit red value
+. `g`: 8-bit green value
+. `b`: 8-bit blue value
+
+`turnOff`: Turns the LED off. Takes no parameters.
+
+== Reading from the TMP75
+
+The menu:TMP75[Thermometer] example uses the shield to create a thermometer. The temperature is displayed on the segments, and the LED changes color accordingly.
+
+[source,cpp]
+----
+include::../res/downloads/SevenSegmentShield/examples/TMP75/Thermometer/Thermometer.ino[]
+----
+
+|===
+|Cold |Warm |Hot
+
+a|image::7-segment-shield/thermometer-cold.jpg[Thermometer cold,height=250]
+a|image::7-segment-shield/thermometer-warm.jpg[Thermometer warm,height=250]
+a|image::7-segment-shield/thermometer-hot.jpg[Thermometer hot,height=250]
+|===
+
+.Serial monitor output
+[listing]
+Temperature: 27.69
+Temperature: 27.94
+Temperature: 28.37
+Temperature: 28.75
+Temperature: 29.12
+Temperature: 29.31
+Temperature: 29.50
+Temperature: 29.62
+Temperature: 29.81
+Temperature: 29.87
+Temperature: 29.94
+Temperature: 30.06
+Temperature: 30.00
+Temperature: 29.62
+Temperature: 29.44
+Temperature: 29.25
+Temperature: 29.12
+Temperature: 28.94
+Temperature: 28.81
+
+All TMP75 functions are contained inside a class called `TMP75`.
+
+=== Initializing the TMP75
+
+`begin`: Initializes the TMP75 and configures it to 12-bit resolution.
+
+=== Reading the Temperature
+
+`read`: Returns the temperature read by the TMP75 in degrees Celsius.
