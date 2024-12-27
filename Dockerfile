@@ -20,9 +20,6 @@ RUN chmod +x scripts/copy-downloads.sh && \
   npm run build && \
   npx svgo -f dist/_astro
 
-FROM base AS deps
-RUN npm ci --omit=dev
-
 FROM nginx:alpine-slim AS runner
 ARG CONFIG
 
