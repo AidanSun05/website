@@ -12,3 +12,7 @@ trim_trailing_whitespace = true
 ## Python code typically uses 4-space indentation
 [*.py]
 indent_size = 4
+
+## Shell scripts require LF
+[*.sh]
+end_of_line = lf
