@@ -1,8 +1,0 @@
-services:
-  web:
-    image: node:22.11-alpine
-    tty: true
-    ports:
-      - '4321:4321'
-    volumes:
-      - ./:/code/
