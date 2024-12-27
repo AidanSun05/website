@@ -7,7 +7,7 @@ Aidan Sun
 
 == Overview
 
-This project uses a web server page to control the Arduino's I/O ports remotely. See [Ethernet Shield](/articles/ethernet-shield/) for more details on using the Ethernet shield and its SD card slot with Arduino.
+This project uses a web server page to control the Arduino's I/O ports remotely. See xref:ethernet-shield.adoc[Ethernet Shield] for more details on using the Ethernet shield and its SD card slot with Arduino.
 
 WARNING: An Arduino Uno may not have enough memory for this program. You can use any board with sufficient memory, such as a Mega.
 
