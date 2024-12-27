@@ -1,4 +1,4 @@
-import { favicons, type FaviconOptions, type FaviconResponse } from "favicons";
+import { favicons } from "favicons";
 import fs from "fs/promises";
 import path from "path";
 
@@ -7,18 +7,24 @@ async function main() {
   const outPath = "public/favicons";
   const manifestPath = "src/generated/manifest.astro";
 
-  const configuration: FaviconOptions = {
+  /**
+   * @type {import("favicons").FaviconOptions}
+   */
+  const configuration = {
     path: "/favicons",
     background: "#555",
     theme_color: "#555"
   };
 
-  let response: FaviconResponse;
+  /**
+   * @type {import("favicons").FaviconResponse}
+   */
+  let response;
 
   try {
     response = await favicons(iconPath, configuration);
   } catch (error) {
-    console.log((<Error>error).message);
+    console.log(error.message);
     return;
   }
 
@@ -37,4 +43,4 @@ async function main() {
   await fs.writeFile(manifestPath, response.html.join("\n"));
 }
 
-main();
+await main();
