@@ -18,7 +18,7 @@ async function main() {
   try {
     response = await favicons(iconPath, configuration);
   } catch (error) {
-    console.log((error as Error).message);
+    console.log((<Error>error).message);
     return;
   }
 
