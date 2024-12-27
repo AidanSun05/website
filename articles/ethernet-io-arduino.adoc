@@ -1,48 +1,45 @@
----
-title: "Ethernet I/O Controller with Arduino"
-description: "Creating a web page with the Arduino and Ethernet shield to control I/O pins"
-image: "ethernet-io-arduino/thumbnail.jpg"
-date: 2020-06-08
-tags:
-  - arduino
-  - shields
-  - ethernet
-  - projects
----
+= Ethernet I/O Controller with Arduino
+Aidan Sun
+2020-06-08
+:description: Creating a web page with the Arduino and Ethernet shield to control I/O pins
+:image: @img/ethernet-io-arduino/thumbnail.jpg
+:tags: arduino shields ethernet projects
 
-## Overview
+== Overview
 
 This project uses a web server page to control the Arduino's I/O ports remotely. See [Ethernet Shield](/articles/ethernet-shield/) for more details on using the Ethernet shield and its SD card slot with Arduino.
 
-{% alert %}
-An Arduino Uno may not have enough memory for this program. You can use any board with sufficient memory, such as a Mega.
-{% /alert %}
+WARNING: An Arduino Uno may not have enough memory for this program. You can use any board with sufficient memory, such as a Mega.
 
-## Schematic
+== Schematic
 
-![I/O controller schematic](@img/ethernet-io-arduino/schematic.png)
+image::ethernet-io-arduino/schematic.png[I/O controller schematic]
 
-## HTML File
+== HTML File
 
-Save this HTML file as **index.htm** in your SD card:
+Save this HTML file as *index.htm* in your SD card:
 
-```@code/ethernet-io-arduino/index.html
-```
+[source,html]
+----
+include::../res/code/ethernet-io-arduino/index.html[]
+----
 
 This HTML page is similar to the last example in the "Ethernet Shield" article. There are not many changes to the HTML/JS code. This is because we used many loops to iterate through the pins, so the request handling code can be left alone. However, there are more tags that show the input states, since we have more inputs. We have also used `<div>` tags, which are used to style a group of elements.
 
 We have also used internal CSS in the `<style>` tag. The `float: left;` means that the element should go as far left as possible in its container and `margin-left: 25px;` means that there should be a 25px wide margin to the left of the element.
 
-## Arduino Code
+== Arduino Code
 
-```@code/ethernet-io-arduino/WebServerAjaxIO.ino
-```
+[source,cpp]
+----
+include::../res/code/ethernet-io-arduino/WebServerAjaxIO.ino[]
+----
 
-## Running the Code
+== Running the Code
 
 Follow the same steps as in "Ethernet Shield". However, you should see a different page:
 
-![I/O web server page in browser](@img/ethernet-io-arduino/server.png)
+image::ethernet-io-arduino/server.png[I/O web server page in browser]
 
 This page contains three columns: one for digital inputs, one for analog inputs, and one for digital outputs.
 
