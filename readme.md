@@ -12,21 +12,19 @@ This repository contains the source code for aidansun.com. The website is built 
 
 This website is deployed using Docker and Docker Compose. Docker Compose files:
 
-- `docker-compose.yml`: Base Compose file.
-- `docker-compose.override.yml`: Local development, mounts the repository root in the container.
+- `docker-compose.yml`: For testing use, like the production file but without TLS.
 - `docker-compose.prod.yml`: Production, includes nginx and TLS configured.
-- `docker-compose.staging.yml`: For testing use, like the production file but without TLS.
 
 Run development container locally:
 
 ```shell
-docker compose -f docker-compose.yml -f docker-compose.override.yml up --build
+docker compose up --build
 ```
 
 Run staging container locally:
 
 ```shell
-docker compose -f docker-compose.yml -f docker-compose.staging.yml up --build
+docker compose -f docker-compose.staging.yml up --build
 ```
 
 ## Setup
