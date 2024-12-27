@@ -1,0 +1,205 @@
+/* Predefined classes/roles */
+
+.halign-left {
+  text-align: left;
+}
+
+.halign-right {
+  text-align: right;
+}
+
+.halign-center {
+  text-align: center;
+}
+
+.valign-top {
+  vertical-align: top;
+}
+
+.valign-bottom {
+  vertical-align: bottom;
+}
+
+.valign-middle {
+  vertical-align: middle;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.overline {
+  text-decoration: overline;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+:not(pre).nobreak {
+  word-wrap: normal;
+}
+
+:not(pre).nowrap {
+  white-space: nowrap;
+}
+
+:not(pre).pre-wrap {
+  white-space: pre-wrap;
+}
+
+/* Spacing fixes */
+
+ul p,
+li p,
+table p {
+  margin: 0;
+}
+
+table {
+  margin: 0.5rem 0;
+}
+
+/* Tables */
+
+table.tableblock,
+th.tableblock,
+td.tableblock {
+  border-collapse: collapse;
+  border: 1px solid;
+}
+
+th.tableblock,
+td.tableblock {
+  padding: 4px;
+}
+
+/* Font icons */
+
+.fa {
+  cursor: default;
+}
+
+.admonitionblock td.icon {
+  font-size: 2em;
+  text-shadow: 1px 1px 2px rgb(0 0 0 / 0.5);
+  cursor: default;
+  border-right: 2px solid rgb(0 0 0 / 0.5);
+  padding-right: 8px;
+
+  .icon-note::before {
+    content: "\f05a";
+    color: #19407c;
+  }
+
+  .icon-tip::before {
+    content: "\f0eb";
+    text-shadow: 1px 1px 2px rgb(155 155 0 / 0.8);
+    color: #111;
+  }
+
+  .icon-warning::before {
+    content: "\f071";
+    color: #bf6900;
+  }
+
+  .icon-caution::before {
+    content: "\f06d";
+    color: #bf3400;
+  }
+
+  .icon-important::before {
+    content: "\f06a";
+    color: #bf0000;
+  }
+}
+
+/* Callouts */
+
+.conum {
+  display: inline-block;
+  color: #fff !important;
+  background: rgb(0 0 0 / 0.8);
+  border-radius: 50%;
+  text-align: center;
+  font-size: 0.75em;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  font-family: "Open Sans", "DejaVu Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+
+  * {
+    color: #fff !important;
+  }
+
+  & + b {
+    display: none;
+  }
+
+  &::after {
+    content: attr(data-value);
+  }
+}
+
+pre .conum {
+  position: relative;
+  top: -0.125em;
+}
+
+table .conum {
+  vertical-align: top;
+}
+
+.colist > table > tbody > tr > :first-child {
+  padding: 0.25em 0.5rem;
+  vertical-align: top;
+}
+
+/* UI macros */
+
+kbd {
+  background-color: #eee;
+  border-radius: 3px;
+  border: 1px solid #b4b4b4;
+  box-shadow:
+    0 1px 1px rgb(0 0 0 / 0.2),
+    0 2px 0 0 rgb(255 255 255 / 0.7) inset;
+  color: #333;
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: bold;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+
+b.button {
+  white-space: nowrap;
+
+  &::before {
+    content: "[";
+    padding-right: 0.25em;
+  }
+
+  &::after {
+    content: "]";
+    padding-left: 0.25em;
+  }
+}
+
+/* Other styles */
+
+.title {
+  font-style: italic;
+}
+
+.quoteblock {
+  border-left: 4px solid #555;
+  padding: 2px 0;
+
+  .attribution {
+    margin-left: 10px;
+  }
+}
