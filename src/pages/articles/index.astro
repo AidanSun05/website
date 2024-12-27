@@ -1,13 +1,23 @@
 ---
-import { getArticlesSorted } from "@common/articles";
+import { getAllTags, getArticlesSorted } from "@common/articles";
 import ArticleListing from "@components/ArticleListing.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import ChipContainer from "@components/ChipContainer.astro";
 
 const articles = await getArticlesSorted();
 const title = "Articles";
+
+const tagsNumbered = new Map<string, number>();
+for (const tag of await getAllTags()) {
+  const num = tagsNumbered.get(tag);
+  tagsNumbered.set(tag, num === undefined ? 1 : num + 1);
+}
+
+const tags = [...tagsNumbered.entries()].sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count }));
 ---
 
 <BaseLayout {title} description="List of all articles">
   <h1>{title}</h1>
+  <ChipContainer {tags} />
   <ArticleListing {articles} />
 </BaseLayout>

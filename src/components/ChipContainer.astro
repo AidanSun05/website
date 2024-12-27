@@ -1,18 +1,31 @@
 ---
+interface Tag {
+  name: string;
+  count: number;
+}
+
 interface Props {
-  tags: string;
+  tags: string | Tag[];
 }
 
 const { tags } = Astro.props;
+const tagsList = typeof tags === "string" ? tags.split(" ") : tags;
 ---
 
 <div class="chip-container">
   {
-    tags.split(" ").map((tag) => (
-      <a class="chip" href={`/articles/tag/${tag}/`}>
-        {tag}
-      </a>
-    ))
+    tagsList.map((tag) =>
+      typeof tag === "string" ? (
+        <a class="chip" href={`/articles/tag/${tag}/`}>
+          {tag}
+        </a>
+      ) : (
+        <a class="chip flex" href={`/articles/tag/${tag.name}/`}>
+          <span class="name">{tag.name}</span>
+          <span class="count">{tag.count}</span>
+        </a>
+      )
+    )
   }
 </div>
 
@@ -25,12 +38,31 @@ const { tags } = Astro.props;
     gap: 4px;
 
     .chip {
-      padding: 2px;
       border: 2px solid #777;
       border-radius: 4px;
       background-color: #ddd;
       text-decoration: none;
       color: black;
+    }
+
+    .chip:not(.flex) {
+      padding: 2px;
+    }
+
+    .chip.flex {
+      display: flex;
+
+      span {
+        padding: 2px;
+      }
+
+      .name {
+        border-right: 2px solid #777;
+      }
+
+      .count {
+        background-color: #aaa;
+      }
     }
   }
 </style>
