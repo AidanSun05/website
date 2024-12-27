@@ -21,7 +21,8 @@ const { articles } = Astro.props;
           <a href={`/${page.collection}/${page.id}/`}>{page.data.doctitle}</a>
         </h3>
         <p>
-          <time datetime={page.data.revdate.toISOString()}>{formatDate(page.data.revdate)}</time> - {page.data.description}
+          <time datetime={page.data.revdate.toISOString()}>{formatDate(page.data.revdate)}</time> -{" "}
+          {page.data.description}
         </p>
         <ChipContainer tags={page.data.tags} />
       </div>

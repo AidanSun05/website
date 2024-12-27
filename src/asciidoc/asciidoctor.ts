@@ -2,9 +2,9 @@ import type { Asciidoctor, Document, ProcessorOptions, Section } from "@asciidoc
 import asciidoctor from "@asciidoctor/core";
 import mathJaxProcessor from "@djencks/asciidoctor-mathjax";
 import type { MarkdownHeading } from "astro";
+import JSDOM from "jsdom";
 import path from "path";
 import * as shiki from "shiki";
-import JSDOM from "jsdom";
 
 type Catalog = {
   [key: string]: unknown;
