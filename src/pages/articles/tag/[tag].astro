@@ -1,16 +1,15 @@
 ---
-import { getArticlesSorted } from "@common/articles";
+import { getAllTags, getArticlesSorted } from "@common/articles";
 import ArticleListing from "@components/ArticleListing.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 
-export const prerender = false;
+export async function getStaticPaths() {
+  return [...new Set(await getAllTags())].map((tag) => ({ params: { tag } }));
+}
 
 const { tag } = Astro.params;
-if (tag === undefined) return Astro.redirect("/404");
-
 const title = `Articles with tag: ${tag}`;
 const description = `List of all articles tagged with ${tag}`;
-
 const articles = (await getArticlesSorted()).filter((i) => i.data.tags.includes(tag));
 ---
 
