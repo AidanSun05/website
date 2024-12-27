@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 for IMAGE in "web" "server"
 do
   if [ ! -z "$(doctl registry repository list | grep "$(echo $IMAGE)")" ]
