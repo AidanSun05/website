@@ -23,3 +23,8 @@ export async function getArticlesSorted() {
   articles.sort((a, b) => b.data.revdate.getTime() - a.data.revdate.getTime());
   return articles;
 }
+
+export async function getAllTags() {
+  const articles = await getCollection("articles");
+  return articles.map(({ data }) => data.tags.split(" ")).flat();
+}
