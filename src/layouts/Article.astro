@@ -1,29 +1,33 @@
 ---
+import "@styles/asciidoc.pcss";
+import "@fortawesome/fontawesome-free/css/solid.css";
+import "@fortawesome/fontawesome-free/css/fontawesome.css";
 import BaseLayout from "./BaseLayout.astro";
 import ChipContainer from "@components/ChipContainer.astro";
 import { Image } from "astro:assets";
-import { formatDate, loadImage } from "@common/articles";
+import type { ImageMetadata } from "astro";
+import { formatDate } from "@common/articles";
 
 interface Frontmatter {
-  title: string;
+  doctitle: string;
   description: string;
-  image?: string;
-  date: Date;
-  tags: string[];
+  image?: ImageMetadata;
+  revdate: Date;
+  tags: string;
+  stylesheets?: string;
 }
 
 interface Props {
   frontmatter: Frontmatter;
 }
 
-const { title, description, image, date, tags } = Astro.props.frontmatter;
-const imageSrc = image ? await loadImage(image) : null;
+const { doctitle, description, image, revdate, tags, stylesheets } = Astro.props.frontmatter;
 ---
 
-<BaseLayout {title} {description} imageURL={imageSrc?.src}>
-  <h1>{title}</h1>
-  {imageSrc && <Image src={imageSrc} height="350" alt="Article thumbnail" />}
-  <p>Published <time datetime={date.toISOString()}>{formatDate(date)}</time></p>
+<BaseLayout title={doctitle} {description} {stylesheets} imageURL={image?.src}>
+  <h1>{doctitle}</h1>
+  {image && <Image src={image} height="350" alt="Article thumbnail" />}
+  <p>Published <time datetime={revdate.toISOString()}>{formatDate(revdate)}</time></p>
   <ChipContainer tags={tags} />
   <p>{description}</p>
   <slot />

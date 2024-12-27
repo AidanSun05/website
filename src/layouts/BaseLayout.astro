@@ -10,16 +10,21 @@ interface Props {
   title: string;
   description: string;
   imageURL?: string;
+  stylesheets?: string;
 }
 
-const { title, description, imageURL } = Astro.props;
+const { title, description, imageURL, stylesheets } = Astro.props;
 
 const imageURLWithSite = Astro.site?.toString().slice(0, -1) + (imageURL ?? Placeholder.src);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Specific attributes are picked out to avoid unnecessary bloat in generated HTML
-const articles = (await getCollection("articles")).map((i) => ({ data: i.data, slug: i.slug }));
-articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const articles = (await getCollection("articles")).map((i) => ({ data: i.data, id: i.id }));
+articles.sort((a, b) => b.data.revdate.getTime() - a.data.revdate.getTime());
+
+const styles: string[] = [];
+if (stylesheets)
+  for (const i of stylesheets.split(" ")) styles.push((await import(`../styles/${i}.pcss?inline`)).default);
 ---
 
 <html lang="en-US">
@@ -40,6 +45,7 @@ articles.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
     <meta property="og:site_name" content="Aidan Sun" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL} />
+    <style is:inline set:html={styles.join("\n")}></style>
     <Manifest />
   </head>
   <body>
