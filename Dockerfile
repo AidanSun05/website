@@ -1,20 +1,14 @@
-FROM node:23 AS base
+FROM node:23 AS builder
+RUN apt update && apt install zip
+
 USER node
 WORKDIR /code
 
 ENV ASTRO_TELEMETRY_DISABLED=1
-COPY --chown=node package*.json .
-RUN npm cache clean --force
-
-FROM base AS builder
-USER root
-RUN apt update && apt install zip
-
-USER node
-RUN npm ci --include=dev
-
 COPY --chown=node . .
-RUN chmod +x scripts/copy-downloads.sh && \
+RUN npm cache clean --force && \
+  npm ci --include=dev && \
+  chmod +x scripts/copy-downloads.sh && \
   scripts/copy-downloads.sh && \
   node scripts/generate-favicons.js && \
   npm run build && \
