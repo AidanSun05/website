@@ -85,7 +85,7 @@ I_(max) = (5-D)/(R_1)
 
 * stem:[I_(max)]: Output current (A)
 * stem:[D]: Diode drop, e.g., voltage drop across a diode (typically 0.7 V); multiply this by the number of diodes you selected
-* stem:[R_1]: Resistor value you selected (&#8486;)
+* stem:[R_1]: Resistor value you selected (&#937;)
 
 For example, the output current of having 1 diode and the 2k resistor selected would be:
 
@@ -99,12 +99,12 @@ I_(max) = (5-0.7)/(2000) = 0.00215 "A" ~~ 2.2 "mA"
 The DS1302 powers up with the TCR disabled. To enable the TCR, use `writeRaw` *(not `write`)* to write to the register `TCR_SET`. For the data to write, use one of these six constants:
 
 * `TCR_DISABLE`: TCR is disabled
-* `TCR_1D_2R`: 1 diode and 2 k&#8486; resistance
-* `TCR_1D_4R`: 1 diode and 4 k&#8486; resistance
-* `TCR_1D_8R`: 1 diode and 8 k&#8486; resistance
-* `TCR_2D_2R`: 2 diodes and 2 k&#8486; resistance
-* `TCR_2D_4R`: 2 diodes and 4 k&#8486; resistance
-* `TCR_2D_8R`: 2 diodes and 8 k&#8486; resistance
+* `TCR_1D_2R`: 1 diode and 2 k&#937; resistance
+* `TCR_1D_4R`: 1 diode and 4 k&#937; resistance
+* `TCR_1D_8R`: 1 diode and 8 k&#937; resistance
+* `TCR_2D_2R`: 2 diodes and 2 k&#937; resistance
+* `TCR_2D_4R`: 2 diodes and 4 k&#937; resistance
+* `TCR_2D_8R`: 2 diodes and 8 k&#937; resistance
 * `TCR_INITIAL`: Initial power-on state (also disabled)
 
 For example, to set the TCR to have 1 diode and a 2k resistor to have a 2.2mA current (like described above), use:
