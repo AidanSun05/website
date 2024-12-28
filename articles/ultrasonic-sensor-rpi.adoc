@@ -38,7 +38,7 @@ The formula for calculating resistor values is:
 V_(out) = V_(i\n)(R_2/(R_1 + R_2))
 ++++
 
-With R1 being 330 &#8486; and R2 being 470 &#8486;, the equation becomes:
+With R1 being 330 &#937; and R2 being 470 &#937;, the equation becomes:
 
 [stem]
 ++++
