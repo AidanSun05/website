@@ -4,6 +4,7 @@ Aidan Sun
 :description: This document explains how to use WhaleConnect. For a full list of features, see the readme.
 :image: @img/whaleconnect-usage/screenshot.png
 :tags: software
+:toclevels: 3
 :experimental:
 
 == Reference: Port Ranges
