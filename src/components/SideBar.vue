@@ -120,7 +120,7 @@ watch(searchQuery, () => setTimeout(doSearch, 500));
     transform: translateX(0);
   }
 
-  @media screen and (min-width: 1600px) {
+  @media screen and (min-width: 1000px) {
     transform: translateX(0) !important;
 
     &.toggled {
@@ -185,7 +185,7 @@ watch(searchQuery, () => setTimeout(doSearch, 500));
     transform: translateX(300px);
   }
 
-  @media screen and (min-width: 1600px) {
+  @media screen and (min-width: 1000px) {
     transform: translateX(300px) !important;
 
     &.toggled {
@@ -209,7 +209,7 @@ watch(searchQuery, () => setTimeout(doSearch, 500));
     transform: rotateZ(0.5turn);
   }
 
-  @media screen and (min-width: 1600px) {
+  @media screen and (min-width: 1000px) {
     transform: rotateZ(0.5turn) !important;
 
     #menu-button.toggled & {
