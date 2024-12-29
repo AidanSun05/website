@@ -5,7 +5,7 @@ import "@fortawesome/fontawesome-free/css/fontawesome.css";
 import BaseLayout from "./BaseLayout.astro";
 import ChipContainer from "@components/ChipContainer.astro";
 import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
+import type { ImageMetadata, MarkdownHeading } from "astro";
 import { formatDate } from "@common/articles";
 import path from "path";
 
@@ -20,9 +20,11 @@ interface Frontmatter {
 
 interface Props {
   frontmatter: Frontmatter;
+  headings: MarkdownHeading[];
 }
 
 const { doctitle, description, image, revdate, tags, stylesheets } = Astro.props.frontmatter;
+const { headings } = Astro.props;
 ---
 
 <BaseLayout title={doctitle} {description} {stylesheets} imageURL={image?.src}>
@@ -31,6 +33,12 @@ const { doctitle, description, image, revdate, tags, stylesheets } = Astro.props
   <p>Published <time datetime={revdate.toISOString()}>{formatDate(revdate)}</time></p>
   <p><a href={`/pdf/${path.basename(Astro.url.pathname)}.pdf`} class="download-pdf">Download PDF</a></p>
   <ChipContainer tags={tags} />
+  <aside id="headings">
+    <strong>Contents</strong>
+    <nav>
+      {headings.map((h) => <a href={`#${h.slug}`} style={{ marginLeft: `${h.depth - 1}em` }}>{h.text}</a>)}
+    </nav>
+  </aside>
   <p>{description}</p>
   <slot />
 </BaseLayout>
@@ -42,5 +50,48 @@ const { doctitle, description, image, revdate, tags, stylesheets } = Astro.props
     border: 2px solid #555;
     color: #fff;
     padding: 4px 8px;
+  }
+
+  @media (max-width: 999px) {
+    #headings {
+      margin-top: 1em;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    #headings {
+      position: fixed;
+      top: 1em;
+      right: 1em;
+      width: 350px;
+    }
+  }
+
+  #headings {
+    padding: 4px;
+    border: 1px solid;
+
+    strong {
+      display: block;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+
+      a {
+        padding: 4px;
+        transition: 0.2s;
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+          background-color: #aaa;
+        }
+      }
+    }
   }
 </style>
