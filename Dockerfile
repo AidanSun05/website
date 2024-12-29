@@ -4,7 +4,15 @@ COPY articles ./articles
 COPY src/img ./img
 COPY res ./res
 RUN gem install rghost rouge && \
-  asciidoctor-pdf -r asciidoctor-mathematical -a icons=font -a icon-set=fas -a imagesdir=/documents/img -a videosdir=https://www.aidansun.com/videos -a source-highlighter=rouge -a rouge-style=github -a optimize articles/*.adoc
+  asciidoctor-pdf -r asciidoctor-mathematical \
+    # Define the icon set:
+    -a icons=font -a icon-set=fas \
+    -a imagesdir=/documents/img \
+    # This is for display in the PDF to turn videos into links:
+    -a videosdir=https://www.aidansun.com/videos \
+    -a source-highlighter=rouge -a rouge-style=github \
+    -a optimize \
+    articles/*.adoc
 
 FROM node:23 AS builder
 RUN apt update && apt install zip
@@ -12,10 +20,12 @@ RUN apt update && apt install zip
 USER node
 WORKDIR /code
 
+# Install dependencies (only depends on package*.json files)
 ENV ASTRO_TELEMETRY_DISABLED=1
 COPY --chown=node package*.json .
 RUN npm cache clean --force && npm ci --include=dev
 
+# Build
 COPY --chown=node . .
 RUN chmod +x scripts/copy-downloads.sh && \
   scripts/copy-downloads.sh && \
