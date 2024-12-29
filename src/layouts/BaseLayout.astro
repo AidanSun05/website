@@ -19,8 +19,9 @@ const imageURLWithSite = Astro.site?.toString().slice(0, -1) + (imageURL ?? Plac
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Specific attributes are picked out to avoid unnecessary bloat in generated HTML
-const articles = (await getCollection("articles")).map((i) => ({ data: i.data, id: i.id }));
-articles.sort((a, b) => b.data.revdate.getTime() - a.data.revdate.getTime());
+const articles = (await getCollection("articles"))
+  .sort((a, b) => b.data.revdate.getTime() - a.data.revdate.getTime())
+  .map((i) => [i.data.doctitle, i.data.description, i.data.tags, i.id]);
 
 const styles: string[] = [];
 if (stylesheets)

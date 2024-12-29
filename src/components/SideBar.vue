@@ -15,11 +15,11 @@
       <a href="/articles/">Articles</a>
       <template v-if="articlesOpened">
         <a
-          v-for="page of articles as Page[]"
-          :key="page.id"
-          :href="`/articles/${page.id}/`"
+          v-for="page of articles"
+          :key="page[3]"
+          :href="`/articles/${page[3]}/`"
           :class="{ highlight: searchActive && searchMatches.includes(page) }"
-          >{{ page.data.doctitle }}</a
+          >{{ page[0] }}</a
         >
       </template>
     </nav>
@@ -33,18 +33,8 @@
 import SearchIcon from "@img/search.svg";
 import { ref, watch } from "vue";
 
-// Manually typing Page interface to avoid importing dependency from Astro
-interface Page {
-  id: string;
-  data: {
-    doctitle: string;
-    description: string;
-    tags: string;
-  };
-}
-
 const props = defineProps<{
-  articles: unknown[];
+  articles: string[][]; // Array of page data: [doctitle, description, tags, id]
 }>();
 
 let searchActive = ref(false);
@@ -63,11 +53,11 @@ function doSearch() {
 
   searchActive.value = true;
   const q = searchQuery.value.toLowerCase();
-  searchMatches.value = (<Page[]>props.articles).filter(
-    ({ data }) =>
-      data.doctitle.toLowerCase().includes(q) ||
-      data.description.toLowerCase().includes(q) ||
-      data.tags.split(" ").some((tag) => tag.toLowerCase().includes(q))
+  searchMatches.value = props.articles.filter(
+    ([doctitle, description, tags, _]) =>
+      doctitle.toLowerCase().includes(q) ||
+      description.toLowerCase().includes(q) ||
+      tags.split(" ").some((tag) => tag.toLowerCase().includes(q))
   );
 }
 
