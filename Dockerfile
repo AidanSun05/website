@@ -1,3 +1,11 @@
+FROM asciidoctor/docker-asciidoctor AS pdfs
+WORKDIR /documents
+COPY articles ./articles
+COPY src/img ./img
+COPY res ./res
+RUN gem install rghost rouge && \
+  asciidoctor-pdf -r asciidoctor-mathematical -a icons=font -a icon-set=fas -a imagesdir=/documents/img -a videosdir=https://www.aidansun.com/videos -a source-highlighter=rouge -a rouge-style=github -a optimize articles/*.adoc
+
 FROM node:23 AS builder
 RUN apt update && apt install zip
 
@@ -5,10 +13,11 @@ USER node
 WORKDIR /code
 
 ENV ASTRO_TELEMETRY_DISABLED=1
+COPY --chown=node package*.json .
+RUN npm cache clean --force && npm ci --include=dev
+
 COPY --chown=node . .
-RUN npm cache clean --force && \
-  npm ci --include=dev && \
-  chmod +x scripts/copy-downloads.sh && \
+RUN chmod +x scripts/copy-downloads.sh && \
   scripts/copy-downloads.sh && \
   node scripts/generate-favicons.js && \
   npm run build && \
@@ -21,3 +30,4 @@ RUN rm -f /etc/nginx/conf.d/default.conf
 COPY ./nginx/include /etc/nginx/conf.d/include
 COPY nginx/${CONFIG}.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /code/dist /usr/share/nginx/html
+COPY --from=pdfs --chown=node /documents/articles/*.pdf /usr/share/nginx/html/pdf/

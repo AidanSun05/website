@@ -7,6 +7,7 @@ import ChipContainer from "@components/ChipContainer.astro";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import { formatDate } from "@common/articles";
+import path from "path";
 
 interface Frontmatter {
   doctitle: string;
@@ -28,7 +29,18 @@ const { doctitle, description, image, revdate, tags, stylesheets } = Astro.props
   <h1>{doctitle}</h1>
   {image && <Image src={image} height="350" alt="Article thumbnail" />}
   <p>Published <time datetime={revdate.toISOString()}>{formatDate(revdate)}</time></p>
+  <p><a href={`/pdf/${path.basename(Astro.url.pathname)}.pdf`} class="download-pdf">Download PDF</a></p>
   <ChipContainer tags={tags} />
   <p>{description}</p>
   <slot />
 </BaseLayout>
+
+<style>
+  .download-pdf {
+    text-decoration: none;
+    background-color: #888;
+    border: 2px solid #555;
+    color: #fff;
+    padding: 4px 8px;
+  }
+</style>
