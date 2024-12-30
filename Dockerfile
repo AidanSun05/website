@@ -29,7 +29,8 @@ RUN chmod +x scripts/copy-downloads.sh && \
   scripts/copy-downloads.sh && \
   node scripts/generate-favicons.js && \
   npm run build && \
-  npx svgo -f dist/_astro
+  npx svgo -f dist/_astro && \
+  node scripts/clean-assets.js
 
 FROM nginx:alpine-slim AS runner
 ARG CONFIG
