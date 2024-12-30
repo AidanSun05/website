@@ -16,7 +16,14 @@ async function main() {
     for (const i of imageMatches) referencedImages.add(path.basename(i));
   }
 
-  for await (const file of assets) if (!referencedImages.has(path.basename(file))) await fs.unlink(file);
+  let removedFiles = 0;
+  for await (const file of assets) {
+    if (!referencedImages.has(path.basename(file))) {
+      await fs.unlink(file);
+      removedFiles++;
+    }
+  }
+  console.log(`Removed ${removedFiles} unused assets`);
 }
 
 await main();
