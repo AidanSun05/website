@@ -1,10 +1,10 @@
 ---
 import "@styles/global.pcss";
-import { getCollection } from "astro:content";
 import Manifest from "../generated/manifest.astro";
 import PageFooter from "@components/PageFooter.astro";
 import Placeholder from "@img/placeholder.svg";
 import Sidebar from "@components/SideBar.vue";
+import { getArticlesSorted } from "@common/articles";
 
 interface Props {
   title: string;
@@ -19,9 +19,7 @@ const imageURLWithSite = Astro.site?.toString().slice(0, -1) + (imageURL ?? Plac
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // Specific attributes are picked out to avoid unnecessary bloat in generated HTML
-const articles = (await getCollection("articles"))
-  .sort((a, b) => b.data.revdate.getTime() - a.data.revdate.getTime())
-  .map((i) => [i.data.doctitle, i.data.description, i.data.tags, i.id]);
+const articles = (await getArticlesSorted()).map((i) => [i.data.doctitle, i.data.description, i.data.tags, i.id]);
 
 const styles: string[] = [];
 if (stylesheets)
