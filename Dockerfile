@@ -17,16 +17,14 @@ RUN gem install rghost rouge && \
 FROM node:23 AS builder
 RUN apt update && apt install zip
 
-USER node
-WORKDIR /code
-
 # Install dependencies (only depends on package*.json files)
+WORKDIR /code
 ENV ASTRO_TELEMETRY_DISABLED=1
-COPY --chown=node package*.json .
+COPY package*.json .
 RUN npm cache clean --force && npm ci --include=dev
 
 # Build
-COPY --chown=node . .
+COPY . .
 RUN chmod +x scripts/copy-downloads.sh && \
   scripts/copy-downloads.sh && \
   node scripts/generate-favicons.js && \
@@ -40,4 +38,4 @@ RUN rm -f /etc/nginx/conf.d/default.conf
 COPY ./nginx/include /etc/nginx/conf.d/include
 COPY nginx/${CONFIG}.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /code/dist /usr/share/nginx/html
-COPY --from=pdfs --chown=node /documents/articles/*.pdf /usr/share/nginx/html/pdf/
+COPY --from=pdfs /documents/articles/*.pdf /usr/share/nginx/html/pdf/
