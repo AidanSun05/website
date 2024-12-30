@@ -4,7 +4,7 @@ import "@fortawesome/fontawesome-free/css/solid.css";
 import "@fortawesome/fontawesome-free/css/fontawesome.css";
 import BaseLayout from "./BaseLayout.astro";
 import ChipContainer from "@components/ChipContainer.astro";
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import type { ImageMetadata, MarkdownHeading } from "astro";
 import { formatDate } from "@common/articles";
 import path from "path";
@@ -25,9 +25,10 @@ interface Props {
 
 const { doctitle, description, image, revdate, tags, stylesheets } = Astro.props.frontmatter;
 const { headings } = Astro.props;
+const imageURL = image ? (await getImage({ src: image })).src : undefined;
 ---
 
-<BaseLayout title={doctitle} {description} {stylesheets} imageURL={image?.src}>
+<BaseLayout title={doctitle} {description} {stylesheets} {imageURL}>
   <h1>{doctitle}</h1>
   {image && <Image src={image} height="350" alt="Article thumbnail" />}
   <p>Published <time datetime={revdate.toISOString()}>{formatDate(revdate)}</time></p>
