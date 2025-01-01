@@ -21,10 +21,10 @@ Run development container locally:
 docker compose up --build
 ```
 
-Run staging container locally:
+Run production container locally:
 
 ```shell
-docker compose -f docker-compose.staging.yml up --build
+docker compose -f docker-compose.prod.yml up --build
 ```
 
 ## Setup
