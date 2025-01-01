@@ -43,10 +43,7 @@ async function registerHighlighters(registry: Asciidoctor["SyntaxHighlighter"]) 
       return true;
     },
     highlight(_node, source, lang, opts) {
-      const html = highlighter.codeToHtml(source, {
-        lang,
-        theme: "github-light"
-      });
+      const html = highlighter.codeToHtml(source, { lang, theme: "github-light" });
 
       // Apply line highlighting
       if (opts.highlight_lines === undefined) return html;
