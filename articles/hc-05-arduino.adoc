@@ -1,0 +1,57 @@
+= HC-05 Module with Arduino
+Aidan Sun
+2020-03-11
+:description: Using the HC-05 Bluetooth module to wirelessly control an Arduino from a computer
+:image: @img/hc-05-arduino/thumbnail.jpg
+:tags: arduino software bluetooth
+
+== The HC-05 Bluetooth Module
+
+The HC-05 module allows an Arduino to communicate over Bluetooth using the Serial Port Profile (SPP) protocol. This enables it to wirelessly communicate with a Bluetooth Classic-enabled device, such as a computer. Notably, the Arduino code used to communicate through the HC-05 closely resembles the code used to communicate over the standard USB serial port, which will be demonstrated below.
+
+Below is an image of the HC-05 module, with an Arduino Nano for scale:
+
+image::hc-05-arduino/hc-05.jpg[HC-05 with Arduino Nano]
+
+The HC-05 module has a serial interface, with RX and TX pins. It is a 3.3V logic device, so you need a voltage divider for it to work with a 5V Arduino. (See xref:ultrasonic-sensor-rpi.adoc#_voltage_divider[Using an Ultrasonic Sensor with the Raspberry Pi] for more information.)
+
+== HC-05 Module Pinout
+
+|===
+|Pin |Function
+
+|STATE |Tells if the HC-05 is connected wirelessly to a device
+|RXD |Data received by the module
+|TXD |Data transmitted by the module
+|GND |Ground connection
+|V~CC~ |Power connection
+|EN |Toggle between Data Mode and AT Command Mode
+|===
+
+* EN pin HIGH: Set to AT Command Mode{empty}footnote:[AT Command Mode allows you to send commands and configuration settings to the module. It is not used in this guide.]
+* EN Pin Low: Set to Data Mode (Default)
+
+== Schematic
+
+image::hc-05-arduino/schematic.png[HC-05 schematic]
+
+== Code
+
+[source,cpp]
+----
+include::../res/code/HC-05.ino[]
+----
+
+This code uses the `SoftwareSerial` library, which allows serial communication with the HC-05 to be on pins other than 0 and 1. This prevents Bluetooth communication from interfering from regular USB communication with the Arduino, such as uploading code and using the serial monitor.
+
+`SoftwareSerial` has a similar interface to `Serial`: the `available` and `read` functions allow the Arduino to receive data from Bluetooth, while the `println` function allows it to send data over Bluetooth with a newline at the end.
+
+== Controlling Your Arduino
+
+To control your Arduino from your computer, you can use WhaleConnect. For more information on Bluetooth communication in WhaleConnect, refer to its xref:whaleconnect-usage.adoc#_bluetooth[usage documentation].
+
+IMPORTANT: You will need to pair the HC-05 with your computer before communicating with it. It will usually have a name such as *JDY-30, JDY-31, HC-05, or HC-06*. If it requires a passkey, it is usually *0000 or 1234*.
+
+After connecting, you are ready to control your Arduino. Enter 0 to turn off the D13 L LED and enter 1 to turn on the LED.
+
+image::hc-05-arduino/module.jpg[HC-05 module on a breadboard]
