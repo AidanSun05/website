@@ -13,15 +13,7 @@ async function main() {
   const configuration = {
     path: "/favicons",
     background: "#555",
-    theme_color: "#555",
-    icons: {
-      android: false,
-      appleIcon: false,
-      appleStartup: false,
-      favicons: true,
-      windows: false,
-      yandex: false
-    }
+    theme_color: "#555"
   };
 
   /**
