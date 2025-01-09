@@ -62,61 +62,23 @@ link:/dl/clock-pcb.fzz[Download the .fzz file]
 
 == Installation
 
-. Solder on both IC sockets. Pay attention to the orientation and direction of the notch.
-+
-image::arduino-clock/soldering-1.jpg[Step 1]
-
-. Solder on both rounded female headers (7 pins).
-+
-image::arduino-clock/soldering-2.jpg[Step 2]
-
-. Solder on the battery holder, R2, and R3 (both 220R).
-+
-image::arduino-clock/soldering-3.jpg[Step 3]
-
-. Solder on both female headers (15 pins).
-+
-image::arduino-clock/soldering-4.jpg[Step 4]
-
-. R1 is mounted vertically to save space. Bend one of the leads 180 degrees to make it fit. Then, put it on the PCB with the actual resistor in the circle. Next, be sure to leave at least 2mm of lead space on Y1 at the top of the PCB. Solder on R1 and Y1.
-+
-image::arduino-clock/soldering-5.jpg[Step 5]
-
-. Solder on D1. Make sure that the anode goes into the square pad.
-+
-image::arduino-clock/soldering-6.jpg[Step 6]
-
-. Solder on S1-8 and the buzzer. Make sure that the "+" on the buzzer is on the left.
-+
-image::arduino-clock/soldering-7.jpg[Step 7]
-
-. *If using 9V battery:* Solder the 9V battery snap to the back of the PCB. The black wire should be in the square pad. Then, attach the wires to the board with tape.
-+
-image::arduino-clock/soldering-8.jpg[Step 8]
-
-. *If using 9V battery:* Solder the SPST slide switch to the two holes labelled "SWITCH".
-+
-image::arduino-clock/soldering-9.jpg[Step 9]
-
-. Bend Y1 downward. Then, insert the Arduino Nano into the two long female headers. The USB port should be over the word "USB" on the PCB.
-+
-image::arduino-clock/soldering-10.jpg[Step 10]
-
-. Insert the two ICs into their corresponding sockets. Pay attention to their orientation.
-+
-image::arduino-clock/soldering-11.jpg[Step 11]
-
-. Note the small "1" on the PCB. This indicates where pin 1 of the display should be connected. Insert the display into the rounded female headers. Then, insert a 3V coin cell into the coin cell holder. The side marked with a "+" should be on top.
-+
-image::arduino-clock/soldering-12.jpg[Step 12]
-
-. Use superglue to stick a 7.5 mm &#215; 31 mm (0.3 in &#215; 1.2 in) piece of black, rigid plastic to S6 and S7, forming the snooze bar.
-+
-image::arduino-clock/soldering-13.jpg[Step 13]
-
-. *If using 9V battery:* Insert the 9V battery into the snap and use double-sided tape to stick it on the PCB.
-+
-image::arduino-clock/soldering-14.jpg[Step 14]
+[%noheader,frame=none,grid=none,cols="a,.^"]
+|===
+|image::arduino-clock/soldering-1.jpg[Step 1] |Solder on both IC sockets. Pay attention to the orientation and direction of the notch.
+|image::arduino-clock/soldering-2.jpg[Step 2] |Solder on both rounded female headers (7 pins).
+|image::arduino-clock/soldering-3.jpg[Step 3] |Solder on the battery holder, R2, and R3 (both 220R).
+|image::arduino-clock/soldering-4.jpg[Step 4] |Solder on both female headers (15 pins).
+|image::arduino-clock/soldering-5.jpg[Step 5] |R1 is mounted vertically to save space. Bend one of the leads 180 degrees to make it fit. Then, put it on the PCB with the actual resistor in the circle. Next, be sure to leave at least 2mm of lead space on Y1 at the top of the PCB. Solder on R1 and Y1.
+|image::arduino-clock/soldering-6.jpg[Step 6] |Solder on D1. Make sure that the anode goes into the square pad.
+|image::arduino-clock/soldering-7.jpg[Step 7] |Solder on S1-8 and the buzzer. Make sure that the "+" on the buzzer is on the left.
+|image::arduino-clock/soldering-8.jpg[Step 8] |*If using 9V battery:* Solder the 9V battery snap to the back of the PCB. The black wire should be in the square pad. Then, attach the wires to the board with tape.
+|image::arduino-clock/soldering-9.jpg[Step 9] |*If using 9V battery:* Solder the SPST slide switch to the two holes labelled "SWITCH".
+|image::arduino-clock/soldering-10.jpg[Step 10] |Bend Y1 downward. Then, insert the Arduino Nano into the two long female headers. The USB port should be over the word "USB" on the PCB.
+|image::arduino-clock/soldering-11.jpg[Step 11] |Insert the two ICs into their corresponding sockets. Pay attention to their orientation.
+|image::arduino-clock/soldering-12.jpg[Step 12] |Note the small "1" on the PCB. This indicates where pin 1 of the display should be connected. Insert the display into the rounded female headers. Then, insert a 3V coin cell into the coin cell holder. The side marked with a "+" should be on top.
+|image::arduino-clock/soldering-13.jpg[Step 13] |Use superglue to stick a 7.5 mm &#215; 31 mm (0.3 in &#215; 1.2 in) piece of black, rigid plastic to S6 and S7, forming the snooze bar.
+|image::arduino-clock/soldering-14.jpg[Step 14] |*If using 9V battery:* Insert the 9V battery into the snap and use double-sided tape to stick it on the PCB.
+|===
 
 == Code
 
