@@ -66,12 +66,64 @@ table.tableblock,
 th.tableblock,
 td.tableblock {
   border-collapse: collapse;
-  border: 1px solid;
+  border-style: solid;
 }
 
 th.tableblock,
 td.tableblock {
   padding: 4px;
+}
+
+table.grid-all > * > tr > * {
+  border-width: 1px;
+}
+
+table.grid-cols > * > tr > * {
+  border-width: 0 1px;
+}
+
+table.grid-rows > * > tr > * {
+  border-width: 1px 0;
+}
+
+table.grid-none > * > tr > * {
+  border-width: 0;
+}
+
+table.frame-all {
+  border-width: 1px;
+}
+
+table.frame-ends {
+  border-width: 1px 0;
+}
+
+table.frame-sides {
+  border-width: 0 1px;
+}
+
+table.frame-none {
+  border-width: 0;
+}
+
+table.frame-none > colgroup + * > :first-child > *,
+table.frame-sides > colgroup + * > :first-child > * {
+  border-top-width: 0;
+}
+
+table.frame-none > :last-child > :last-child > *,
+table.frame-sides > :last-child > :last-child > * {
+  border-bottom-width: 0;
+}
+
+table.frame-none > * > tr > :first-child,
+table.frame-ends > * > tr > :first-child {
+  border-left-width: 0;
+}
+
+table.frame-none > * > tr > :last-child,
+table.frame-ends > * > tr > :last-child {
+  border-right-width: 0;
 }
 
 /* Font icons */
