@@ -65,6 +65,11 @@ const imageURL = image ? (await getImage({ src: image })).src : undefined;
       top: 1em;
       right: 1em;
       width: 350px;
+
+      nav {
+        max-height: calc(100vh - 5em);
+        overflow: auto;
+      }
     }
   }
 
