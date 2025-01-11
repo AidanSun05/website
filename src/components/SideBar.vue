@@ -11,17 +11,14 @@
       </template>
       <a href="/">Home</a>
       <a href="/about/">About</a>
-      <button type="button" @click="articlesOpened = !articlesOpened">{{ articlesOpened ? "-" : "+" }}</button>
       <a href="/articles/">Articles</a>
-      <template v-if="articlesOpened">
-        <a
-          v-for="page of articles"
-          :key="page[3]"
-          :href="`/articles/${page[3]}/`"
-          :class="{ highlight: searchActive && searchMatches.includes(page) }"
-          >{{ page[0] }}</a
-        >
-      </template>
+      <a
+        v-for="page of articles"
+        :key="page[3]"
+        :href="`/articles/${page[3]}/`"
+        :class="{ highlight: searchActive && searchMatches.includes(page) }"
+        >{{ page[0] }}</a
+      >
     </nav>
   </aside>
   <button id="menu-button" type="button" :class="{ toggled: sidebarOpened }" @click="sidebarOpened = !sidebarOpened">
@@ -42,7 +39,6 @@ let searchMatches = ref<unknown[]>([]);
 const searchQuery = ref("");
 
 let sidebarOpened = ref(false);
-let articlesOpened = ref(true);
 const searchIcon = `url(${SearchIcon.src})`;
 
 function doSearch() {
@@ -122,15 +118,9 @@ watch(searchQuery, () => setTimeout(doSearch, 500));
 #sidebar-content {
   overflow: auto;
   padding: 4px;
-  display: grid;
-  grid-template-columns: 1em auto;
-  grid-auto-rows: max-content;
-  gap: 4px 2px;
-  align-items: center;
-
-  strong {
-    grid-column: 1 / span 2;
-  }
+  gap: 4px;
+  display: flex;
+  flex-direction: column;
 
   button {
     font-size: 100%;
@@ -143,7 +133,6 @@ watch(searchQuery, () => setTimeout(doSearch, 500));
   }
 
   a {
-    grid-column: 2;
     padding: 4px;
     transition: 0.2s;
     text-decoration: none;
