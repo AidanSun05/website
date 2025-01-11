@@ -47,7 +47,7 @@ Note that the ATmega328 is not compatible with the ATmega 40 Board - it has been
 
 [%noheader]
 |===
-|Microcontroller |ATmega16/32/164/324/644/1284/8535
+|Microcontroller |ATmega16, 32, 164, 324, 644, 1284, 8535
 
 |Operating Voltage |5V
 |Input Voltage |7-20V (recommended), 6-35V (limit)
@@ -203,7 +203,7 @@ TIP: It is a good idea to mark the box corresponding to the microcontroller you 
 Some microcontroller boards (like the ATmega 40 Board) require the installation of an additional software API to work with the Arduino IDE. This is called a _core_. The ATmega 40 Board uses https://github.com/MCUdude/MightyCore[MightyCore] to work with the Arduino environment.
 
 . Open the Arduino IDE, then go to menu:File[Preferences].
-. In the text box marked "Additional Boards Manager URLs", enter this URL: `https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json`. This is the JSON file that will be used to install the core.
+. In the text box marked "Additional Boards Manager URLs", enter this URL: [.wrap]#`https://mcudude.github.io/MightyCore/package_MCUdude_MightyCore_index.json`#. This is the JSON file that will be used to install the core.
 . Exit out of the preferences window by clicking OK, then go to menu:Tools[Board > Boards Manager].
 . Search for "MightyCore" in the search box, then scroll down until you find it. Click Install to install this core. (You may need to wait for the IDE to download the core's files.)
 . Once the installation is complete, exit out of the boards manager and go to the board selection menu under menu:Tools[Board]. You should see the seven microcontrollers under the MightyCore option.
