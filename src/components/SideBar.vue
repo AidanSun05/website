@@ -9,9 +9,9 @@
         <strong v-if="searchMatches.length === 0">No search results found.</strong>
         <strong v-else>Found {{ searchMatches.length }} search results.</strong>
       </template>
-      <a href="/">Home</a>
-      <a href="/about/">About</a>
-      <a href="/articles/">Articles</a>
+      <a href="/"><strong>Home</strong></a>
+      <a href="/about/"><strong>About</strong></a>
+      <a href="/articles/"><strong>Articles</strong></a>
       <a
         v-for="page of articles"
         :key="page[3]"
