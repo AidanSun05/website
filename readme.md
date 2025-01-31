@@ -27,6 +27,17 @@ Run production container locally:
 docker compose -f docker-compose.prod.yml up --build
 ```
 
+### Certificate Renewal Script
+
+```bash
+#!/bin/bash
+
+cd /path/to/website
+docker compose -f docker-compose.prod.yml run --rm certbot renew
+docker system prune -af
+docker compose -f docker-compose.prod.yml restart server
+```
+
 ## Setup
 
 ```shell
