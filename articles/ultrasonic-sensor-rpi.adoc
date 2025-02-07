@@ -14,7 +14,7 @@ An ultrasonic sensor has two main parts: a transmitter (emits sound) and receive
 
 == How the HC-SR04 Communicates
 
-The controller starts by sending a 10 &#181;S pulse to the Trigger pin. The transmitter on the sensor fires an 8-cycle sonic burst, which travels at the speed of sound, reflects off an object, and into the sensor's receiver. The sensor then sends a pulse on the Echo pin proportional to the distance (time it takes for the sound waves to come back).
+The controller starts by sending a 10 µS pulse to the Trigger pin. The transmitter on the sensor fires an 8-cycle sonic burst, which travels at the speed of sound, reflects off an object, and into the sensor's receiver. The sensor then sends a pulse on the Echo pin proportional to the distance (time it takes for the sound waves to come back).
 
 image::ultrasonic-sensor-rpi/signal.svg[Ultrasonic sensor signal]
 
@@ -38,7 +38,7 @@ The formula for calculating resistor values is:
 V_(out) = V_(i\n)(R_2/(R_1 + R_2))
 ++++
 
-With R1 being 330 &#937; and R2 being 470 &#937;, the equation becomes:
+With R1 being 330 Ω and R2 being 470 Ω, the equation becomes:
 
 [stem]
 ++++

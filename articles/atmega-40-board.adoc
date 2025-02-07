@@ -106,7 +106,7 @@ image::atmega-40-board/parts-2.jpg[Passives]
 [%autowidth]
 |===
 |Number |Part |Value |Quantity
-|1 |Electrolytic capacitor |10&#181;F |4
+|1 |Electrolytic capacitor |10µF |4
 |2 .2+.^|Ceramic capacitor |20pF |2
 |3 |100nF .8+.^|1
 |4 .2+.^|Crystal oscillator |16MHz
@@ -339,7 +339,7 @@ Fri, 28/08/20 10:05:59
 
 === Reading Coin Cell Voltage
 
-The ATmega 40 Board has a 2&#215;3 header containing only power pins. This header is located to the left of the coin cell.
+The ATmega 40 Board has a 2⨯3 header containing only power pins. This header is located to the left of the coin cell.
 
 The top row (labeled BAT) is connected to the coin cell's output. This means that you can use the pins to read the voltage of the coin cell without having to take it out.
 
@@ -372,7 +372,7 @@ Below are some limitations of the compatibility of the ATmega 40 Board with the 
 * The I2C pins on ATmega 40 microcontrollers are different than on the standard Arduino Uno. This means that any shields that use I2C are not compatible on the ATmega 40 Board.
 * The SPI pins on ATmega 40 microcontrollers are different than on the standard Arduino Uno. This means that any shields that use SPI must communicate via the ICSP header, which is standard across all Arduino boards.
 
-An easy way to tell if a shield uses ICSP is by looking at its underside - if it has a black 2&#215;3 header on the back and it plugs into the ICSP header, the shield uses ICSP and is compatible.
+An easy way to tell if a shield uses ICSP is by looking at its underside - if it has a black 2⨯3 header on the back and it plugs into the ICSP header, the shield uses ICSP and is compatible.
 
 image::atmega-40-board/icsp.jpg[ICSP header on shield and ATmega 40 Board]
 

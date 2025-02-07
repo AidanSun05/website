@@ -21,7 +21,7 @@ See also: xref:sd-shield.adoc[SD Shield], xref:ds1307-arduino.adoc[DS1307 with A
 * Blank SD/TF card (any size)
 * Jumper wires
 
-IMPORTANT: Your SD shield must have a female 2&#215;3 header on the back, located on the underside. This will plug into the board's ICSP header and allow it to communicate properly through SPI.
+IMPORTANT: Your SD shield must have a female 2⨯3 header on the back, located on the underside. This will plug into the board's ICSP header and allow it to communicate properly through SPI.
 
 == Wiring
 
@@ -59,7 +59,7 @@ If you got "Failed." check the following:
 
 * Check that your SD card and shield both work.
 * The connections between the ATmega 40 Board and the shield should be secure. Look for the power LED on the shield, and make sure it is on.
-* The shield should have the black 2&#215;3 header on the back. Without it, the shield won't work with the ATmega 40 Board.
+* The shield should have the black 2⨯3 header on the back. Without it, the shield won't work with the ATmega 40 Board.
 * If you are using the SD Shield v3, the voltage switch should be set to 5V, not 3V3.
 
 If the SD init is done, you will see the data being written to the serial monitor:

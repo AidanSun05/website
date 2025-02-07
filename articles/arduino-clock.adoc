@@ -18,7 +18,7 @@ The Arduino Clock v2 is an open-source, easy-to-use alarm clock running on an Ar
 |Microcontroller |ATmega328P (on Arduino Nano)
 |Input Voltage |5V DC via USB or 7-12V DC via input pins
 |Clock Speed (crystal) |16MHz microcontroller, 32.768kHz DS1302
-|PCB Size |13.3 cm &#215; 8.3 cm (5.2 in &#215; 3.2 in)
+|PCB Size |13.3 cm ⨯ 8.3 cm (5.2 in ⨯ 3.2 in)
 |Clock Chip |DS1302
 |Clock Chip Backup Power Supply |3V DC via coin cell battery
 |Num. of Digits |4
@@ -76,7 +76,7 @@ link:/dl/clock-pcb.fzz[Download the .fzz file]
 |image::arduino-clock/soldering-10.jpg[Step 10] |Bend Y1 downward. Then, insert the Arduino Nano into the two long female headers. The USB port should be over the word "USB" on the PCB.
 |image::arduino-clock/soldering-11.jpg[Step 11] |Insert the two ICs into their corresponding sockets. Pay attention to their orientation.
 |image::arduino-clock/soldering-12.jpg[Step 12] |Note the small "1" on the PCB. This indicates where pin 1 of the display should be connected. Insert the display into the rounded female headers. Then, insert a 3V coin cell into the coin cell holder. The side marked with a "+" should be on top.
-|image::arduino-clock/soldering-13.jpg[Step 13] |Use superglue to stick a 7.5 mm &#215; 31 mm (0.3 in &#215; 1.2 in) piece of black, rigid plastic to S6 and S7, forming the snooze bar.
+|image::arduino-clock/soldering-13.jpg[Step 13] |Use superglue to stick a 7.5 mm ⨯ 31 mm (0.3 in ⨯ 1.2 in) piece of black, rigid plastic to S6 and S7, forming the snooze bar.
 |image::arduino-clock/soldering-14.jpg[Step 14] |*If using 9V battery:* Insert the 9V battery into the snap and use double-sided tape to stick it on the PCB.
 |===
 

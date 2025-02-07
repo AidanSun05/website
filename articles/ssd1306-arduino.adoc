@@ -8,7 +8,7 @@ Aidan Sun
 
 == What is the SSD1306?
 
-The SSD1306 is a driver chip for 128&#215;64 OLED (Organic Light Emitting Diode) displays. It can support many communication interfaces, but we will be using I2C.
+The SSD1306 is a driver chip for 128⨯64 OLED (Organic Light Emitting Diode) displays. It can support many communication interfaces, but we will be using I2C.
 
 image::ssd1306-arduino/module.jpg[SSD1306 module]
 
@@ -128,7 +128,7 @@ The methods below draw various graphics; parameters are listed under each. The f
 
 `print`, `println`: Prints text; the latter moves the cursor to the next line.
 
-. `s`: Data to print (can be string, char, float/double, or number in the range &#177;2,147,483,647)
+. `s`: Data to print (can be string, char, float/double, or number in the range ±2,147,483,647)
 . `color`
 . `nplaces`: Number of decimal places to print (optional, *only with `s` as float or double*)
 
@@ -233,7 +233,7 @@ NOTE: Scrolling affects the data in the display's RAM, so to revert it to its pr
 
 == Displaying Bitmaps
 
-The SSD1306 can display bitmap images with a size up to 128&#215;64. Bitmaps are read from arrays of `unsigned char` stored in `PROGMEM`.
+The SSD1306 can display bitmap images with a size up to 128⨯64. Bitmaps are read from arrays of `unsigned char` stored in `PROGMEM`.
 
 Example code: menu:File[Examples > SSD1306_I2C > DisplayBitmap]
 

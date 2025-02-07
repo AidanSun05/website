@@ -14,7 +14,7 @@ The ADS1115 is an ADC (Analog-to-Digital Converter). ADCs convert analog signals
 Below are some specifications for the ADS1115:
 
 * Operating voltage: 2.0 V-5.5 V
-* Current consumption: 150 &#181;A in continuous mode
+* Current consumption: 150 µA in continuous mode
 * Communication protocol: I2C
 * Programmable data rate: 8-860 SPS (Samples Per Second)
 * Precision: 16 bits
@@ -65,7 +65,7 @@ The output of the ADS1115 is a signed integer (positive or negative). This means
 
 == ADS1115 Full Scale and Value of a Bit
 
-The value of a bit is determined by the Programmable Gain Amplifier (PGA) setting. This setting establishes the full scale. In the default mode, the setting is &#177;6.144 V where 32,767 represents an input value of 6.144 V. Dividing 6.144 V by 32,767 yields a scale factor of 0.1875 mV per bit. You can also change the PGA setting to have a smaller full scale of &#177;2.048 V. That provides a more precise resolution of 0.0635 mV per bit.
+The value of a bit is determined by the Programmable Gain Amplifier (PGA) setting. This setting establishes the full scale. In the default mode, the setting is ±6.144 V where 32,767 represents an input value of 6.144 V. Dividing 6.144 V by 32,767 yields a scale factor of 0.1875 mV per bit. You can also change the PGA setting to have a smaller full scale of ±2.048 V. That provides a more precise resolution of 0.0635 mV per bit.
 
 IMPORTANT: The maximum analog input voltage cannot exceed the voltage at VDD + 0.3 V. For example, if VDD is 3.3 V, the analog inputs cannot exceed 3.6 V. If the input does exceed 3.6 V, the chip on the ADS1115 could be damaged.
 
@@ -140,12 +140,12 @@ After importing the library, we create an ADS1115 instance. The `ADS1115` constr
 
 * `device_address`: ADC address (default is 0x48)
 * `gain`: Gain value, possible values:
-** `GAIN_2_3`, gain of &#177; 6.144 V
-** `GAIN_1` - gain of &#177; 4.096 V (default)
-** `GAIN_2` - gain of &#177; 2.048 V
-** `GAIN_4` - gain of &#177; 1.024 V
-** `GAIN_8` - gain of &#177; 0.512 V
-** `GAIN_16` - gain of &#177; 0.256 V
+** `GAIN_2_3`, gain of ± 6.144 V
+** `GAIN_1` - gain of ± 4.096 V (default)
+** `GAIN_2` - gain of ± 2.048 V
+** `GAIN_4` - gain of ± 1.024 V
+** `GAIN_8` - gain of ± 0.512 V
+** `GAIN_16` - gain of ± 0.256 V
 * `sps`: Data rate in samples per second (SPS), possible values:
 ** `SPS_8` - 8 SPS
 ** `SPS_16` - 16 SPS
@@ -156,7 +156,7 @@ After importing the library, we create an ADS1115 instance. The `ADS1115` constr
 ** `SPS_475` - 475 SPS
 ** `SPS_860` - 860 SPS
 
-For example, to initialize the ADS1115 with address 0x49, gain of &#177; 2.048 V, and data rate of 250 SPS, you would use:
+For example, to initialize the ADS1115 with address 0x49, gain of ± 2.048 V, and data rate of 250 SPS, you would use:
 
 [source,python]
 ----

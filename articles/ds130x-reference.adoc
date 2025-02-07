@@ -314,7 +314,7 @@ In each loop, the increment statement is `i += 2`. Since the addresses alternate
 |0xC3 |Read
 .2+|2 |0xC4 |Write
 |0xC5 |Read
-3+^|&#8942;
+3+^|⋮
 |===
 
 ==== DS1307 Specifics
