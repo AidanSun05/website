@@ -1,7 +1,7 @@
 = WhaleConnect Usage Guide
 Aidan Sun
 2024-06-29
-:description: This document explains how to use WhaleConnect. For a full list of features, see the readme.
+:description: This document explains how to use WhaleConnect. For a full list of features, see the project's GitHub repository.
 :image: @img/whaleconnect-usage/screenshot.png
 :tags: software bluetooth
 :toclevels: 3

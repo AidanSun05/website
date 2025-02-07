@@ -251,7 +251,7 @@ There is also a new function called `sendXML`. This function will send all input
 
 The first `<digital>` tag holds the value read by the first digital pin (pin 2) and so on. The `<analog>` tag holds the value read by A5. To send each pin's data, we use `for` loops and iterate through the pins array in `sendXML`.
 
-Note that there is no easy way to get the length of an array in the Arduino language. We will need array length because of our inputPins array: it contains the pin numbers we are using as inputs. The array length is just the number of pins that we have put in this array.
+Note that there is no easy way to get the length of an array in the Arduino language. We will need array length because of our `inputPins` array: it contains the pin numbers we are using as inputs. The array length is just the number of pins that we have put in this array.
 
 To calculate the array length, we use `sizeof`. This is an operator that returns the number of bytes occupied by a variable (in this case, our pins array). By dividing the array size by the size of its data type, we can determine the length.
 
