@@ -51,7 +51,7 @@ npm run dev      # Start development server
 
 - **Code**: VSCode
 - **SVGs** (`/src/img/**.svg`): Inkscape
-- [**Schematics**](https://github.com/AidanSun05/website-schematics): KiCad
+- **Schematics**: KiCad
 
 ## License
 
