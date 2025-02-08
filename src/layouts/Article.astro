@@ -7,7 +7,6 @@ import ChipContainer from "@components/ChipContainer.astro";
 import { getImage, Image } from "astro:assets";
 import type { ImageMetadata, MarkdownHeading } from "astro";
 import { formatDate } from "@common/articles";
-import path from "path";
 
 interface Frontmatter {
   doctitle: string;
@@ -32,7 +31,6 @@ const imageURL = image ? (await getImage({ src: image })).src : undefined;
   <h1>{doctitle}</h1>
   {image && <Image src={image} height="350" alt="Article thumbnail" />}
   <p>Published <time datetime={revdate.toISOString()}>{formatDate(revdate)}</time></p>
-  <p><a href={`/pdf/${path.basename(Astro.url.pathname)}.pdf`} class="download-pdf">Download PDF</a></p>
   <ChipContainer tags={tags} />
   <aside id="headings">
     <strong>Contents</strong>
@@ -51,14 +49,6 @@ const imageURL = image ? (await getImage({ src: image })).src : undefined;
 </BaseLayout>
 
 <style>
-  .download-pdf {
-    text-decoration: none;
-    background-color: #888;
-    border: 2px solid #555;
-    color: #fff;
-    padding: 4px 8px;
-  }
-
   @media (max-width: 999px) {
     #headings {
       margin-top: 1em;
