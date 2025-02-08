@@ -37,7 +37,13 @@ const imageURL = image ? (await getImage({ src: image })).src : undefined;
   <aside id="headings">
     <strong>Contents</strong>
     <nav>
-      {headings.map((h) => <a href={`#${h.slug}`} style={{ marginLeft: `${h.depth - 1}em` }}>{h.text}</a>)}
+      {
+        headings.map((h) => (
+          <a href={`#${h.slug}`} style={{ marginLeft: `${h.depth - 1}em` }}>
+            {h.text}
+          </a>
+        ))
+      }
     </nav>
   </aside>
   <p>{description}</p>
