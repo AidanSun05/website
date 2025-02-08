@@ -1,8 +1,8 @@
 <template>
-  <aside id="sidebar" :class="{ toggled: sidebarOpened }">
+  <aside id="sidebar" :class="{ toggled: opened }">
     <div id="searchbar">
       <input id="search-box" v-model.trim="searchQuery" type="text" placeholder="Search" />
-      <button id="search-button" type="button" @click="doSearch"></button>
+      <button id="search-button" type="button" aria-label="search" @click="doSearch"></button>
     </div>
     <nav id="sidebar-content">
       <template v-if="searchActive">
@@ -21,7 +21,7 @@
       >
     </nav>
   </aside>
-  <button id="menu-button" type="button" :class="{ toggled: sidebarOpened }" @click="sidebarOpened = !sidebarOpened">
+  <button id="menu-button" type="button" aria-label="menu" :class="{ toggled: opened }" @click="opened = !opened">
     <div id="menu-button-arrow"></div>
   </button>
 </template>
@@ -38,7 +38,7 @@ let searchActive = ref(false);
 let searchMatches = ref<unknown[]>([]);
 const searchQuery = ref("");
 
-let sidebarOpened = ref(false);
+let opened = ref(false);
 const searchIcon = `url(${SearchIcon.src})`;
 
 function doSearch() {
@@ -203,5 +203,4 @@ watch(searchQuery, () => setTimeout(doSearch, 500));
     display: none !important;
   }
 }
-
 </style>
