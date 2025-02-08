@@ -196,4 +196,12 @@ watch(searchQuery, () => setTimeout(doSearch, 500));
     }
   }
 }
+
+@media print {
+  #sidebar,
+  #menu-button {
+    display: none !important;
+  }
+}
+
 </style>

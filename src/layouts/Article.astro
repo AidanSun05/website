@@ -100,4 +100,11 @@ const imageURL = image ? (await getImage({ src: image })).src : undefined;
       }
     }
   }
+
+  @media print {
+    /* All your print styles go here */
+    #headings {
+      display: none !important;
+    }
+  }
 </style>
