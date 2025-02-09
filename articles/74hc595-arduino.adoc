@@ -103,7 +103,7 @@ image::74hc595-arduino/schematic.png[74HC595 schematic]
 
 [source,cpp]
 ----
-include::../res/code/74HC595.ino[]
+include::../res/74HC595.ino[]
 ----
 
 video::{videosdir}/74hc595-arduino/scanner.mp4[]

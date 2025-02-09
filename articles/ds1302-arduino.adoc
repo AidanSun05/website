@@ -62,7 +62,7 @@ You can use a multimeter to measure the voltage between V~CC1~ and GND to make s
 
 [source,cpp]
 ----
-include::../res/downloads/DS130X/examples/DS1302/Other/SetTCR/SetTCR.ino[]
+include::../res/lib/DS130X/examples/DS1302/Other/SetTCR/SetTCR.ino[]
 ----
 
 === DS1302 TCR Output Voltage/Current

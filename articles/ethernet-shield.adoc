@@ -42,7 +42,7 @@ IMPORTANT: The Arduino SD library only supports 8.3 file names (maximum file nam
 
 [source,html]
 ----
-include::../res/code/ethernet-shield/index-sd.html[]
+include::../res/ethernet-shield/index-sd.html[]
 ----
 
 Before powering on your Arduino, insert the SD card into the SD slot.
@@ -53,7 +53,7 @@ image::ethernet-shield/sd.jpg[SD card in SD slot]
 
 [source,cpp]
 ----
-include::../res/code/ethernet-shield/WebServerSD.ino[]
+include::../res/ethernet-shield/WebServerSD.ino[]
 ----
 
 === Explanation
@@ -121,14 +121,14 @@ Save this file as style.css in your SD card:
 
 [source,css]
 ----
-include::../res/code/ethernet-shield/style.css[]
+include::../res/ethernet-shield/style.css[]
 ----
 
 Update `index.htm` with:
 
 [source,html,highlight=5]
 ----
-include::../res/code/ethernet-shield/index-css.html[]
+include::../res/ethernet-shield/index-css.html[]
 ----
 
 This HTML file uses a new tag: `<link>` (highlighted above), used to include external files (CSS files here).
@@ -137,7 +137,7 @@ Arduino code:
 
 [source,cpp]
 ----
-include::../res/code/ethernet-shield/WebServerCSS.ino[]
+include::../res/ethernet-shield/WebServerCSS.ino[]
 ----
 
 === Explanation
@@ -162,7 +162,7 @@ Then, update `index.htm` on the SD card with the following:
 
 [source,html]
 ----
-include::../res/code/ethernet-shield/index-ajax-led.html[]
+include::../res/ethernet-shield/index-ajax-led.html[]
 ----
 
 The AJAX code is in the JavaScript `sendLed` function. This will send an HTTP request to the Arduino telling if it should turn the LED on or off (determined by the `state` parameter). The request also contains a `nocache` parameter, which will prevent the browser from caching responses from the Arduino (which could result in out-of-date data).
@@ -173,7 +173,7 @@ The Arduino code is as follows:
 
 [source,cpp]
 ----
-include::../res/code/ethernet-shield/WebServerAjaxLeds.ino[]
+include::../res/ethernet-shield/WebServerAjaxLeds.ino[]
 ----
 
 === Explanation
@@ -210,7 +210,7 @@ Update `index.htm` with the following:
 
 [source,html]
 ----
-include::../res/code/ethernet-shield/index-ajax-io.html[]
+include::../res/ethernet-shield/index-ajax-io.html[]
 ----
 
 Here, `setInterval` is used in JavaScript to call `getInputs` every 250 ms. The browser sends a request to the Arduino similar to before, but it will now wait for a response. The response contains XML data with the values of the digital and analog inputs, which the JavaScript will use to update the contents of the HTML.
@@ -227,7 +227,7 @@ The Arduino code is as follows:
 
 [source,cpp]
 ----
-include::../res/code/ethernet-shield/WebServerAjaxXML.ino[]
+include::../res/ethernet-shield/WebServerAjaxXML.ino[]
 ----
 
 === Explanation

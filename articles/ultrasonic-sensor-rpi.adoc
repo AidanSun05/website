@@ -57,7 +57,7 @@ The following code reads the distance from the ultrasonic sensor and switches LE
 
 [source,python]
 ----
-include::../res/code/ultrasonic_sensor_rpi.py[]
+include::../res/ultrasonic_sensor_rpi.py[]
 ----
 
 image::ultrasonic-sensor-rpi/object.jpg[Ultrasonic sensor with an object]

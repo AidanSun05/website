@@ -34,7 +34,7 @@ image::usbhost/thumbnail.jpg[Cables plugged into the Arduino Due]
 
 [source,cpp]
 ----
-include::../res/code/USBHost.ino[]
+include::../res/USBHost.ino[]
 ----
 
 == Code Explanation

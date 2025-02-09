@@ -81,5 +81,5 @@ image::l293d-arduino/schematic.png[L293D schematic]
 
 [source,cpp]
 ----
-include::../res/code/L293D.ino[]
+include::../res/L293D.ino[]
 ----

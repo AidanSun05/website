@@ -25,7 +25,7 @@ NOTE: This program yields best results in a dark room and with a flashlight to p
 
 [source,cpp]
 ----
-include::../res/code/LDR.ino[]
+include::../res/LDR.ino[]
 ----
 
 .Serial monitor output

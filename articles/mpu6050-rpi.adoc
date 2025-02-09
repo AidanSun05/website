@@ -73,7 +73,7 @@ This code prints the acceleration and gyro values on each of the three axes.
 
 [source,python]
 ----
-include::../res/code/mpu6050_basic.py[]
+include::../res/mpu6050_basic.py[]
 ----
 
 .Output
@@ -97,7 +97,7 @@ Below is the code showing this:
 
 [source,python]
 ----
-include::../res/code/mpu6050_rotation.py[]
+include::../res/mpu6050_rotation.py[]
 ----
 
 .Output

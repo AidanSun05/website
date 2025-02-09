@@ -36,7 +36,7 @@ if (Wire.endTransmission() == 0) {
 
 [source,cpp]
 ----
-include::../res/code/I2CScanner.ino[]
+include::../res/I2CScanner.ino[]
 ----
 
 == Iterating Addresses

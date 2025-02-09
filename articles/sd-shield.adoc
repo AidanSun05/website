@@ -20,7 +20,7 @@ image::sd-shield/switch.jpg[]
 
 [source,cpp]
 ----
-include::../res/code/SDCard.ino[]
+include::../res/SDCard.ino[]
 ----
 
 === Initialization and Setup

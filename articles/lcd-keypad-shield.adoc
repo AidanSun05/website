@@ -29,7 +29,7 @@ The LCD Keypad shield contains a 1602 LCD connected to pins 4-9 and backlight co
 
 [source,cpp]
 ----
-include::../res/code/LCDShieldText.ino[]
+include::../res/LCDShieldText.ino[]
 ----
 
 image::lcd-keypad-shield/text-example.jpg[LCD text example]
@@ -46,7 +46,7 @@ The LCD's backlight is connected to digital pin 10. It can be controlled like a 
 
 [source,cpp]
 ----
-include::../res/code/LCDShieldBacklight.ino[]
+include::../res/LCDShieldBacklight.ino[]
 ----
 
 video::{videosdir}/lcd-keypad-shield/backlight.mp4[]
@@ -74,7 +74,7 @@ We can compare these ranges with the analog input value to interpret each button
 
 [source,cpp]
 ----
-include::../res/code/LCDShieldButtons.ino[]
+include::../res/LCDShieldButtons.ino[]
 ----
 
 video::{videosdir}/lcd-keypad-shield/buttons.mp4[]

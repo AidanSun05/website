@@ -31,7 +31,7 @@ Using the jumper wires, connect the sensor to analog input A0. All analog inputs
 
 [source,cpp,highlight=29..30]
 ----
-include::../res/code/DataLogger.ino[]
+include::../res/DataLogger.ino[]
 ----
 
 The first part of the code includes the required libraries and declares the global variables used for the program.

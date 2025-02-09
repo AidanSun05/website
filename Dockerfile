@@ -9,12 +9,7 @@ RUN npm cache clean --force && npm ci --include=dev
 
 # Build
 COPY . .
-RUN chmod +x scripts/copy-downloads.sh && \
-  scripts/copy-downloads.sh && \
-  node scripts/generate-favicons.js && \
-  npm run build && \
-  npx svgo -f dist/_astro && \
-  node scripts/clean-assets.js
+RUN chmod +x scripts/build.sh && ./scripts/build.sh
 
 FROM nginx:alpine-slim AS runner
 ARG CONFIG

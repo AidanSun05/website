@@ -86,7 +86,7 @@ NOTE: You will need the xref:ds1302-arduino.adoc[DS130X] and https://github.com/
 
 [source,cpp]
 ----
-include::../res/code/Clock.ino[]
+include::../res/Clock.ino[]
 ----
 
 == Usage

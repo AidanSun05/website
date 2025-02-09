@@ -50,7 +50,7 @@ Example code for drawing graphics is located at menu:File[Examples > SSD1306_I2C
 
 [source,cpp]
 ----
-include::../res/downloads/SSD1306_I2C/examples/DrawGraphics/DrawGraphics.ino[]
+include::../res/lib/SSD1306_I2C/examples/DrawGraphics/DrawGraphics.ino[]
 ----
 
 video::{videosdir}/ssd1306-arduino/example1.mp4[]
@@ -144,7 +144,7 @@ This code demonstrates how data and text can be printed to the screen.
 
 [source,cpp]
 ----
-include::../res/downloads/SSD1306_I2C/examples/DrawText/DrawText.ino[]
+include::../res/lib/SSD1306_I2C/examples/DrawText/DrawText.ino[]
 ----
 
 image::ssd1306-arduino/characters.jpg[Displaying all printable characters]
@@ -168,7 +168,7 @@ This code shows various controls supported by the library, such as inverting the
 
 [source,cpp]
 ----
-include::../res/downloads/SSD1306_I2C/examples/ControlCommands/ControlCommands.ino[]
+include::../res/lib/SSD1306_I2C/examples/ControlCommands/ControlCommands.ino[]
 ----
 
 video::{videosdir}/ssd1306-arduino/example2.mp4[]
@@ -197,7 +197,7 @@ Example code: menu:File[Examples > SSD1306_I2C > ScrollDisplay]
 
 [source,cpp]
 ----
-include::../res/downloads/SSD1306_I2C/examples/ScrollDisplay/ScrollDisplay.ino[]
+include::../res/lib/SSD1306_I2C/examples/ScrollDisplay/ScrollDisplay.ino[]
 ----
 
 video::{videosdir}/ssd1306-arduino/example3.mp4[]
@@ -239,7 +239,7 @@ Example code: menu:File[Examples > SSD1306_I2C > DisplayBitmap]
 
 [source,cpp]
 ----
-include::../res/downloads/SSD1306_I2C/examples/DisplayBitmap/DisplayBitmap.ino[]
+include::../res/lib/SSD1306_I2C/examples/DisplayBitmap/DisplayBitmap.ino[]
 ----
 
 image::ssd1306-arduino/bitmap.jpg[SSD1306 bitmap display]

@@ -39,7 +39,7 @@ image::hc-05-arduino/schematic.png[HC-05 schematic]
 
 [source,cpp]
 ----
-include::../res/code/HC-05.ino[]
+include::../res/HC-05.ino[]
 ----
 
 This code uses the `SoftwareSerial` library, which allows serial communication with the HC-05 to be on pins other than 0 and 1. This prevents Bluetooth communication from interfering from regular USB communication with the Arduino, such as uploading code and using the serial monitor.

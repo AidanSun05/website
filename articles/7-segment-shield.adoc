@@ -30,7 +30,7 @@ The menu:Display[CycleDigits] example displays the digits 0-9 on each segment.
 
 [source,cpp]
 ----
-include::../res/downloads/SevenSegmentShield/examples/Display/CycleDigits/CycleDigits.ino[]
+include::../res/lib/SevenSegmentShield/examples/Display/CycleDigits/CycleDigits.ino[]
 ----
 
 video::{videosdir}/7-segment-shield/cycle.mp4[]
@@ -39,7 +39,7 @@ The menu:Display[DisplayChars] example directly writes to the segments, displayi
 
 [source,cpp]
 ----
-include::../res/downloads/SevenSegmentShield/examples/Display/DisplayChars/DisplayChars.ino[]
+include::../res/lib/SevenSegmentShield/examples/Display/DisplayChars/DisplayChars.ino[]
 ----
 
 === Initializing the Display
@@ -83,7 +83,7 @@ Integers can also be displayed on the shield. An example is at menu:Display[Disp
 
 [source,cpp]
 ----
-include::../res/downloads/SevenSegmentShield/examples/Display/DisplayNum/DisplayNum.ino[]
+include::../res/lib/SevenSegmentShield/examples/Display/DisplayNum/DisplayNum.ino[]
 ----
 
 The code above randomly generates integers and displays them with the function below:
@@ -98,7 +98,7 @@ The brightness of the display can be adjusted by changing the amount of current 
 
 [source,cpp]
 ----
-include::../res/downloads/SevenSegmentShield/examples/Display/CycleBrightness/CycleBrightness.ino[]
+include::../res/lib/SevenSegmentShield/examples/Display/CycleBrightness/CycleBrightness.ino[]
 ----
 
 The code loops through each possible current value, passing each to the function:
@@ -119,7 +119,7 @@ The 24LC128 chip on the shield can hold 128 kB of data. The menu:EEPROM[ReadWrit
 
 [source,cpp]
 ----
-include::../res/downloads/SevenSegmentShield/examples/EEPROM/ReadWrite/ReadWrite.ino[]
+include::../res/lib/SevenSegmentShield/examples/EEPROM/ReadWrite/ReadWrite.ino[]
 ----
 
 .Serial monitor output
@@ -168,7 +168,7 @@ The shield's RGB LED is connected to three PWM pins on the Arduino. The menu:LED
 
 [source,cpp]
 ----
-include::../res/downloads/SevenSegmentShield/examples/LED/CycleColors/CycleColors.ino[]
+include::../res/lib/SevenSegmentShield/examples/LED/CycleColors/CycleColors.ino[]
 ----
 
 === Hex and RGB Colors
@@ -193,7 +193,7 @@ The menu:TMP75[Thermometer] example uses the shield to create a thermometer. The
 
 [source,cpp]
 ----
-include::../res/downloads/SevenSegmentShield/examples/TMP75/Thermometer/Thermometer.ino[]
+include::../res/lib/SevenSegmentShield/examples/TMP75/Thermometer/Thermometer.ino[]
 ----
 
 |===

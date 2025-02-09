@@ -62,7 +62,7 @@ The example code is at menu:File[Examples > DS130X > DS1307 > Other > SquareWave
 
 [source,cpp]
 ----
-include::../res/downloads/DS130X/examples/DS1307/Other/SquareWave/SquareWave.ino[]
+include::../res/lib/DS130X/examples/DS1307/Other/SquareWave/SquareWave.ino[]
 ----
 
 .Serial monitor output

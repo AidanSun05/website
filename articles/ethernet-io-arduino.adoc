@@ -21,7 +21,7 @@ Save this HTML file as *index.htm* in your SD card:
 
 [source,html]
 ----
-include::../res/code/ethernet-io-arduino/index.html[]
+include::../res/ethernet-io-arduino/index.html[]
 ----
 
 This HTML page is similar to the last example in the "Ethernet Shield" article. There are not many changes to the HTML/JS code. This is because we used many loops to iterate through the pins, so the request handling code can be left alone. However, there are more tags that show the input states, since we have more inputs. We have also used `<div>` tags, which are used to style a group of elements.
@@ -32,7 +32,7 @@ We have also used internal CSS in the `<style>` tag. The `float: left;` means th
 
 [source,cpp]
 ----
-include::../res/code/ethernet-io-arduino/WebServerAjaxIO.ino[]
+include::../res/ethernet-io-arduino/WebServerAjaxIO.ino[]
 ----
 
 == Running the Code

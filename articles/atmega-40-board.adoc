@@ -267,7 +267,7 @@ Upload the Blink sketch, shown below, to your board. The "L" LED should start bl
 
 [source,cpp]
 ----
-include::../res/code/atmega-40-board/Blink.ino[]
+include::../res/atmega-40-board/Blink.ino[]
 ----
 
 === PWM on D13 LED
@@ -276,7 +276,7 @@ Digital pin 13 is PWM-capable on all microcontrollers. This means that `analogWr
 
 [source,cpp]
 ----
-include::../res/code/atmega-40-board/Fade.ino[]
+include::../res/atmega-40-board/Fade.ino[]
 ----
 
 === Shift Register
@@ -308,7 +308,7 @@ When you upload and run the code below, the servo should start moving back and f
 
 [source,cpp]
 ----
-include::../res/code/atmega-40-board/Sweep.ino[]
+include::../res/atmega-40-board/Sweep.ino[]
 ----
 
 === On-board RTC
@@ -349,7 +349,7 @@ To read the coin cell with the ATmega 40 Board, connect one of the BAT pins to a
 
 [source,cpp]
 ----
-include::../res/code/atmega-40-board/TestCoinCell.ino[]
+include::../res/atmega-40-board/TestCoinCell.ino[]
 ----
 
 After uploading and running the sketch, open the serial monitor. It will display the voltage read from the coin cell. If the coin cell has a voltage above 2V, it will print 'OK'. Otherwise, it will tell you to replace it. This is a sample output:

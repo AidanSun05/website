@@ -23,7 +23,7 @@ image::countdown-timer/schematic.png[Timer schematic]
 
 [source,cpp]
 ----
-include::../res/code/CountdownTimer.ino[]
+include::../res/CountdownTimer.ino[]
 ----
 
 == Using the Timer

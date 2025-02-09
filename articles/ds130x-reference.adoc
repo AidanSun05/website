@@ -22,13 +22,13 @@ After installing the library, go to the menu:DateAndTime[PrintDateTime] example.
 .DS1302 example code
 [source,cpp]
 ----
-include::../res/downloads/DS130X/examples/DS1302/DateAndTime/PrintDateTime/PrintDateTime.ino[]
+include::../res/lib/DS130X/examples/DS1302/DateAndTime/PrintDateTime/PrintDateTime.ino[]
 ----
 
 .DS1307 example code
 [source,cpp]
 ----
-include::../res/downloads/DS130X/examples/DS1307/DateAndTime/PrintDateTime/PrintDateTime.ino[]
+include::../res/lib/DS130X/examples/DS1307/DateAndTime/PrintDateTime/PrintDateTime.ino[]
 ----
 
 .Serial monitor output
@@ -88,13 +88,13 @@ An example of reading registers is at menu:DateAndTime[ReadData].
 .DS1302 example code
 [source,cpp]
 ----
-include::../res/downloads/DS130X/examples/DS1302/DateAndTime/ReadData/ReadData.ino[]
+include::../res/lib/DS130X/examples/DS1302/DateAndTime/ReadData/ReadData.ino[]
 ----
 
 .DS1307 example code
 [source,cpp]
 ----
-include::../res/downloads/DS130X/examples/DS1307/DateAndTime/ReadData/ReadData.ino[]
+include::../res/lib/DS130X/examples/DS1307/DateAndTime/ReadData/ReadData.ino[]
 ----
 
 .Serial monitor output
@@ -183,13 +183,13 @@ Register operations can be used for operating on the RTC's RAM. An example is at
 .DS1302 example code
 [source,cpp]
 ----
-include::../res/downloads/DS130X/examples/DS1302/Other/RAMReadWrite/RAMReadWrite.ino[]
+include::../res/lib/DS130X/examples/DS1302/Other/RAMReadWrite/RAMReadWrite.ino[]
 ----
 
 .DS1307 example code
 [source,cpp]
 ----
-include::../res/downloads/DS130X/examples/DS1307/Other/RAMReadWrite/RAMReadWrite.ino[]
+include::../res/lib/DS130X/examples/DS1307/Other/RAMReadWrite/RAMReadWrite.ino[]
 ----
 
 .DS1302 serial monitor output
