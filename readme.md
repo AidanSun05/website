@@ -57,4 +57,4 @@ npm run dev      # Start development server
 
 This website's code and assets are licensed under the [MIT License](/LICENSE.txt).
 
-This repository also contains the Arduino libraries that are featured on the site in `res/downloads/`; each has its own MIT license document.
+This repository also contains the Arduino libraries that are featured on the site in `res/lib/`; each has its own MIT license document.
