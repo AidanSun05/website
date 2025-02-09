@@ -2,4 +2,3 @@
 *.sh text eol=lf
 
 *.adoc linguist-detectable
-* !text !filter !merge !diff
