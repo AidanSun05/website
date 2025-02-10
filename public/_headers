@@ -1,0 +1,4 @@
+/pdf/*
+  X-Content-Type-Options: nosniff
+  Cache-Control: no-store
+  Status: 410 Gone
