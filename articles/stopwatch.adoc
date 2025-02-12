@@ -7,7 +7,7 @@ Aidan Sun
 
 == Overview
 
-This page was updated in 2020 to use the SevenSegmentShield library. For a download and more information, follow xref:7-segment-shield.adoc[this guide].
+This page was updated in 2020 to use the SevenSegmentShield library. For a download and more information, follow xref:7-segment-shield.adoc[my Seven-Segment Shield guide].
 
 This code uses the https://www.gravitech.us/7segmentshield.html[Gravitech seven-segment shield]
 

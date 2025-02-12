@@ -287,7 +287,7 @@ The ATmega 40 Board has an on-board 74HC595 shift register. The connections to t
 * Latch connects to D19
 * Clock connects to D20
 
-An example of using a shift register with the Arduino is available xref:74hc595-arduino.adoc[here]. You can modify the digital pins used in the example to match those listed above.
+See xref:74hc595-arduino.adoc[74HC595 Shift Register with Arduino] for an example of using a shift register with the Arduino. You can modify the digital pins used in the example to match those listed above.
 
 NOTE: The ATmega 40 Board contains built-in resistors for the shift register. Therefore, external resistors don't need to be used when connecting LEDs to the shift register outputs.
 
@@ -317,7 +317,7 @@ IMPORTANT: The RTC cannot be used with the ATmega8535. This is due to the small 
 
 The ATmega 40 Board contains an on-board DS1307 RTC. This RTC uses I2C to communicate. Using the on-board RTC will be exactly the same as using an external one with Arduino.
 
-I have written a separate tutorial on using a DS1307 with Arduino. xref:ds1307-arduino.adoc[View it here.]
+I have written a separate tutorial on using a xref:ds1307-arduino.adoc[DS1307 with Arduino].
 
 NOTE: The RTC requires my DS130X library. link:/dl/DS130X.zip[Download the library in Zip format] | xref:ds130x-reference.adoc[DS130X Documentation]
 

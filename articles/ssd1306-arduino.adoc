@@ -36,7 +36,7 @@ image::ssd1306-arduino/pages.svg[SSD1306 pixels]
 
 The SSD1306 display module connects to the Arduino's 5V, GND, SDA, and SCL pins.
 
-You will need to know your display's I2C address before running any code. See xref:i2c-scanner-arduino.adoc[this page] for an I2C scanner program.
+You will need to know your display's I2C address before running any code. You can run an xref:i2c-scanner-arduino.adoc[I2C scanner program] on your Arduino.
 
 In the example code, the address is set to `0x3C`. If your address is different, substitute it in for each instance of `display.begin(0x3C);` across the examples.
 
@@ -275,4 +275,4 @@ In the example, the bitmap is 128 pixels wide and 64 pixels high, and it is disp
 
 . `x`: Byte to send
 
-A list of available commands can be found in the SSD1306 datasheet, for example, https://www.digikey.com/htmldatasheets/production/2047793/0/0/1/ssd1306.html[here].
+A list of available commands can be found in the https://www.digikey.com/htmldatasheets/production/2047793/0/0/1/ssd1306.html[SSD1306 datasheet].
