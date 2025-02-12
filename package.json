@@ -4,9 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "cd res/lib && for SUBDIR in *; do zip -r -q \"../../public/dl/${SUBDIR}.zip\" \"$SUBDIR\"; done",
     "build": "astro check && astro build",
-    "postbuild": "svgo -f dist/_astro && node scripts/clean-assets.js",
+    "postbuild": "svgo -f dist/_astro && node scripts/clean-assets.js && node scripts/zip-libs.js",
     "preview": "astro preview",
     "format": "prettier --write \"./**/*.{js,ts,json,pcss,astro,vue}\"",
     "lint": "eslint --fix src"
@@ -23,6 +22,7 @@
     "@eslint/js": "^9.19.0",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.13.1",
+    "archiver": "^7.0.1",
     "asciidoctor": "^3.0.4",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.19.0",
