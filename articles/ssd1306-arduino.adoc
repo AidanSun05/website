@@ -34,7 +34,7 @@ image::ssd1306-arduino/pages.svg[SSD1306 pixels]
 
 == I2C Connections to Arduino
 
-The SSD1306 display module connects to the Arduino's 5V, GND, SDA, and SDL pins.
+The SSD1306 display module connects to the Arduino's 5V, GND, SDA, and SCL pins.
 
 You will need to know your display's I2C address before running any code. See xref:i2c-scanner-arduino.adoc[this page] for an I2C scanner program.
 
