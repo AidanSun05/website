@@ -95,7 +95,6 @@ export default class AsciidocConverter {
     const options = {
       safe: "unsafe",
       attributes: {
-        icons: "font",
         "source-highlighter": "shiki",
         relfileprefix: "/articles/",
         relfilesuffix: "/",
