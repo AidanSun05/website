@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "cd res/lib && for SUBDIR in *; do zip -r -q \"../../public/dl/${SUBDIR}.zip\" \"$SUBDIR\"; done",
     "build": "astro check && astro build",
+    "postbuild": "svgo -f dist/_astro && node scripts/clean-assets.js",
     "preview": "astro preview",
     "format": "prettier --write \"./**/*.{js,ts,json,pcss,astro,vue}\"",
     "lint": "eslint --fix src"
