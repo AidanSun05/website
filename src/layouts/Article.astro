@@ -27,7 +27,8 @@ const imageURL = image ? (await getImage({ src: image })).src : undefined;
 
 <BaseLayout title={doctitle} {description} {stylesheets} {imageURL}>
   <h1>{doctitle}</h1>
-  {image && <Image src={image} height="350" alt="Article thumbnail" />}
+  <!-- Disable lazy loading for thumbnail to improve LCP -->
+  {image && <Image src={image} height="350" alt="Article thumbnail" loading="eager" />}
   <p>Published <time datetime={revdate.toISOString()}>{formatDate(revdate)}</time></p>
   <ChipContainer tags={tags} />
   <aside id="headings">
